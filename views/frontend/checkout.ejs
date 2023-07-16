@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/frontend/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/frontend/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/frontend/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/frontend/assets/images/icons/site.html">
+    <link rel="mask-icon" href="/frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="/frontend/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="/frontend/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+	<style>
+		.btn{
+			display: block!important;
+		}
+		.saved-address{
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			column-gap: 20px;
+		}
+		.address-card{
+			margin-bottom:1.3rem;
+			background-color: #f9f9f9;
+			border:.1rem dashed #d7d7d7;
+			
+			padding: 0.85rem 2rem;	
+		}
+		.address-text{
+			color: #666;
+			font-weight: 300;
+			font-size: 1.4rem;
+			margin: 0 0 0.2rem;
+		}
+		.address-action{
+			margin-top: 1.3rem;
+			display: flex;
+			gap:20px;
+		}
+		@media screen and (max-width:460px) {
+			.saved-address{
+				grid-template-columns: repeat(1, minmax(0, 1fr));
+			}
+		}
+		.gold{
+			background-color: #cc9966;
+			color: white!important;
+		}
+		#hide-form{
+			display: none;
+		}
+		#address-expand{
+			-webkit-user-select: none; /* Safari */
+  			-ms-user-select: none; /* IE 10 and IE 11 */
+  			user-select: none;
+		}
+		.address-button{
+			cursor:pointer;
+		}
+		.address-selector{
+			margin-right: 0.5rem;
+    		transform: translateY(0.09em);
+			accent-color: #cc9966;
+		}
+	</style>
+	<script src="https://js.braintreegateway.com/web/dropin/1.36.0/js/dropin.js"></script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <%- include("./navbar.ejs") %>
+
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('/frontend/assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">Checkout<span>Shop</span></h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="checkout">
+	                <div class="container">
+            			
+            			<form id="myform">
+							<% for( let i = 0; i < products.length; i++ ) { %>
+								<input type="hidden" name="prods[]" value="<%= products[i]._id %>" >
+								<input type="hidden" name="quant[]" value="<%= quantity[i] %>" >
+							<% } %>
+		                	<div class="row">
+		                		<div class="col-lg-9">
+									<div class="saved-address">
+
+										<% addresses.forEach(a => { %>
+										 
+										
+										<div class="address-card">
+											<div class="address-text">
+												<p><%= a.aname %></p>
+												<p><%= a.aphone %></p>
+												<p><%= a.aadress %></p>
+												<p><%= a.acity %> - <%= a.apincode %></p>
+												<input type="radio" class="address-selector" value="<%= a._id %>"><label for="123">Use this address.</label>
+											</div>
+										</div>
+										<% }) %>
+									
+
+									</div>
+									<label for="notes" >Order Notes (optional)</label>
+									<textarea class="form-control" id="notes" name="notes"></textarea>
+									<input type="hidden" name="user" value="<%= userid %>" >
+									<input type="hidden" name="address" value="" id="address-d">
+								</form>
+									<div style="display:flex;align-items: center;">
+		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+									<div style="margin-left:auto;cursor:pointer;color: #cc9966;"><label style="margin-right: 0.5rem;" for="address-expand">Add a new address.</label><input type="radio" class="address-selector address-expand" id="address-expand" name="address-selector" ></div>
+									</div>
+						
+									<div id="hide-form">
+										
+		                				<div class="row">
+
+		                					<div class="col-sm-12">
+		                						<label>Full Name *</label>
+		                						<input type="text" name="fname" id="fname" class="form-control"  >
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+	            						<label>Street address *</label>
+	            						<input type="text" name="address1" id="address1" class="form-control" placeholder="House number and Street name"  >
+	            						<input type="text" name="address2" id="address2" class="form-control" placeholder="Appartments, suite, unit etc ..."  >
+
+	            						<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Town / City *</label>
+		                						<input type="text" name="city" id="city" class="form-control"  >
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>State / County *</label>
+		                						<input type="text" name="state" id="state" id="district" class="form-control" disabled>
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Postcode / ZIP *</label>
+		                						<input type="text" name="pincode" id="pincode" class="form-control"  >
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Reciever's Phone *</label>
+		                						<input type="tel" name="phone" id="phone" class="form-control"  >
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+										<button type="submit" form="postaddress" class="btn btn-outline-primary-2 btn-order btn-block">
+		                					Add
+		                				</button>
+
+										<center><span id="adresponse" class="text-danger"></span></center>
+
+										
+
+	                				<form id="postaddress">
+										<input name="aaddress" value="" id="mainaddress" type="hidden">
+										<input name="aname" value="" id="mainname" type="hidden">
+										<input name="aphone" value="" id="mainphone" type="hidden">
+										<input name="user" value="<%= userid %>" type="hidden">
+										<input name="acity" value="" id="maincity" type="hidden">
+										<input name="apincode" value="" id="mainpincode" type="hidden">
+									</form>
+
+									</div> <!--end of hide-->
+		                		</div><!-- End .col-lg-9 -->
+		                		<aside class="col-lg-3">
+		                			<div class="summary">
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+
+		                					<tbody>
+												<% var totalcost=0 %>
+												<% for( let index = 0; index < products.length; index++ ) { %>
+													<% totalcost=totalcost+(Number(products[index].price - (products[index].offer * (products[index].price/100)))*Number(quantity[index])); %>
+		                						<tr>
+		                							<td><a href="#"><%= products[index].name %></a></td>
+		                							<td><span class="pricesabka" ><%= products[index].price - (products[index].offer * (products[index].price/100)) %></span> x <%= quantity[index] %></td>
+		                						</tr>
+												<% } %>	
+
+		                						<tr class="summary-total">
+		                							<td>Grand Total:</td>
+													
+		                							<td id="total">₹<%= totalcost %></td>
+		                						</tr><!-- End .summary-total -->
+
+		                					</tbody>
+		                				</table><!-- End .table table-summary -->
+
+		                				<div id="dropin-container"></div>
+										<center><span id="showerr"></span></center>
+		                				<button type="submit" form="myform" class="btn btn-outline-primary-2 btn-order btn-block">
+		                					<span class="btn-text">Place Order</span>
+		                					<span class="btn-hover-text">Proceed to Payment</span>
+		                				</button>
+		                			</div><!-- End .summary -->
+		                		</aside><!-- End .col-lg-3 -->
+		                	</div><!-- End .row -->
+            			
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+        <%- include("./footer.ejs") %>
+        <script>
+			let couponcodepost = '<%= couponcode %>';
+			var price = 0;
+			$.ajax({
+				url: '/api/coupon/check',
+				type:'POST',
+				data: {coupon: couponcodepost}
+			}).done(response => {
+				if(response.success){
+				let pastprice = Number($("#total").text().split("₹")[1])
+				let discount = (pastprice / 100) * Number(response.discount)
+				let newprice = pastprice - discount
+				price = newprice
+				$("#total").text(`₹${newprice}`)
+				}
+			})
+		
+
+
+	const $form4 = $('#postaddress')
+    $form4.on('submit', submitHandler4)
+
+    function submitHandler4 (e) {
+        e.preventDefault()
+		$('#mainaddress').val($('#address1').val()+' '+$('#address2').val()+' '+$('#state').val());
+		$('#mainname').val($('#fname').val());
+		$('#mainphone').val($('#phone').val());
+		$('#maincity').val($('#city').val());
+		$('#mainpincode').val($('#pincode').val());
+        $.ajax({
+            url: '/api/address/add',
+            type:'POST',
+            data: $form4.serialize()
+        }).done(response => {
+            response = JSON.stringify(response)
+            response = JSON.parse(response);
+			if(response.error){
+				$("#adresponse").text(response.error)
+			}else{
+				location.reload();
+			}
+        })
+    }
+            $("#cart-dropdown").hide();
+			$("#pincode").on("input", function (event) {
+				// console.log(1);
+				var pincodeinput = $("#pincode").val();
+				// console.log(pincodeinput);
+				var pincodeurl = "https://api.postalpincode.in/pincode/" + pincodeinput;
+				// console.log(pincodeurl);
+				$.getJSON(pincodeurl, function (result) {
+				if (result[0].Status == "Error") {
+					// console.log("Please enter a valid pincode");
+					$("#state").val("Please enter a valid pincode");
+				} else {
+					$("#state").val(result[0].PostOffice[0].State);
+				}
+				});
+			});
+			$(".address-selector").change(function() {
+				if(this.checked) {
+					if($(this).hasClass('address-expand')){
+						$('#hide-form').show();
+					}else{
+						$('#hide-form').hide();
+						$("#address-d").val($(this).val())
+					};
+				}
+			});
+			
+	const $form5 = $('#myform')
+    $form5.on('submit', submitHandler5)
+    function submitHandler5 (e) {
+        e.preventDefault()
+		let prods = document.getElementsByName('prods[]')
+		let quant = document.getElementsByName('quant[]')
+		let allProduct = []
+		for(let i=0; i<prods.length; i++){
+			let j = {}
+			j["id"] = prods[i].value;
+			j["quantity"] = Number(quant[i].value);
+			allProduct.push(j)
+		}
+		allProduct = JSON.stringify(allProduct)
+		let amount = price;
+		amount=Number(amount);
+		var data = $form5.serializeArray();
+		data.push({name: "allProduct", value: allProduct});
+		data.push({name: "coupon", value: couponcodepost});
+		data.push({name: "transactionId", value: "mayursports"});
+		
+		$.extend(
+		{
+			redirectPost: function(location, args)
+			{
+				var form = $('<form></form>');
+				form.attr("method", "post");
+				form.attr("action", location);
+				args.forEach(arg => {
+					var field = $('<input></input>');
+
+					field.attr("type", "hidden");
+					field.attr("name", arg.name);
+					field.attr("value", arg.value);
+
+					form.append(field);
+				});
+				$(form).appendTo('body').submit();
+			}
+		});
+		$.redirectPost("/upload", data);
+        // $.ajax({
+        //     url: '/upload',
+        //     type:'POST',
+        //     data: data
+        // })
+		// .done(response => {
+        //     response = JSON.stringify(response)
+		// 	response = JSON.parse(response)
+        //     console.log(response)
+		// 	if(response.msg){
+		// 		$("#showerr").text(response.msg)
+		// 	}
+		// 	if(response.success){
+		// 		localStorage.removeItem("products");
+		// 		window.location = "/dashboard";
+		// 	}
+        // })
+    }
+			// console.log($('input[type="radio"]:checked').val());	
+
+			
+        </script>
+
+</body>
+
+
+</html>

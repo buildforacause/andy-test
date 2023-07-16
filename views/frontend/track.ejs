@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:20 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Track Order</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="frontend/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="frontend/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="frontend/assets/images/icons/site.html">
+    <link rel="mask-icon" href="frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="frontend/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="frontend/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="frontend/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="frontend/assets/css/style.css">
+    <link rel="stylesheet" href="frontend/assets/css/plugins/nouislider/nouislider.css">
+    <style>
+        .timeline {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.li {
+  transition: all 200ms ease-in; }
+
+.timestamp {
+  margin-bottom: 20px;
+  padding: 0px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 100; }
+
+.status {
+  padding: 0px 40px;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #D6DCE0;
+  position: relative;
+  transition: all 200ms ease-in; }
+  .status h4 {
+    font-weight: 600; }
+  .status:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -15px;
+    left: 42%;
+    transition: all 200ms ease-in; }
+
+.li.complete .status {
+  border-top: 2px solid #66DC71; }
+  .li.complete .status:before {
+    background-color: #66DC71;
+    border: none;
+    transition: all 200ms ease-in; }
+  .li.complete .status h4 {
+    color: #66DC71; }
+
+@media (min-device-width: 320px) and (max-device-width: 700px) {
+  .timeline {
+    list-style-type: none;
+    display: block; }
+  .li {
+    transition: all 200ms ease-in;
+    display: flex;
+    width: inherit; }
+  .timestamp {
+    width: 100px; }
+  .status:before {
+    left: -8%;
+    top: 30%;
+    transition: all 200ms ease-in; } 
+  .li.complete .status{
+    border-top: 0px;
+  }
+  .li .status{
+    border-top: 0px;
+  }
+  
+  }
+
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <%- include("./navbar.ejs") %>
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Orders</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Track Order</li>
+                    </ol>
+
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    <article class="entry entry-list">
+                        <div class="row align-items-center">
+                            <div class="col-md-12" style="align-self: flex-start;">
+                                <center><h2 class="title title-lg mt-1">Track order</h2></center>
+                                <div class="row" style="display: flex;">
+                                  
+                                  <div class="col-md-6" style="border:1px solid #e7e7e7;text-align:center;align-self: self-start;padding: 1rem;text-align: center;align-self: stretch;margin-bottom: 1rem;" >
+                                    <% order.allProduct.forEach(element => { %>
+                                     
+                                    
+                                    <div class="d-flex">
+                                      <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
+                                        <%= element.id.name %>
+                                      </h4>
+                                      <p style="margin-left: auto;margin-bottom: 0;font-weight: 500;">₹<%= element.id.price %><span style="font-weight: 400;"> x <%= element.quantity %></span></p>
+                                  </div>
+                                  <% }) %>
+                            </div><!-- End .col-md-4 -->
+
+                                  <div class="entry-body col-md-6" style="text-align: end;">
+                                    <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
+                                        Delivery address
+                                    </h4><!-- End .entry-content -->
+                                    <p style="font-weight: 500;margin-bottom: 0rem;"><%= order.address.aname %></p>
+                                    <p style="margin-bottom: 1rem;"><%= order.address.aaddress %> <br>
+                                      <%= order.address.acity %> - <%= order.address.apincode %></p>
+                                    <p style="font-weight: 500;margin-bottom: 0rem;">Phone number</p>
+                                    <p><%= order.address.aphone %></p>
+                                </div><!-- End .entry-body -->
+
+                                
+
+                              </div>
+                                <% if (order.approval == "Not approved") { %>
+                                 <center>
+                                  <h4>Waiting for the order to be approved!</h4>
+                                  <p>Let our team approve the payment of this order!</p>
+                                </center>
+                                <% } else { %>
+                                <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">                              
+                                  <p class="mb-2"><span style="font-weight: 500;margin-bottom: 0rem;">Tracking Phone number: </span><%= order.address.aphone %></p>
+                                
+                                <ul class="timeline" id="timeline">
+                                    <li class="li">
+                                      <div class="timestamp">
+                                        
+                                        <p>Not processed</p>
+
+                                      </div>
+                                      <div class="status">
+                                        
+                                      </div>
+                                    </li>
+                                    <li class="li">
+                                      <div class="timestamp">
+                                        
+                                        <p>Processing</p>
+
+                                      </div>
+                                      <div class="status">
+                                        
+                                      </div>
+                                    </li>
+                                    <li class="li">
+                                      <div class="timestamp">
+                                        
+                                        <p>Shipped</p>
+
+                                      </div>
+                                      <div class="status">
+                                        
+                                      </div>
+                                    </li>
+                                    <li class="li">
+                                      <div class="timestamp">
+                                        
+                                        <p>Delivered</p>
+
+                                      </div>
+                                      <div class="status">
+                                        
+                                      </div>
+                                    </li>
+                                    
+                                   </ul> 
+                                </div>
+
+                                <div class="refundsection" style="padding:1rem;border:1px solid #e7e7e7;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
+                                  <% if (order.refund) { %>
+                                    <p style="margin: 0px;">View return details</p>    
+                                    <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return details</a>
+                                  <% } else { %>
+                                  <p style="margin: 0px;">Not satisfied with your order?</p>
+                                  <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return</a>
+                                  <% } %>
+                                </div>
+                                <% } %>
+                            </div><!-- End .col-md-8 -->
+                        </div><!-- End .row -->
+                    </article><!-- End .entry -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+    
+    
+    <%- include('./footer.ejs') %>
+
+        <script>
+          $('#cart-total-text').hide();
+
+          var status = '<%= order.status %>';
+          let ts = document.getElementsByClassName("li");
+          let j = {
+            "Not processed" : 0,
+            "Processing": 1,
+            "Shipped": 2,
+            "Delivered": 3
+          }
+          
+          let v = j[status];
+          console.log(status)
+          for(let i = 0; i < ts.length; i++){
+            ts[i].classList.add("complete")
+            if(i === v){
+              break;
+            }
+          }
+        </script>
+  </body>
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:27 GMT -->
+</html>

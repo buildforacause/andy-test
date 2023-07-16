@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="frontend/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="frontend/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="frontend/assets/images/icons/site.html">
+    <link rel="mask-icon" href="frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="frontend/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="frontend/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="frontend/assets/css/style.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <%- include("./navbar.ejs") %>
+        
+        <main class="main">
+        	<div class="page-header text-center" style="background-image: url('frontend/assets/images/page-header-bg.jpg')">
+        		<div class="container">
+        			<h1 class="page-title">My Account<span>Shop</span></h1>
+        		</div><!-- End .container -->
+        	</div><!-- End .page-header -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+			<center> <span id="myspan"> </span></center>
+
+            <div class="page-content">
+            	<div class="dashboard">
+	                <div class="container">
+	                	<div class="row">
+	                		<aside class="col-md-4 col-lg-3">
+	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+								    <li class="nav-item">
+								        <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Change Password</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" href="#">Sign Out</a>
+								    </li>
+								</ul>
+	                		</aside><!-- End .col-lg-3 -->
+
+	                		<div class="col-md-8 col-lg-9">
+	                			<div class="tab-content">
+								    <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+								    	<p>Hello <span class="font-weight-normal text-dark"><%= verify.name %></span> (not <span class="font-weight-normal text-dark"><%= verify.name %></span>? <a href="/logout">Log out</a>) 
+								    	<br>
+								    	From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+										<% orders.forEach(order => { %>
+										 
+								    	<article style="border: 1px solid #e4e4e4;padding: 1rem 2rem;margin-bottom: 2rem;" class="entry entry-list">
+                                            
+											<div class="row align-items-center">
+                                                <div class="col-md-3">
+                                                    <figure class="entry-media">
+                                                        <a href="">
+                                                            <img src="<%= order.allProduct[0].id.image[0] %>" alt="image desc">
+                                                        </a>
+                                                    </figure><!-- End .entry-media -->
+                                                </div><!-- End .col-md-4 -->
+                    
+                                                <div class="col-md-9 d-flex" >
+                                                    <div class="entry-body" style="padding-left: 0;">
+                                                        <div class="entry-meta">
+                                                        </div><!-- End .entry-meta -->
+                    
+                                                        <h2 class="entry-title">
+                                                            <a href="#"><%= order.allProduct[0].id.name %></a>
+                                                        </h2><!-- End .entry-title -->
+                    
+                                                        <div class="entry-cats" style="margin-bottom: 0;font-weight: 500;">
+                                                            <p style="margin-bottom: 0;font-weight: 500;">Total: ₹<%= order.amount %></p>
+                                                        </div><!-- End .entry-cats -->
+														
+														<p style="padding: 0;margin: 0;">
+															Total <%= order.allProduct.length %> product(s)
+														</p>
+                                                    </div><!-- End .entry-body -->
+                                                    <div style="margin-left: auto;color:#cc9966;align-self: last baseline;"><a href="/track?of=<%= order._id %>" class="read-more">Order details</a></div>
+                                                </div><!-- End .col-md-8 -->
+                                            </div><!-- End .row -->
+                                        </article><!-- End .entry -->
+										<% }) %>
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+
+								    	<p>The following addresses will be used on the checkout page.</p>
+										<p><a href="#address-modal" data-toggle="modal">Add New Address</a></p>
+										<% if (addresses.length < 1) { %>
+										 <h5>No addresses found!</h5>
+										<% } %>
+								    	<div class="row">
+											<% addresses.forEach(address => { %>
+											 
+											
+								    		<div class="col-lg-6">
+								    			<div class="card card-dashboard">
+								    				<div class="card-body">
+								    					<h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
+
+														<p><%= address.aname %><br>
+														<%= address.aaddress %><br>
+														<%= address.aphone %><br>
+														<form action="/api/address/delete" method="POST" >
+															<input type="hidden" name="_id" value="<%= address._id %>" >
+														<button type="submit" class="btn btn-danger">Delete</button>
+													</form>
+														
+								    				</div><!-- End .card-body -->
+								    			</div><!-- End .card-dashboard -->
+								    		</div><!-- End .col-lg-6 -->
+											<% }) %>
+								    	</div><!-- End .row -->
+								    </div><!-- .End .tab-pane -->
+
+								    <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+								    	<form id="myform">
+			                				<div class="row">
+
+		            						<label>Current password</label>
+		            						<input type="password" name="oldPassword" class="form-control" required>
+
+		            						<label>New password</label>
+		            						<input type="password" name="newPassword" class="form-control" required>
+
+											<input type="hidden" name="uId" value="641f5f9a2b6c7d598c631a77">
+											
+		                					<button type="submit" class="btn btn-outline-primary-2">
+			                					<span>SAVE CHANGES</span>
+			            						<i class="icon-long-arrow-right"></i>
+			                				</button>
+			                			</form>
+								    </div><!-- .End .tab-pane -->
+								</div>
+	                		</div><!-- End .col-lg-9 -->
+	                	</div><!-- End .row -->
+	                </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+		<div class="modal fade" id="address-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" id="modal-close-now" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true"><i class="icon-close"></i></span>
+						</button>
+			
+						<div class="form-box">
+							<div class="form-tab">
+								<div class="tab-content" id="tab-content-5">
+									<div class="tab-pane fade show active" id="address" role="tabpanel" aria-labelledby="address-tab">
+										<form id="address-form">
+											<center><span id="adresponse" class="text-danger"></span></center>
+											<input type="hidden" name="user" value="<%= userid %>" >
+											<div class="form-group">
+												<label for="singin-email">Name *</label>
+												<input type="text" class="form-control" id="singin-email" name="aname" required>
+											</div><!-- End .form-group -->
+			
+											<div class="form-group">
+												<label for="singin-password">Phone Number *</label>
+												<input type="number" class="form-control" id="singin-password" name="aphone" required>
+											</div><!-- End .form-group -->
+
+											<div class="form-group">
+												<label for="a-password">Address *</label>
+												<textarea type="number" class="form-control" id="a-password" name="aaddress" required></textarea>
+											</div><!-- End .form-group -->
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label for="aa-email">City *</label>
+													<input type="text" class="form-control" id="aa-email" name="acity" required>
+												</div><!-- End .form-group -->
+
+												<div class="form-group col-md-6">
+													<label for="aaa-email">Pincode *</label>
+													<input type="number" class="form-control" id="aaa-email" name="apincode" required>
+												</div><!-- End .form-group -->
+											</div>
+											<div class="form-footer">
+												
+												<button type="submit" form="address-form" class="btn btn-outline-primary-2">
+													
+													<span>Add New Address</span>
+													<i class="icon-long-arrow-right"></i>
+												</button>
+			
+												<!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
+											</div>
+											<!-- End .form-footer -->
+										</form>
+
+									</div><!-- .End .tab-pane -->
+								</div><!-- End .tab-content -->
+							</div><!-- End .form-tab -->
+						</div><!-- End .form-box -->
+					</div><!-- End .modal-body -->
+				</div><!-- End .modal-content -->
+			</div><!-- End .modal-dialog -->
+			</div><!-- End .modal -->
+
+        <%- include("./footer.ejs") %>
+
+    <script>
+	$('#cart-total-text').hide();
+	const $form3 = $('#address-form')
+    $form3.on('submit', submitHandler3)
+
+    function submitHandler3 (e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/api/address/add',
+            type:'POST',
+            data: $form3.serialize()
+        }).done(response => {
+            response = JSON.stringify(response)
+            response = JSON.parse(response);
+			if(response.error){
+				$("#adresponse").text(response.error)
+			}else{
+				$("#modal-close-now").click()
+				location.reload();
+			}
+        })
+    }
+
+		const $form5 = $('#myform')
+		$form5.on('submit', submitHandler5)
+		function submitHandler5 (e) {
+			e.preventDefault()
+			console.log($form5.serialize());
+
+			// console.log(document.getElementsByName('prods[]'))
+			$.ajax({
+			    url: '/api/user/change-password',
+			    type:'POST',
+			    data: $form5.serialize()
+			}).done(response => {
+			    response = JSON.stringify(response)
+			    response = JSON.parse(response);
+			    if(response.error){
+			        $("#myspan").text(response.error);
+			    }else{
+			        $("#myspan").text(response.success);
+			    }
+			})
+		}
+	</script>    
+
+</body>
+    
+
+<!-- molla/dashboard.html  22 Nov 2019 10:03:13 GMT -->
+</html>

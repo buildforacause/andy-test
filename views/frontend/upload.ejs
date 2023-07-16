@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:20 GMT -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Make Payment</title>
+  <meta name="keywords" content="HTML5 Template">
+  <meta name="description" content="Molla - Bootstrap eCommerce Template">
+  <meta name="author" content="p-themes">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="frontend/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="frontend/assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="frontend/assets/images/icons/site.html">
+  <link rel="mask-icon" href="frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+  <link rel="shortcut icon" href="frontend/assets/images/icons/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Molla">
+  <meta name="application-name" content="Molla">
+  <meta name="msapplication-TileColor" content="#cc9966">
+  <meta name="msapplication-config" content="frontend/assets/images/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Plugins CSS File -->
+  <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/magnific-popup/magnific-popup.css">
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="frontend/assets/css/style.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/nouislider/nouislider.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+
+    <main class="main">
+
+      <div class="page-content">
+        <div class="container">
+          <article class="entry entry-list">
+            <div class="row align-items-center">
+              <div class="col-md-12" style="margin: 10px;">
+                <center>
+                  <h2 class="title title-lg mt-1">Make Payment</h2>
+                  <p>After making the payment, please upload the screenshot of the payment and wait for the order confirmation by our team!</p>
+                    <br><br>
+                    <img src="/uploads/qr.jpg" alt="QR" style="max-height: 350px;" >
+                    <br><br>
+                    <h4>Total Amount To Be Paid: Rs. <span style="color:red"><%= data.amount %></span></h4>
+                </center>
+
+                <div class="row" style="border:1px solid #e7e7e7;text-align: left;align-self: self-start;padding: 1rem;align-self: stretch;margin-bottom: 1rem;">
+                  <form  action="/api/order/create-order" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="user" value="<%= data.user %>">
+                    <input type="hidden" name="allProduct" value="<%= data.allProduct %>">
+                    <input type="hidden" name="address" value="<%= data.address %>">
+                    <input type="hidden" name="notes" value="<%= data.notes %>">
+                    <input type="hidden" name="transactionId" value="<%= data.transactionId %>">
+                    <input type="hidden" name="coupon" value="<%= data.coupon %>">
+                    <center><span id="adresponse" class="text-danger"></span></center>
+                    <div class="form-group col-md-12">
+                      <label for="image">Payment Screenshot *</label>
+                      <input type="file" class="form-control" id="image" name="image" required>
+                    </div>
+
+                    <div class="form-footer col-md-12">
+                      <button type="submit" class="btn btn-outline-primary-2">
+                        <span>I Made The Payment</span>
+                        <i class="icon-long-arrow-right"></i>
+                      </button>
+                      
+                      <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
+                    </div>
+                    <!-- End .form-footer -->
+                  </form>
+                </div>
+              </div><!-- End .col-md-8 -->
+            </div><!-- End .row -->
+          </article><!-- End .entry -->
+        </div><!-- End .container -->
+      </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+
+    <%- include('./footer.ejs') %>
+
+</body>
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:27 GMT -->
+
+</html>

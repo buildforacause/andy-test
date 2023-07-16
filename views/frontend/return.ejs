@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:20 GMT -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Track Order</title>
+  <meta name="keywords" content="HTML5 Template">
+  <meta name="description" content="Molla - Bootstrap eCommerce Template">
+  <meta name="author" content="p-themes">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="frontend/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="frontend/assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="frontend/assets/images/icons/site.html">
+  <link rel="mask-icon" href="frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+  <link rel="shortcut icon" href="frontend/assets/images/icons/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Molla">
+  <meta name="application-name" content="Molla">
+  <meta name="msapplication-TileColor" content="#cc9966">
+  <meta name="msapplication-config" content="frontend/assets/images/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Plugins CSS File -->
+  <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/magnific-popup/magnific-popup.css">
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="frontend/assets/css/style.css">
+  <link rel="stylesheet" href="frontend/assets/css/plugins/nouislider/nouislider.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <%- include("./navbar.ejs") %>
+
+    <main class="main">
+      <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container d-flex align-items-center">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/index">Home</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard">Orders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Track Order</li>
+          </ol>
+
+        </div><!-- End .container -->
+      </nav><!-- End .breadcrumb-nav -->
+
+      <div class="page-content">
+        <div class="container">
+          <article class="entry entry-list">
+            <div class="row align-items-center">
+              <div class="col-md-12" style="margin: 10px;">
+                <center>
+                  <h2 class="title title-lg mt-1">Returns</h2>
+                </center>
+                <div class="row" style="display: flex;">
+                  <div class="col-md-6" style="border:1px solid #e7e7e7;text-align:center;align-self: self-start;padding: 1rem;text-align: center;align-self: stretch;margin-bottom: 1rem;">
+
+                    <% order.allProduct.forEach(element => { %>
+                    <div class="d-flex">
+                      <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
+                        <%= element.id.name %>
+                      </h4>
+                      <p style="margin-left: auto;margin-bottom: 0;font-weight: 500;">₹<%= element.id.price %><span style="font-weight: 400;"> x <%= element.quantity %></span></p>
+                    </div>
+                    <% }) %>
+
+                  </div>
+                  <div class="entry-body col-md-6" style="text-align: end;">
+                    <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
+                      Delivery address
+                    </h4><!-- End .entry-content -->
+                    <p style="font-weight: 500;margin-bottom: 0rem;"><%= order.address.aname %></p>
+                    <p style="margin-bottom: 1rem;"><%= order.address.aaddress %> <br>
+                      <%= order.address.acity %> - <%= order.address.apincode %></p>
+                    <p style="font-weight: 500;margin-bottom: 0rem;">Phone number</p>
+                    <p><%= order.address.aphone %></p>
+                  </div>
+                </div>
+
+                <div class="row" style="border:1px solid #e7e7e7;text-align: left;align-self: self-start;padding: 1rem;align-self: stretch;margin-bottom: 1rem;">
+                  <% if (!order.refund) { %>
+                  <form id="return-form">
+                    <center><span id="adresponse" class="text-danger"></span></center>
+                    <input type="hidden" name="userid" value="<%= userid %>">
+                    <input type="hidden" name="orderid" value="<%= order._id %>">
+
+                    <div class="form-group">
+                      <label for="reason">What is your reason for returning the product? *</label>
+                      <!-- <input type="text" class="form-control" id="singin-email"  required> -->
+                      <select class="form-select form-control" id="reason" name="reason" aria-label=".form-select-sm example" required>
+                        <!-- <option selected>Open this select menu</option> -->
+                        <option value="Manufacturing defect">Manufacturing defect</option>
+                        <option value="Wrong Product/Size recieved">Wrong Product/Size recieved</option>
+                      </select>
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="description">Describe what happened *</label>
+                      <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+                    </div><!-- End .form-group -->
+
+                    <div class="form-group">
+                      <label for="payment">Enter payment details *</label>
+                      <textarea type="text" class="form-control" id="payment" name="payment" required></textarea>
+                    </div>
+
+                    <div class="form-footer">
+
+                      <button type="submit" form="return-form" class="btn btn-outline-primary-2">
+                        <span>Submit return request</span>
+                        <i class="icon-long-arrow-right"></i>
+                      </button>
+
+                      <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
+                    </div>
+                    <!-- End .form-footer -->
+                  </form>
+                  <% } else { %>
+                  <div style="display:flex;flex-direction:column;text-align: left;">
+                    
+                    <p style="margin-bottom: 0rem!important;"><span style="font-weight: 500;margin-bottom: 0rem!important;">Reason:</span> <%= order.refund.reason %></p>
+                    <p style="margin-bottom: 0rem!important;"><span style="font-weight: 500;margin-bottom: 0rem;">Description:</span> <%= order.refund.description %></p>
+                    <p style="margin-bottom: 0rem!important;"><span style="font-weight: 500;margin-bottom: 0rem;">Payment Details:</span> <%= order.refund.payment %></p>
+                    <% if (order.refund.status) { %>
+                      <p style="margin-bottom: 0rem!important;color:#eea287;"><span style="font-weight: 500;margin-bottom: 0rem;">Status:</span> <%= order.refund.status %></p>
+                    <% } else {%>
+                      <p style="margin-bottom: 0rem!important;"><span style="font-weight: 500;margin-bottom: 0rem;">Status:</span> Your return request is being processed.</p>
+                    <% } %>
+                  </div>
+                  <% } %>
+
+
+                </div>
+
+              </div><!-- End .col-md-8 -->
+            </div><!-- End .row -->
+          </article><!-- End .entry -->
+        </div><!-- End .container -->
+      </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+
+    <%- include('./footer.ejs') %>
+    <script>
+      const $form3 = $('#return-form')
+      $form3.on('submit', submitHandler3)
+
+      function submitHandler3(e) {
+        e.preventDefault()
+        $.ajax({
+          url: '/api/order/return-add',
+          type: 'POST',
+          data: $form3.serialize()
+        }).done(response => {
+          response = JSON.stringify(response)
+          response = JSON.parse(response);
+          if (response.error) {
+            // $("#adresponse").text(response.error)
+            alert(response.error);
+            window.location = '/dashboard';
+          } else {
+            alert("Your return request has been submitted.");
+            window.location = '/dashboard';
+          }
+        })
+      }
+    </script>
+</body>
+
+
+<!-- molla/product-extended.html  22 Nov 2019 10:03:27 GMT -->
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>About</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="http://localhost:8000/assets/img/favicon.png" rel="icon">
+    <link href="http://localhost:8000/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="http://localhost:8000/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="http://localhost:8000/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="http://localhost:8000/assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <%- include('../templates/header.ejs'); %>
+    <%- include('../templates/navbar.ejs'); %>
+    <script src="http://localhost:8000/assets/js/script.js"></script>
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>About Us</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">About Us</li>
+                </ol>
+            </nav>
+        </div>
+        <section class="section">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <!-- Profile Edit Form -->
+                    <form method="POST" action="/api/product/add-product" enctype="multipart/form-data">
+
+                        <div class="row mb-3">
+                            <label for="SKU" class="col-md-4 col-lg-3 col-form-label">Product SKU</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="SKU" class="form-control" id="sku" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label">Product Images</label>
+                            <div class=" col-md-8 col-lg-9">
+                                <input name="image" class="form-control" type="file" id="formFileMultiple" multiple required>
+                            </div>
+                          </div>
+
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-lg-3 col-form-label">Product Name</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="name" class="form-control" id="name" required></input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="description" class="col-md-4 col-lg-3 col-form-label">Description</label>
+                            <div class="col-md-8 col-lg-9">
+                                <textarea name="description" class="form-control" rows="10" id="description" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="material" class="col-md-4 col-lg-3 col-form-label">Material</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="company" class="form-control" id="material" required></input>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
+                            <div class="col-md-8 col-lg-9">
+                                <select class="form-select" id="category" name="category" aria-label="Default select example" required>
+                                    <% categories.forEach(element => { %>
+                                        <option value="<%= element._id %>"><%= element.cName %></option>
+                                    <% }) %>
+                                    
+
+                                  </select>
+                            </div>
+                        </div>
+                        
+                          <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-lg-3 col-form-label">Status</label>
+                            <div class="col-md-8 col-lg-9">
+                                <select class="form-select" id="status" name="status" aria-label="Default select example" required>
+                                    <!-- <option selected>Open this select menu</option> -->
+                                    <option selected>Active</option>
+                                    <option >Disabled</option>
+                                    <!-- <option value="3">Three</option> -->
+                                  </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="sizes" class="col-md-4 col-lg-3 col-form-label">Size</label>
+                            <div class="col-md-8 col-lg-9">
+                                <select class="form-select" id="sizes" name="sizes" required>
+                                    <option selected>XS</option>
+                                    <option >S</option>
+                                    <option >M</option>
+                                    <option >L</option>
+                                    <option >XL</option>
+                                    <option >XXL</option>
+                                  </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="price" class="col-md-4 col-lg-3 col-form-label">Price</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="price" type="number" class="form-control" id="price" required></input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="offer" class="col-md-4 col-lg-3 col-form-label">Offer in %</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="offer" type="number" class="form-control" id="offer" required></input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="quantity" class="col-md-4 col-lg-3 col-form-label">Quantity</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="quantity" type="number" class="form-control" id="quantity" required></input>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="mb-3 form-check col-md-6">
+                                <input name="featured" value=0 type="hidden">
+                                <input name="featured" value=1 type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Featured</label>
+                              </div>
+                              <div class="mb-3 form-check col-md-6">
+                                <input name="shipping" value=0 type="hidden">
+                                <input type="checkbox" value=1 name="shipping" class="form-check-input" id="exampleCheck2">
+                                <label class="form-check-label" for="exampleCheck2">Free Shipping</label>
+                              </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save Product</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="credits">
+            Designed by <a href="#">JVSH Technologies</a>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="http://localhost:8000/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="http://localhost:8000/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:8000/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="http://localhost:8000/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="http://localhost:8000/assets/vendor/quill/quill.min.js"></script>
+    <script src="http://localhost:8000/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="http://localhost:8000/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="http://localhost:8000/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <!-- Template Main JS File -->
+    <script src="http://localhost:8000/assets/js/main.js"></script>
+    <script>
+        $("#sku").on('change', function(){
+            $.ajax({
+                type: 'POST',
+                url: "/api/product/product-by-SKU",
+                data: {SKU: $(this).val()}
+            }).done(function(responseData) {
+                if(responseData.prod){
+                    $("#name").val(responseData.prod.name.split("-")[0]);
+                    $("#description").val(responseData.prod.description);
+                    $("#material").val(responseData.prod.company);
+                    $("#category").val(responseData.prod.category._id);
+                    $("#status").val(responseData.prod.status);
+                    $("#price").val(responseData.prod.price);
+                    $("#offer").val(responseData.prod.offer);
+                    $("#quantity").val(responseData.prod.quantity);
+                }
+                
+            })
+        })
+    </script>
+
+</body>
+
+</html>

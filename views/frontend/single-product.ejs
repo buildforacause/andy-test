@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/product.html  22 Nov 2019 09:54:50 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/frontend/assets/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/frontend/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/frontend/assets/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="/frontend/assets/images/icons/site.html">
+    <link rel="mask-icon" href="/frontend/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="shortcut icon" href="/frontend/assets/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="/frontend/assets/images/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="/frontend/assets/css/plugins/magnific-popup/magnific-popup.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/plugins/nouislider/nouislider.css">
+
+    <style>
+        .txt-center {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+
+.clear {
+  float: none;
+  clear: both;
+}
+
+.rating {
+    width: 90px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+}
+
+.rating > label {
+    float: right;
+    display: inline;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 1.1em;
+    cursor: pointer;
+    color: #000;
+}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input.radio-btn:checked ~ label {
+    color: transparent;
+}
+
+.rating > label:hover::before,
+.rating > label:hover ~ label::before,
+.rating > input.radio-btn:checked ~ label::before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <%- include("./navbar.ejs") %>
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container d-flex align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><%= product.name %></li>
+                    </ol>
+
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+                <div class="container">
+                    <div class="product-details-top">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="product-gallery product-gallery-vertical">
+                                    <div class="row">
+                                        <figure class="product-main-image">
+                                            <img id="product-zoom" src="<%= product.image[0] %>" data-zoom-image="<%= product.image[0] %>" alt="product image">
+
+                                            <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                                <i class="icon-arrows"></i>
+                                            </a>
+                                        </figure><!-- End .product-main-image -->
+
+                                        <div id="product-zoom-gallery" class="product-image-gallery">
+                                            <% product.image.forEach(image => { %>
+                                                <a class="product-gallery-item" href="#" data-image="<%= image %>" data-zoom-image="<%= image %>">
+                                                    <img src="<%= image %>">
+                                                </a>
+                                            <% }) %>
+
+
+
+                                           <!--  <a class="product-gallery-item" href="#" data-image="/frontend/assets/images/products/single/3.jpg" data-zoom-image="/frontend/assets/images/products/single/3-big.jpg">
+                                                <img src="/frontend/assets/images/products/single/3-small.jpg" alt="product with model">
+                                            </a>
+
+                                            <a class="product-gallery-item" href="#" data-image="/frontend/assets/images/products/single/4.jpg" data-zoom-image="/frontend/assets/images/products/single/4-big.jpg">
+                                                <img src="/frontend/assets/images/products/single/4-small.jpg" alt="product back">
+                                            </a> -->
+                                        </div><!-- End .product-image-gallery -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .product-gallery -->
+                            </div><!-- End .col-md-6 -->
+
+                            <div class="col-md-6">
+                                <div class="product-details">
+                                    <h1 class="product-title"><%= product.name %></h1><!-- End .product-title -->
+                                <% if (product.ratings.length > 0) { %>
+                                 
+                                
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: <%= total %>%;"></div>
+                                        </div>
+                                        
+                                        <a class="ratings-text" href="#product-review-link" id="review-link">( <%= product.ratings.length %> Reviews )</a>
+                                    </div>
+                                    <% } else {%>
+                                        <div class="ratings-container">                                            
+                                            <a class="ratings-text" href="#product-review-link" id="review-link">( No Reviews )</a>
+                                        </div>
+                                    <% } %>
+                                    <!-- End .rating-container -->
+
+                                    <div class="product-price">
+                                        <% if (product.offer != 0) { %>
+                                            <span class="new-price"> ₹<%= product.price - ((product.price/100)*product.offer).toFixed(2) %></span>
+                                            <span class="old-price">₹<%= product.price.toFixed(2) %></span>
+                                        <% } else { %>
+                                            <span class="new-price">₹<%= product.price.toFixed(2) %></span>
+                                        <% } %>
+                                    </div><!-- End .product-price -->
+
+                                    <div class="product-content">
+                                        <p></p>
+                                    </div><!-- End .product-content -->
+
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="size">Size:</label>
+                                        <div style="display: flex; gap: 20px;">
+                                            <% productsizes.forEach(productsize => { %>
+                                            <a href="/view/<%=productsize._id%>">
+                                                <div class="productsizecard" style="text-align: center;">
+                                                    <div class="productsizecardimg" style="width: 50px;height:50px;display: flex;align-items: center;justify-content: center;overflow: hidden;">
+                                                        <img style="height:100%;width: auto;" src="<%= productsize.image[0] %>">
+                                                    </div>
+                                                    <p><%= productsize.name.split("-")[1] %></p>
+                                                </div>
+                                            </a>
+                                            <% }) %>
+                                        </div><!-- End .select-custom -->
+                                    </div><!-- End .details-filter-row -->
+
+                                    <div class="product-details-action" style="display: flex; gap:20px;flex-direction: row;align-items: center;">
+                                        <% if (product.quantity < 1) { %>
+                                            <button class="btn btn-danger" disabled><span>Out of stock</span></button>
+                                        <% }else{ %>
+                                            <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        
+                                        <% } %>
+                                   
+                                        <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
+                                    </div><!-- End .product-action -->
+
+                                    <div class="product-details-footer" style="display: flex;justify-content: space-between;">
+                                        <div class="product-cat">
+                                            <span>Category:</span>
+                                            <a href="/shop?filterby=<%= product.category._id %>"><%= product.category.cName %></a>
+                                            
+                                        </div><!-- End .product-cat -->
+                                        <div class="product-cat">
+                                            <span>SKU:</span>
+                                            <a href="#"><%= product.SKU %></a>
+
+                                        </div>
+                                        <div class="social-icons social-icons-sm" style="margin: 0!important;">
+                                            <span class="social-label">Share:</span>
+                                            <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                            <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                        </div>
+                                    </div><!-- End .product-details-footer -->
+                                </div><!-- End .product-details -->
+                            </div><!-- End .col-md-6 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-details-top -->
+
+                    <div class="product-details-tab">
+                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (<%= product.ratings.length %>)</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                                <div class="product-desc-content">
+                                    <h3>Product Information</h3>
+                                    <p><%= product.description  %></p>       
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                                <div class="product-desc-content">
+                                    <h3>Sizes:</h3>
+                                    <ul>
+                                        <% productsizes.forEach(productsize => { %>
+                                            <li><%= productsize.name.split("-")[1] %></li>
+                                       <% })%>
+                                    </ul>
+                                </div><!-- End .product-desc-content -->
+                            </div><!-- .End .tab-pane -->
+                            <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                                <div class="reviews">
+                                    <h3>Reviews</h3>
+                                    <% product.ratings.forEach(rating => { %>
+                                     
+                                    
+                                    <div class="review">
+                                        <div class="row no-gutters">
+                                            <div class="col-auto">
+                                                <h4><a href="#"><%= rating.user.name %></a></h4>
+                                                <div class="ratings-container">
+                                                    <div class="ratings">
+                                                        <div class="ratings-val" style="width: <%= rating.rating %>%;"></div><!-- End .ratings-val -->
+                                                    </div><!-- End .ratings -->
+                                                </div><!-- End .rating-container -->
+                                                <% let d = new Date(rating.createdAt.toISOString()); %>
+                                                <% let day = d.getDate(); %>
+                                                <% let m = ["January", "February", "March", "April", "May", "June", "July", 
+                                                "August", "September", "October", "November", "December"]; %>
+                                                <% let month = m[d.getMonth()]; %>
+                                                <% let year = d.getFullYear(); %>
+                                                <% let newdate = day + " " + month + ", " + year; %>
+
+                                                <span class="review-date"><%= newdate %></span>
+                                            </div><!-- End .col -->
+                                            <div class="col">
+                                                <div class="review-content">
+                                                    <p><%= rating.review %></p>
+                                                </div><!-- End .review-content -->
+                                                <div id="product-zoom-gallery" class="product-image-gallery">
+                                                    <% rating.image.forEach(image => { %>
+                                                        <a class="product-gallery-item" href="#" data-image="<%= image %>" data-zoom-image="<%= image %>">
+                                                            <img src="<%= image %>" width="50px" height="50px">&nbsp;
+                                                        </a>
+                                                    <% }) %>
+                                                </div><!-- End .product-image-gallery -->
+                                            </div><!-- End .col-auto -->
+                                            <% if (rating.user._id.toString() === userid) { %>
+                                                <a href="#delreview<%= rating._id %>" data-toggle="modal">Delete</a>
+                                            <% } %>
+
+                                            <div class="modal fade" id="delreview<%= rating._id %>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <button type="button" id="btn-btnclose" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="icon-close"></i></span>
+                                                            </button>
+                                                            <div class="form-box">
+                                                                <div class="form-tab">
+                                                                    <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#addreview" role="tab" aria-controls="signin" aria-selected="true">Are You Sure?</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div class="tab-content" id="tab-content-5">
+                                                                        <div class="tab-pane fade show active" id="addreview" role="tabpanel" >
+                                                                            <form method="POST" action="/api/product/delete-review">
+                                                                                <input type="hidden" name="rId" value="<%= rating._id %>" >
+                                                                                <input type="hidden" name="_id" value="<%= product._id %>" >
+                                                                                <label for="rat">Rating</label>
+                                                                                <div class="ratings-container">
+                                                                                    <div class="ratings">
+                                                                                        
+                                                                                        <div id="rat" class="ratings-val" style="width: <%= rating.rating %>%;"></div><!-- End .ratings-val -->
+                                                                                    </div><!-- End .ratings -->
+                                                                                </div><!-- End .rating-container -->
+                                                
+                                                                                <div class="form-group">
+                                                                                    <label for="review">Review</label>
+                                                                                    <textarea class="form-control" id="review" readonly><%= rating.review %></textarea>
+                                                                                </div><!-- End .form-group -->
+                                
+                                                                                <div class="form-footer">
+                                                                                    
+                                                                                    <button type="submit" class="btn btn-outline-primary-2 w-100">
+                                                                                        <span>Delete Review</span>
+                                                                                        <i class="icon-long-arrow-right"></i>
+                                                                                    </button>
+                                                
+                                                                                    <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
+                                                                                </div>
+                                                                                <!-- End .form-footer -->
+                                                                            </form>
+                                
+                                                                        </div><!-- .End .tab-pane -->
+                                
+                                                                    </div><!-- End .tab-content -->
+                                                                </div><!-- End .form-tab -->
+                                                            </div><!-- End .form-box -->
+                                                        </div><!-- End .modal-body -->
+                                                    </div><!-- End .modal-content -->
+                                                </div><!-- End .modal-dialog -->
+                                                </div><!-- End .modal -->
+                                            
+                                        </div><!-- End .row -->
+                                    </div><!-- End .review -->
+
+                                    <% }) %>
+                                    <% if (user) { %>
+                                        <center><a href="#addreviewmodal" data-toggle="modal">Add Review</a></center>
+                                    <% }else{ %>
+                                        <center><a href="#signin-modal" data-toggle="modal">Login To Add Review</a></center>
+                                    <% } %>
+                                </div><!-- End .reviews -->
+                            </div><!-- .End .tab-pane -->
+
+                        </div><!-- End .tab-content -->
+                    </div><!-- End .product-details-tab -->
+
+                    <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+
+                    <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" 
+                        data-owl-options='{
+                            "nav": false, 
+                            "dots": true,
+                            "margin": 20,
+                            "loop": false,
+                            "responsive": {
+                                "0": {
+                                    "items":1
+                                },
+                                "480": {
+                                    "items":2
+                                },
+                                "768": {
+                                    "items":3
+                                },
+                                "992": {
+                                    "items":4
+                                },
+                                "1200": {
+                                    "items":4,
+                                    "nav": true,
+                                    "dots": false
+                                }
+                            }
+                        }'>
+                        <% let i = 0; %>
+                        <% allProds.forEach(prod => { %>
+                           
+                         
+                        <% if (prod.category.cName == product.category.cName) { %>
+                         
+                        
+                        <div class="product product-7 text-center">
+                    
+                            <figure class="product-media">
+                                <% if (prod.offer != 0) { %>
+                                    <span class="product-label label-sale">-<%= prod.offer %>%</span>
+                                <% } %>
+                                <a href="/view/<%= prod._id %>">
+                                    <img src="<%= prod.image[0] %>" alt="Product image" class="product-image">
+                                    <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
+                                </a>
+                                
+                                <div class="product-action ">
+                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" class="btn-product btn-cart"><span>add to cart</span></a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="#"><%= prod.category.cName %></a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a href="product.html"><%= prod.name %></a></h3><!-- End .product-title -->
+                                
+                                <div class="product-price">
+                                    <% if (prod.offer != 0) { %>
+                                        <span class="new-price"> ₹<%= prod.price - ((prod.price/100)*prod.offer).toFixed(2) %></span>
+                                        <span class="old-price">₹<%= prod.price.toFixed(2) %></span>
+                                    <% } else { %>
+                                        <span class="new-price">₹<%= prod.price.toFixed(2) %></span>
+                                    <% } %>
+                                </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                        <% 
+                        i++;
+                    } %>
+                        <% }) %>
+
+
+
+                    </div><!-- End .owl-carousel -->
+                    <% if (i < 1) { %>
+                        <center>
+                           <p>No Products matching this criteria yet!</p>
+                       </center>
+                       <% } %>
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+
+
+            <div class="modal fade" id="addreviewmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" id="btn-btn01close" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="icon-close"></i></span>
+                            </button>
+                
+                            <div class="form-box">
+                                <div class="form-tab">
+                                    <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#addreview" role="tab" aria-controls="signin" aria-selected="true">Add Review</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="tab-content-5">
+                                        <div class="tab-pane fade show active" id="addreview" role="tabpanel" >
+                                            <form id="addReviewForm" enctype="multipart/form-data">
+                                                <input type="hidden" name="uId" value="<%= userid %>" >
+                                                <input type="hidden" name="_id" value="<%= product._id %>" >
+                                                <center><span class="mb-2 text-danger" id="showreview"></span></center>
+                                                <div class="form-group row mb-3">
+                                                    <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label">Review Images (if any)</label>
+                                                    <div class=" col-md-8 col-lg-9">
+                                                        <input name="image" class="form-control" type="file" id="formFileMultiple" multiple>
+                                                    </div>
+                                                  </div>
+                                                <div class="form-group">
+                                                    <label for="rating">Rating *</label>
+                                                    <div class="rating" id="rating">
+                                                        <input id="star5" name="rating" type="radio" value="100" class="radio-btn hide" required/>
+                                                        <label for="star5" >☆</label>
+                                                        <input id="star4" name="rating" type="radio" value="80" class="radio-btn hide" required/>
+                                                        <label for="star4" >☆</label>
+                                                        <input id="star3" name="rating" type="radio" value="60" class="radio-btn hide" required/>
+                                                        <label for="star3" >☆</label>
+                                                        <input id="star2" name="rating" type="radio" value="40" class="radio-btn hide" required/>
+                                                        <label for="star2" >☆</label>
+                                                        <input id="star1" name="rating" type="radio" value="20" class="radio-btn hide" required/>
+                                                        <label for="star1" >☆</label>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div><!-- End .form-group -->
+                
+                                                <div class="form-group">
+                                                    <label for="review">Review *</label>
+                                                    <textarea class="form-control" id="review" name="review" required></textarea>
+                                                </div><!-- End .form-group -->
+
+                                                <div class="form-footer">
+                                                    
+                                                    <button type="submit" class="btn btn-outline-primary-2">
+                                                        
+                                                        <span>Add Review</span>
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                
+                                                    <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
+                                                </div>
+                                                <!-- End .form-footer -->
+                                            </form>
+
+                                        </div><!-- .End .tab-pane -->
+
+                                    </div><!-- End .tab-content -->
+                                </div><!-- End .form-tab -->
+                            </div><!-- End .form-box -->
+                        </div><!-- End .modal-body -->
+                    </div><!-- End .modal-content -->
+                </div><!-- End .modal-dialog -->
+                </div><!-- End .modal -->
+
+
+        </main><!-- End .main -->
+
+
+<%- include("./footer.ejs") %>
+
+<script>
+	$("#cart-total-text").hide();
+    $('#addReviewForm').on('submit', function (e) {
+        e.preventDefault()
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: '/api/product/add-review',
+            type:'POST',
+            data: formData,
+            processData: false,
+            enctype: "multipart/form-data",
+            cache: false,
+            contentType: false
+        }).done(response => {
+            if(response.error){
+                $("#showreview").text(response.error)
+            }else{
+                $("#showreview").text(response.success)
+                $("#btn-btn01close").click()
+                location.reload();
+            }
+        })
+    })
+
+    
+</script>
+</body>
+
+
+<!-- molla/product.html  22 Nov 2019 09:55:05 GMT -->
+</html>
