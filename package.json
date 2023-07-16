@@ -9,7 +9,7 @@
     "start": "node app.js"
   },
   "engines": {
-    "node": ">=16 <18"
+    "node": ">=18 <19"
   },
   "author": "Harmit & Siddharth",
   "license": "ISC",
