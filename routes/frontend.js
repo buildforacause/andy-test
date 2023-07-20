@@ -246,7 +246,13 @@ router.get("/view/:id",async (req,res) => {
     let userid = req.cookies.userid
     let navCats = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 }).limit(5);
     let Info = await infoModel.find({});
-    res.render("frontend/single-product.ejs", {total: total,info: Info[0],userid: userid,product: Product[0],productsizes:ProductSize, allProds: allProds, user:user, userid:userid, navCats: navCats});
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const url = req.originalUrl;
+    const port = process.env.PORT;
+    let fullUrl = `${protocol}://${host}:${port}${url}`
+    console.log(fullUrl);
+    res.render("frontend/single-product.ejs", {fullUrl: fullUrl, total: total,info: Info[0],userid: userid,product: Product[0],productsizes:ProductSize, allProds: allProds, user:user, userid:userid, navCats: navCats});
 })
 
 router.get("/shop",async (req,res) => {
