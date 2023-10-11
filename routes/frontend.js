@@ -304,6 +304,7 @@ router.get("/shop",async (req,res) => {
     )
     let navCats = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 }).limit(5);
     let Info = await infoModel.find({});
+    console.log(allProds)
     res.render("frontend/results.ejs", {info: Info[0], userid: userid,allProds: allProds, cats: Categories, user:user, title: title, navCats: navCats});
 })
 

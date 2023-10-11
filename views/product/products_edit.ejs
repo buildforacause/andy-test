@@ -176,6 +176,15 @@
     <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // Replace 'textarea' with the CSS selector of your textareas
+            plugins: 'autolink lists link charmap print preview anchor',
+            menubar: false,
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            height: 300  // Set the height of the editor as needed
+        });
+    </script>
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
