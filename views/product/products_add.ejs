@@ -190,6 +190,16 @@
 
     <!-- Template Main JS File -->
     <script src="http://localhost:8000/assets/js/main.js"></script>
+    <script src="http://localhost:8000/assets/js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // Replace 'textarea' with the CSS selector of your textareas
+            plugins: 'autolink lists link charmap print preview anchor',
+            menubar: false,
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+            height: 300  // Set the height of the editor as needed
+        });
+    </script>
     <script>
         $("#sku").on('change', function(){
             $.ajax({
