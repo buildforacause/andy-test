@@ -18,10 +18,10 @@ const upload = multer({ storage: storage });
 
 router.get("/all-category", categoryController.getAllCategory);
 router.post(
-  "/add-category",
+  "/add-category", upload.any(),
   categoryController.postAddCategory
 );
-router.post("/edit-category", categoryController.postEditCategory);
+router.post("/edit-category", upload.any(), categoryController.postEditCategory);
 router.post(
   "/delete-category",
   categoryController.getDeleteCategory

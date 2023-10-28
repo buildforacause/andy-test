@@ -74,6 +74,7 @@ router.get('/product-add',async(req,res)=>{
 
 router.get('/product-edit/:id',async(req,res)=>{
     let id = req.params.id
+    let Categories = await categoryModel.find({}).sort({ _id: -1 });
     let singleProduct = await productModel
           .findById(id)
           .populate("category", "_id cName")
@@ -91,7 +92,7 @@ router.get('/product-edit/:id',async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    res.render("product/products_edit.ejs", {prod: singleProduct });
+    res.render("product/products_edit.ejs", {prod: singleProduct, categories: Categories });
 })
 
 router.get('/category-view',async(req,res)=>{

@@ -133,7 +133,7 @@
     <script src="/assets/js/main.js"></script>
 
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                             <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
                             <script>
@@ -141,12 +141,11 @@
                                     $('#tblUser').DataTable(
                                       
                                     );
+                                    $("#select").on('change', submitHandler3)
                                 });
-
-
                                 const $form3 = $('#update-order')
-                                $("#select").on('change', submitHandler3)
-
+                                    
+                                
                                 function submitHandler3 (e) {
                                     e.preventDefault()
                                     $.ajax({

@@ -89,6 +89,7 @@ class Sponsor {
       });
     }
     // Validate Update Images
+    
     else {
       let editData = {
         name: name,

@@ -150,6 +150,9 @@
                                       <%= order.address.acity %> - <%= order.address.apincode %></p>
                                     <p style="font-weight: 500;margin-bottom: 0rem;">Phone number</p>
                                     <p><%= order.address.aphone %></p>
+                                    <p style="font-weight: 500;margin-bottom: 0rem;"><a href="<%= order.transactionScreenShot %>" target="_blank">View Payment Details</a></p>
+                                    
+                                    
                                 </div><!-- End .entry-body -->
 
                                 
@@ -161,6 +164,7 @@
                                   <p>Let our team approve the payment of this order!</p>
                                 </center>
                                 <% } else { %>
+                                  
                                 <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">                              
                                   <p class="mb-2"><span style="font-weight: 500;margin-bottom: 0rem;">Tracking Phone number: </span><%= order.address.aphone %></p>
                                 

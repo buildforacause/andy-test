@@ -51,9 +51,13 @@ class Info {
         email: email,
         name : name
       };
+      if(editImages.length > 0){
         let i = "/uploads/products/" +editImages[0].filename;
         editData = { ...editData, image: i };
         Info.deleteImages(previmage, "file");
+      }else{
+        editData = { ...editData, image: previmage };
+      }
       try {
         let editSponsor = await infoModel.findByIdAndUpdate(_id, editData);
         let save = await editSponsor.save()

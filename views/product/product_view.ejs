@@ -80,7 +80,7 @@
                                         <th>Description</th>
                                         <th>Category</th>
                                         <th>Price</th>
-                                        <th>SKU</th>
+                                        <th>Quantity</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -93,9 +93,16 @@
                                             <td><%= prod.description.substring(0, 50) %>...</td>
                                             <td><%= prod.category.cName %></td>
                                             <td><%= prod.price %></td>
-                                            <td><%= prod.SKU %></td>
+                                            <td><%= prod.quantity %></td>
                                             <td><%= prod.status %></td>
-                                            <td><a href="/admin/product-edit/<%= prod._id %>" class="btn btn-secondary">Edit</a></td>
+                                            <td><a href="/admin/product-edit/<%= prod._id %>" class="btn btn-secondary">Edit</a>
+                                                <form method="POST" action="/api/product/delete-product">
+                                                    <input type="hidden" value="<%= prod._id %>" name="_id">
+                                                    <div class="text-center mt-3">
+                                                        <button id="delete" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </td>
                                         </tr>
                                     <% }) %>
                                         

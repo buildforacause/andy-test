@@ -78,7 +78,14 @@
                                     <% pincodes.forEach(pin => { %>
                                         <tr>
                                             <td><%= pin.pincode %></td>
-                                            <td><a href="/admin/pincode-edit/<%= pin._id %>" class="btn btn-secondary">Edit</a></td>
+                                            <td><a href="/admin/pincode-edit/<%= pin._id %>" class="btn btn-secondary">Edit</a>
+                                                <form method="POST" action="/api/pincode/delete-pincode">
+                                                    <input type="hidden" value="<%= pin._id %>" name="_id">
+                                                    <div class="text-center mt-3">
+                                                        <button id="delete" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </td>
                                         </tr>
                                     <% }) %>
                                         

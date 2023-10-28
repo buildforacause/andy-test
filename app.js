@@ -18,6 +18,15 @@ go user model and see the role field.
 const productModel = require("./models/products");
 const express = require("express");
 const app = express();
+
+const slugify = (inputString) => {
+  const cleanedString = inputString.replace(/[^a-zA-Z0-9\s]/g, '');
+  const slug = cleanedString.replace(/\s+/g, '-').toLowerCase();
+  return slug;
+};
+
+// Make the slugify function available to your EJS templates
+app.locals.slugify = slugify;
 app.set('view engine', 'ejs');
 require("dotenv").config();
 const mongoose = require("mongoose");

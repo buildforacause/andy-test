@@ -1,8 +1,24 @@
 const { toTitleCase } = require("../config/function");
 const categoryModel = require("../models/categories");
 const fs = require("fs");
+const path = require("path");
 
 class Category {
+  static deleteImages(images, mode) {
+    var basePath =
+      path.resolve(__dirname + "../../") + "/public";
+      let filePath = "";
+      if (mode == "file") {
+        filePath = basePath + `${images}`;
+        console.log(filePath);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          return err;
+        }
+      });
+      }
+  }
+
   async getAllCategory(req, res) {
     try {
       let Categories = await categoryModel.find({}).sort({ _id: -1 });
@@ -16,17 +32,21 @@ class Category {
 
   async postAddCategory(req, res) {
     let { cName, cDescription, cStatus } = req.body;
-    console.log(cName);
-      cName = toTitleCase(cName);
+    let images = req.files;
+
+    cName = toTitleCase(cName);
       try {
         let checkCategoryExists = await categoryModel.findOne({ cName: cName });
         if (checkCategoryExists) {
+            Category.deleteImages(images[0], "file");
             return res.json({ error: "Category already exists" });
         } else {
+          let i = "/uploads/categories/" +images[0].filename;
           let newCategory = new categoryModel({
             cName: cName,
             cDescription:cDescription,
-            cStatus:cStatus
+            cStatus:cStatus,
+            cImage: i
           });
           await newCategory.save((err) => {
             if (!err) {
@@ -40,15 +60,22 @@ class Category {
   }
 
   async postEditCategory(req, res) {
-    let { cId, cName, cDescription, cStatus } = req.body;
+    let { cId, cName, cDescription, cStatus, previmage } = req.body;
+    let editImages = req.files;
+
     if (!cId | !cName | !cDescription | !cStatus) {
       return res.json({ error: "All fields are required" });
     }
     try {
+      let i = previmage;
+      if(editImages.length > 0){
+        i = "/uploads/categories/" +editImages[0].filename;
+      }
       let editCategory = categoryModel.findByIdAndUpdate(cId, {
         cDescription:cDescription,
         cName : cName,
         cStatus:cStatus,
+        cImage: i,
         updatedAt: Date.now(),
       });
       let edit = await editCategory.exec();
@@ -66,8 +93,11 @@ class Category {
       return res.json({ error: "All fields are required" });
     } else {
       try {
+        let deleteProductObj = await categoryModel.findById(cId);
         let deleteCategory = await categoryModel.findByIdAndDelete(cId);
         if (deleteCategory) {
+          // Delete Image from uploads -> products folder
+          Category.deleteImages(deleteProductObj.cImage, "string");
           return res.redirect("/admin/category-view");
         }
       } catch (err) {

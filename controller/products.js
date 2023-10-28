@@ -42,7 +42,7 @@ class Product {
   }
 
   async postAddProduct(req, res) {
-    let { name, description, price, quantity, category, offer, status, SKU, company, featured, shipping, sizes } =
+    let { name, description, price, quantity, category, offer, status, SKU, company, featured, shipping, previmages, sizes } =
       req.body;
     let images = req.files;
     // Validation
@@ -57,21 +57,23 @@ class Product {
       !SKU |
       !company
     ) {
-      Product.deleteImages(images, "file");
       return res.json({ error: "All fields are required" });
     }
     // Validate Name and description
     else if (name.length > 255 || description.length > 3000) {
-      Product.deleteImages(images, "file");
       return res.json({
-        error: "Name 255 & Description must not be 3000 charecter long",
+        error: "Name should not be more than 255 characters & Description should not be more than 3000 characters",
       });
     }
     // Validate Images
-    else if (images.length < 2) {
+    else if (images.length < 2 && previmages.length < 1) {
       Product.deleteImages(images, "file");
       return res.json({ error: "Must need to provide 2 images" });
-    } else {
+    }else if(images.length < 2 && previmages.length > 1){
+      images = previmages.join(",")
+      
+    }
+    else {
       try {
         let allImages = [];
         for (const img of images) {

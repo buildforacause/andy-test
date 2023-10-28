@@ -25,23 +25,32 @@ router.get('/',async (req,res) => {
     let Categories = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 });
     let navCats = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 }).limit(5);
     let banner = await secondarybannerModel.find({});
-    let RecentProducts= await productModel
-        .find({})
-        .populate("category")
-        .sort({"createdAt":-1})
-        .limit(10);
 
-    RecentProducts = RecentProducts.filter((value, index, self) =>
-        index === self.findIndex((t) => (
-            t.SKU === value.SKU
-        ))
-    )
+    const allProducts = await productModel
+    .find({})
+    .populate("category")
+    .sort({ createdAt: -1 });
+    const top5RecentProductsByCategory = new Map();
+    allProducts.forEach((product) => {
+    const category = product.category.cName; // Assuming "category" is the name field of your category model
+    if (!top5RecentProductsByCategory.has(category)) {
+        top5RecentProductsByCategory.set(category, []);
+    }
+    if (top5RecentProductsByCategory.get(category).length < 5) {
+        top5RecentProductsByCategory.get(category).push(product);
+    }
+    });
+    const result = Array.from(top5RecentProductsByCategory, ([category, products]) => ({
+    category,
+    products,
+    }));
     let Sponsors = await sponsorModel.find({}).sort({ _id: -1 });
     let sliders = await customizeModel.find({});
     let user = req.cookies.autOken
     let userid = req.cookies.userid
     let Info = await infoModel.find({});
-    res.render("frontend/index.ejs", {banner: banner[0], info: Info[0],navCats: navCats,userid: userid,products: Products, categories: Categories,recentproducts:RecentProducts, sponsors:Sponsors, user:user, sliders:sliders});
+    console.log(result[0].products)
+    res.render("frontend/index.ejs", {banner: banner[0], info: Info[0],navCats: navCats,userid: userid,products: Products, categories: Categories,recentproducts:result, sponsors:Sponsors, user:user, sliders:sliders});
 })
 
 router.get("/cart",async (req,res)=>{

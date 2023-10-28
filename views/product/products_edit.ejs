@@ -95,7 +95,9 @@
                             <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
                             <div class="col-md-8 col-lg-9">
                                 <select class="form-select" id="category" name="category" aria-label="Default select example">
-                                        <option value="<%= prod.category._id %>"><%= prod.category.cName %></option>
+                                    <% categories.forEach(element => { %>
+                                        <option value="<%= element._id %>" <%- (prod.category.cName === element.cName) ? "selected" : "" %>><%= element.cName %></option>
+                                    <% }) %>
                                   </select>
                             </div>
                         </div>

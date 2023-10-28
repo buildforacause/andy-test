@@ -36,19 +36,11 @@ class secondarybanner {
     let images = req.files;
     // Validation
     if (
-      !title | !description | !link
+      !link
     ) {
     secondarybanner.deleteImages(images[0], "file");
-      return res.json({ error: "All fields are required" });
+      return res.json({ error: "Link is required" });
     }
-    // Validate Name and description
-    // else if (title.length > 200) {
-    //     secondarybanner.deleteImages(images[0], "file");
-    //   return res.json({
-    //     error: "Title must not be more than 200 characters",
-    //   });
-    // }
-    // Validate Images
     else {
       try {
         let i = "/uploads/products/" +images[0].filename;
@@ -80,18 +72,10 @@ class secondarybanner {
 
     // Validate other fileds
     if (
-      !_id |
-      !title|!description|!link
+      !_id | !link
     ) {
-      return res.json({ error: "All fields are required" });
+      return res.json({ error: "Link field is required" });
     }
-    // Validate Name and description
-    // else if (name.length > 255) {
-    //   return res.json({
-    //     error: "Name must not be 255 character long",
-    //   });
-    // }
-    // Validate Update Images
     else {
       let editData = {
         title: title,

@@ -57,6 +57,10 @@ const orderSchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
+    tracking: {
+      type: Object,
+      required: false,
+    },
   },
   { timestamps: true }
 );
