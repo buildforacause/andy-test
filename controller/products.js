@@ -67,7 +67,7 @@ class Product {
       });
     }
     // Validate Images
-    else if (images.length < 2 && previmages.length < 1) {
+    else if (images.length < 2 && previmages == undefined) {
       Product.deleteImages(images, "file");
       return res.json({ error: "Must need to provide 2 images" });
     }else if(images.length < 2 && previmages.length > 1){

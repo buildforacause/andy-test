@@ -94,7 +94,7 @@
                         <div class="row mb-3">
                             <label for="weight" class="col-md-4 col-lg-3 col-form-label">Weight (in grams)</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="weight" value="<%= prod.weight %>" class="form-control" id="weight" required></input>
+                                <input name="weight" value="<%= prod.weight %>" type="number" class="form-control" id="weight" required></input>
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@
                         <div class="row mb-3">
                             <label for="offer" class="col-md-4 col-lg-3 col-form-label">Offer in %</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="offer" type="number" value="<%= prod.offer %>" class="form-control" id="offer"></input>
+                                <input name="offer" type="number" min="0" max="99" value="<%= prod.offer %>" class="form-control" id="offer"></input>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -193,6 +193,11 @@
             toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
             height: 300  // Set the height of the editor as needed
         });
+        document.getElementById("offer").addEventListener("change", function() {
+      let v = parseInt(this.value);
+      if (v < 0) this.value = 0;
+      if (v > 99) this.value = 99;
+    });
     </script>
 
     <!-- Template Main JS File -->
