@@ -2,6 +2,8 @@
 <html lang="en">
   <!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
   <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -367,9 +369,12 @@
               newdiscount = pastdiscount + discount
               $("#totaloffer").text(`₹${newdiscount}`)
               $("#couponcode").attr("value", response.coupon)
+              Toastify({text: 'Coupon applied successfully',style:{background:'#c96'}, gravity:'bottom',duration: 3000 }).showToast();
             }
         })
     }
     </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
   </body>
 </html>

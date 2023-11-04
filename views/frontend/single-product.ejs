@@ -4,6 +4,8 @@
 
 <!-- molla/product.html  22 Nov 2019 09:54:50 GMT -->
 <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -206,7 +208,7 @@
                                         <% if (product.quantity < 1) { %>
                                             <button class="btn btn-danger" disabled><span>Out of stock</span></button>
                                         <% }else{ %>
-                                            <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" class="btn-product btn-cart"><span>add to cart</span></a>
+                                            <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" onclick="Toastify({text: 'Product added to the cart',gravity:'bottom',style:{background:'#c96'}, duration: 3000 }).showToast();" class="btn-product btn-cart"><span>add to cart</span></a>
                                         
                                         <% } %>
                                    
@@ -562,6 +564,8 @@
 
     
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </body>
 
 

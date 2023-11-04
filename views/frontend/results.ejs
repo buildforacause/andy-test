@@ -5,6 +5,7 @@
 <!-- molla/category.html  22 Nov 2019 10:02:48 GMT -->
 <head>
     <meta charset="UTF-8">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Products</title>
@@ -25,6 +26,7 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="frontend/assets/css/style.css">
     <link rel="stylesheet" href="frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
@@ -84,7 +86,7 @@
                                                 </a>
 
                                                 <div class="product-action ">
-                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" class="btn-product btn-cart"><span>add to cart</span></a>
+                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart  ',style:{background:'#c96'},gravity:'bottom', duration: 3000 }).showToast();" class="btn-product btn-cart"><span>add to cart</span></a>
                                                 </div><!-- End .product-action -->
                                             </figure><!-- End .product-media -->
 
@@ -119,6 +121,8 @@
 <script>
 	$("#cart-total-text").hide();
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </body>
 
 

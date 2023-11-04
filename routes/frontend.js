@@ -13,7 +13,7 @@ const secondarybannerModel = require("../models/secondarybanner");
 
 router.get('/',async (req,res) => {
     let Products = await productModel
-        .find({featured: true})
+        .find({featured: true, status: "Active"})
         .populate("category", "_id cName")
         .sort({ _id: -1 })
         .limit(5);
@@ -269,7 +269,7 @@ router.get("/shop",async (req,res) => {
     let allProds = []
     if(req.query.filterby){
         try{
-            allProds = await productModel.find({category: req.query.filterby}).populate("category", "_id cName");
+            allProds = await productModel.find({category: req.query.filterby, status: "Active"}).populate("category", "_id cName");
             title = await categoryModel.find({_id: req.query.filterby});
             if(title){
                 title = title[0].cName;
@@ -295,16 +295,16 @@ router.get("/shop",async (req,res) => {
                             $regex: req.query.s, $options: "i" 
                         }
                 },
-            ]
+            ], status: "Active"
         }).populate("category", "_id cName");
         title = "Search Results For " + req.query.s;
     }
     else{
-        allProds = await productModel.find({}).populate("category", "_id cName");
+        allProds = await productModel.find({status: "Active"}).populate("category", "_id cName");
         title = "All Products"
     }
-    let Categories = await categoryModel.find({status: "Active"}).sort({ _id: -1 });
-    let user = req.cookies.autOken
+    let Categories = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 });
+    let user = req.cookies.autOken 
     let userid = req.cookies.userid
     allProds = allProds.filter((value, index, self) =>
         index === self.findIndex((t) => (

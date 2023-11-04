@@ -155,9 +155,11 @@
                                     }).done(response => {
                                         response = JSON.stringify(response)
                                         response = JSON.parse(response);
+                                        alert('Status updated');
                                         if(response.success){
                                             location.reload();
                                         }
+                                        
                                     })
                                 }
 
