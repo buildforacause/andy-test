@@ -166,7 +166,14 @@
                                 <% } else { %>
                                   
                                 <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">                              
-                                  <p class="mb-2"><span style="font-weight: 500;margin-bottom: 0rem;">Tracking Phone number: </span><%= order.address.aphone %></p>
+                                  <% if (order.tracking && order.tracking.trackingid) { %>
+                                    <p class="mb-0"><span style="font-weight: 500; margin-bottom: 0rem;">Tracking Id: </span><%= order.tracking.trackingid %></p>
+                                  <% } %>
+                                  
+                                  <% if (order.tracking && order.tracking.trackingcompany) { %>
+                                    <p class="mb-2"><span style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem;">Delivery Partner: </span><%= order.tracking.trackingcompany %></p>
+                                  <% } %>
+                                  
                                 
                                 <ul class="timeline" id="timeline">
                                     <li class="li">

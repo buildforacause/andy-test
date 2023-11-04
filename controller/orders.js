@@ -6,17 +6,16 @@ const path = require("path");
 
 class Order {
   static deleteImages(images, mode) {
-    var basePath =
-      path.resolve(__dirname + "../../") + "/public";
-      let filePath = "";
-      if (mode == "file") {
-        filePath = basePath + `${images}`;
+    var basePath = path.resolve(__dirname + "../../") + "/public";
+    let filePath = "";
+    if (mode == "file") {
+      filePath = basePath + `${images}`;
       fs.unlink(filePath, (err) => {
         if (err) {
           return err;
         }
       });
-      }
+    }
   }
   async getAllOrders(req, res) {
     try {
@@ -30,6 +29,25 @@ class Order {
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async getTrackingDetails(req, res) {
+    let { oId} = req.body;
+    if (!oId) {
+      console.log(oId);
+      return res.json({ message: "Order Id wasn't given"});
+    } else {
+      try {
+        const trackingData = await Order.find({ _id: oId }).select("tracking");
+        if (trackingData.length > 0) {
+          return res.json({ trackingData });
+        }
+        return res.json({ message: "No tracking details yet." });
+      } catch (err) {
+        console.log(err);
+        return res.json({ message: "Something went wrong while retrieving your order." });
+      }
     }
   }
 
@@ -57,38 +75,37 @@ class Order {
     let { allProduct, user, coupon, transactionId, address, notes } = req.body;
     let images = req.files;
     if (!allProduct || !user || !transactionId || !address) {
-        Order.deleteImages(images[0], "file");
-        return res.json({ error: "All fields are required" });
+      Order.deleteImages(images[0], "file");
+      return res.json({ error: "All fields are required" });
     } else {
       try {
-        allProduct = JSON.parse(allProduct)
-        let transactionScreenShot = "/uploads/customer/" +images[0].filename;
-        var couponValue=0;
-        var totalValue=0;
-        if(coupon){
-          let couponName = await couponModel.find({coupon:coupon})
-          if (couponName){
-            couponValue=couponName[0].discount;
+        allProduct = JSON.parse(allProduct);
+        let transactionScreenShot = "/uploads/customer/" + images[0].filename;
+        var couponValue = 0;
+        var totalValue = 0;
+        if (coupon) {
+          let couponName = await couponModel.find({ coupon: coupon });
+          if (couponName) {
+            couponValue = couponName[0].discount;
           }
         }
-        console.log(allProduct)
-        
+        console.log(allProduct);
+
         await Promise.all(
-          
           allProduct.map(async (prod) => {
             let p = await productModel.find({ _id: prod.id });
-        
+
             let quantity = Number(prod.quantity);
             let price = Number(p[0].price);
-            let offer= p[0].offer;
-            price=price-((price/100)*offer)
+            let offer = p[0].offer;
+            price = price - (price / 100) * offer;
             let total = price * quantity;
-        
+
             totalValue += total;
           })
         );
-   
-        let amount=totalValue-((totalValue/100)*couponValue);
+
+        let amount = totalValue - (totalValue / 100) * couponValue;
         let newOrder = new orderModel({
           allProduct: allProduct,
           user: user,
@@ -110,7 +127,7 @@ class Order {
               updatedAt: Date.now(),
             });
           });
-          return res.redirect("/dashboard")
+          return res.redirect("/dashboard");
         }
       } catch (err) {
         Order.deleteImages(images[0], "file");
@@ -121,18 +138,30 @@ class Order {
   }
 
   async postUpdateOrder(req, res) {
-    let { oId, status } = req.body;
+    let { oId, trackingid, trackingcompany, status } = req.body;
     if (!oId || !status) {
       return res.json({ message: "All filled must be required" });
     } else {
-      let currentOrder = orderModel.findByIdAndUpdate(oId, {
-        status: status,
-        updatedAt: Date.now(),
-      });
-      currentOrder.exec((err, result) => {
-        if (err) console.log(err);
-        return res.json({ success: "Order updated successfully" });
-      });
+      if (trackingid && trackingcompany) {
+        let currentOrder = orderModel.findByIdAndUpdate(oId, {
+          status: status,
+          tracking: { trackingid, trackingcompany },
+          updatedAt: Date.now(),
+        });
+        currentOrder.exec((err, result) => {
+          if (err) console.log(err);
+          return res.json({ success: "Order updated successfully" });
+        });
+      } else {
+        let currentOrder = orderModel.findByIdAndUpdate(oId, {
+          status: status,
+          updatedAt: Date.now(),
+        });
+        currentOrder.exec((err, result) => {
+          if (err) console.log(err);
+          return res.json({ success: "Order updated successfully" });
+        });
+      }
     }
   }
 
@@ -170,30 +199,27 @@ class Order {
 
   async addReturn(req, res) {
     let { userid, orderid, reason, description, payment } = req.body;
-    
+
     let Order = await orderModel
       .find({ _id: orderid })
       .populate("allProduct.id", "name image price")
       .populate("user", "name email userRole")
       .sort({ _id: -1 });
-    
+
     //checking if someone else apart from the admin is trying to access
-    if(Order[0].user._id != userid || Order[0].user.userRole == 1){
+    if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
       return res.json({ error: "There was an error processing your request." });
     }
-   
-    if (
-      !Order[0] ||
-      !reason ||
-      !description ||
-      !payment
-    ) {
-      return res.json({ error: "There was an error processing your request. Please try again." });
+
+    if (!Order[0] || !reason || !description || !payment) {
+      return res.json({
+        error: "There was an error processing your request. Please try again.",
+      });
     }
 
     let Refund = { reason, description, payment };
-    if(req.body.status){
-      Refund.status=req.body.status;
+    if (req.body.status) {
+      Refund.status = req.body.status;
     }
 
     let currentOrder = orderModel.findByIdAndUpdate(orderid, {
@@ -201,7 +227,10 @@ class Order {
       updatedAt: Date.now(),
     });
     currentOrder.exec((err, result) => {
-      if (err) return res.json({error:"There was a backend error. Please try later."});
+      if (err)
+        return res.json({
+          error: "There was a backend error. Please try later.",
+        });
     });
     return res.json({ success: "Refund request updated successfully" });
   }
