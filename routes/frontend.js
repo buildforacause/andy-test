@@ -324,5 +324,9 @@ router.get("/check-quantity/:id",async (req,res) => {
     res.json({quantity: quantity});
 })
 
+router.get('/confirming-order-details', (req, res) => {
+    res.send('<script>window.localStorage.clear(); window.location="/dashboard"</script>');
+});
+
 
 module.exports = router;
