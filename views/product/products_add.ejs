@@ -89,6 +89,13 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="weight" class="col-md-4 col-lg-3 col-form-label">Weight (in grams)</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input name="weight" class="form-control" id="weight" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
                             <div class="col-md-8 col-lg-9">
                                 <select class="form-select" id="category" name="category" aria-label="Default select example" required>
@@ -215,6 +222,7 @@
                     $("#imgdiv").show();
                     var str = "";
                     $("#name").val(responseData.prod.name.split("-")[0]);
+                    $("#weight").val(responseData.prod.weight);
                     tinymce.activeEditor.setContent(responseData.prod.description);
                     $("#material").val(responseData.prod.company);
                     $("#photoDiv").hide();

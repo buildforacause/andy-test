@@ -42,13 +42,14 @@ class Product {
   }
 
   async postAddProduct(req, res) {
-    let { name, description, price, quantity, category, offer, status, SKU, company, featured, shipping, previmages, sizes } =
+    let { name, description,weight, price, quantity, category, offer, status, SKU, company, featured, shipping, previmages, sizes } =
       req.body;
     let images = req.files;
     // Validation
     if (
       !name |
       !description |
+      !weight |
       !price |
       !quantity |
       !category |
@@ -86,6 +87,7 @@ class Product {
         let newProduct = new productModel({
           image: allImages,
           name: name,
+          weight:weight,
           description: description,
           price: price,
           quantity: quantity,
@@ -117,6 +119,7 @@ class Product {
       quantity,
       category,
       offer,
+      weight,
       status,
       images,
       company,
@@ -132,6 +135,7 @@ class Product {
       !price |
       !quantity |
       !category |
+      !weight |
       !offer |
       !status |
       !company
@@ -152,6 +156,7 @@ class Product {
       let editData = {
         name: name,
         description: description,
+        weight:weight,
         price: price,
         quantity: quantity,
         category: category,

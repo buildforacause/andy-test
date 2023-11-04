@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>All Orders</title>
+    <title>Cancelled Orders</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -46,11 +46,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>All Categories</h1>
+            <h1>Cancelled Orders</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                    <li class="breadcrumb-item active">All Orders</li>
+                    <li class="breadcrumb-item active">Cancelled Orders</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -71,8 +71,6 @@
                                         <th>User Phone</th>
                                         <th>Amount</th>
                                         <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Refund</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,24 +82,6 @@
                                             <td><%= order.address.aphone %></td>
                                             <td><%= order.amount %></td>
                                             <td><a href="/track?of=<%= order._id %>">View</a></td>
-                                            <td>
-                                                <form id="update-order">
-                                                    <input type="hidden" name="oId" value="<%= order._id %>" >
-                                                    <select class="form-select" name="status" id="select">
-                                                        <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
-                                                        <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
-                                                        <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
-                                                        <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
-                                                        <option <%= order.status == "Cancelled" ? "selected" : "" %>>Cancelled</option>
-                                                      </select>
-                                                </form>
-                                            </td>
-                                            <% if (order.refund) { %>
-                                                <td><a href="/admin/return-edit?of=<%= order._id %>">Requested</a></td>
-                                            <% } else {%>
-                                                <td>No</td>                                                
-                                            <% } %>
-                                            
                                         </tr>
                                     <% }) %>
                                         

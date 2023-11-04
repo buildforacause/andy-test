@@ -123,7 +123,7 @@ class Order {
   async postUpdateOrder(req, res) {
     let { oId, status } = req.body;
     if (!oId || !status) {
-      return res.json({ message: "All filled must be required" });
+      return res.json({ message: "All fields are required" });
     } else {
       let currentOrder = orderModel.findByIdAndUpdate(oId, {
         status: status,
@@ -139,7 +139,7 @@ class Order {
   async postUpdateOrder2(req, res) {
     let { oId, approval } = req.body;
     if (!oId || !approval) {
-      return res.json({ message: "All filled must be required" });
+      return res.json({ message: "All fields are required" });
     } else {
       let currentOrder = orderModel.findByIdAndUpdate(oId, {
         approval: approval,
@@ -155,7 +155,7 @@ class Order {
   async postDeleteOrder(req, res) {
     let { oId } = req.body;
     if (!oId) {
-      return res.json({ error: "All filled must be required" });
+      return res.json({ error: "All fields are required" });
     } else {
       try {
         let deleteOrder = await orderModel.findByIdAndDelete(oId);

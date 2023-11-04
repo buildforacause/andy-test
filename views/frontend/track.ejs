@@ -134,11 +134,22 @@
                                     
                                     <div class="d-flex">
                                       <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
-                                        <%= element.id.name %>
+                                        <a href="/view/<%= element.id._id %>" target="_blank"><%= element.id.SKU %> - <%= element.id.name %></a>
                                       </h4>
+                                      
                                       <p style="margin-left: auto;margin-bottom: 0;font-weight: 500;">₹<%= element.id.price %><span style="font-weight: 400;"> x <%= element.quantity %></span></p>
                                   </div>
+
+                                  
                                   <% }) %>
+                                  <div class="d-flex">
+                                    <h4 style="font-weight: 500;margin-bottom: 1rem;" class="widget-title">
+                                      Grand Total
+                                    </h4>
+                                    
+                                    <p style="margin-left: auto;margin-bottom: 0;font-weight: 600;">₹<%= order.amount %></p>
+                                </div>
+
                             </div><!-- End .col-md-4 -->
 
                                   <div class="entry-body col-md-6" style="text-align: end;">
@@ -164,7 +175,7 @@
                                   <p>Let our team approve the payment of this order!</p>
                                 </center>
                                 <% } else { %>
-                                  
+                              <% if(order.status !== "Cancelled"){ %>
                                 <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">                              
                                   <p class="mb-2"><span style="font-weight: 500;margin-bottom: 0rem;">Tracking Phone number: </span><%= order.address.aphone %></p>
                                 
@@ -213,16 +224,31 @@
                                    </ul> 
                                 </div>
 
+                                <% if(order.status == "Delivered" && (new Date() - order.updatedAt < 86400000)){ %>
+                                  <center class="m-3">Delivered On : <%= order.updatedAt %></center>
                                 <div class="refundsection" style="padding:1rem;border:1px solid #e7e7e7;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
                                   <% if (order.refund) { %>
                                     <p style="margin: 0px;">View return details</p>    
                                     <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return details</a>
                                   <% } else { %>
-                                  <p style="margin: 0px;">Not satisfied with your order?</p>
+                                    
+                                  <p style="margin: 0px;">Not satisfied with your order? Return within 30 days!</p>
                                   <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return</a>
                                   <% } %>
                                 </div>
                                 <% } %>
+                                <% if(order.status == "Not Processed" || order.status == "Processing"){ %>
+                                <div class="refundsection" style="padding:1rem;border:1px solid #e7e7e7;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
+                                  <p style="margin: 0px;">Cancel Order?</p>
+                                  <button id="cancel-this" oid="<%= order._id %>" class="btn btn-outline-primary-2">Cancel Order</button>
+                                </div>
+                                <% } %>
+                                <% }else{ %>
+                                <center>
+                                  <h4>This order has been cancelled!</h4>
+                                </center>
+                                <% }
+                              } %>
                             </div><!-- End .col-md-8 -->
                         </div><!-- End .row -->
                     </article><!-- End .entry -->
@@ -234,7 +260,24 @@
     <%- include('./footer.ejs') %>
 
         <script>
+
+
           $('#cart-total-text').hide();
+
+          $("#cancel-this").on("click", function(){
+            let oId = $("#cancel-this").attr("oid");
+            $.ajax({
+                url: '/api/order/update-order',
+                type:'POST',
+                data: "oId="+oId+"&status=Cancelled"
+            }).done(response => {
+                response = JSON.stringify(response)
+                response = JSON.parse(response);
+                if(response.success){
+                  location.reload();
+                }
+            })
+          })
 
           var status = '<%= order.status %>';
           let ts = document.getElementsByClassName("li");
