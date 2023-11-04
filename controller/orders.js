@@ -127,7 +127,7 @@ class Order {
               updatedAt: Date.now(),
             });
           });
-          return res.redirect("/dashboard");
+          return res.redirect("/confirming-order-details");
         }
       } catch (err) {
         Order.deleteImages(images[0], "file");

@@ -89,7 +89,7 @@
                                     <!-- loop start -->
                                     <% products.forEach(prod => { %>
                                         <tr>
-                                            <td><%= prod.name %></td>
+                                            <td><%= prod.SKU %>-<%= prod.name %></td>
                                             <td><%= prod.description.substring(0, 50) %>...</td>
                                             <td><%= prod.category.cName %></td>
                                             <td><%= prod.price %></td>
