@@ -87,7 +87,7 @@ router.get("/track",async (req,res)=>{
     let order = []
     if(req.query.of){
         try{
-            order = await orderModel.find({_id: req.query.of}).populate("allProduct.id", "name image price")
+            order = await orderModel.find({_id: req.query.of}).populate("allProduct.id", "name image price SKU")
             .populate("address", "aaddress aphone aname acity apincode")
         }catch(r){
             res.redirect("/dashboard");
