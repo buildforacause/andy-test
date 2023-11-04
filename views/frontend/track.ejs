@@ -177,13 +177,15 @@
                                 </center>
                                 <% } else { %>
                               <% if(order.status !== "Cancelled"){ %>
-                                <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">                              
-                                  <% if (order.tracking && order.tracking.trackingid) { %>
-                                    <p class="mb-0"><span style="font-weight: 500; margin-bottom: 0rem;">Tracking Id: </span><%= order.tracking.trackingid %></p>
-                                  <% } %>
-                                  
-                                  <% if (order.tracking && order.tracking.trackingcompany) { %>
-                                    <p class="mb-2"><span style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem;">Delivery Partner: </span><%= order.tracking.trackingcompany %></p>
+                                <div class="p-5" style="border:1px solid #e7e7e7;text-align:center;">  
+                                  <% if(order.status == "Shipped"){ %>                            
+                                    <% if (order.tracking && order.tracking.trackingid) { %>
+                                      <p class="mb-0"><span style="font-weight: 500; margin-bottom: 0rem;">Tracking Id: </span><%= order.tracking.trackingid %></p>
+                                    <% } %>
+                                    
+                                    <% if (order.tracking && order.tracking.trackingcompany) { %>
+                                      <p class="mb-2"><span style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem;">Delivery Partner: </span><%= order.tracking.trackingcompany %></p>
+                                    <% } %>
                                   <% } %>
                                   
                                 
