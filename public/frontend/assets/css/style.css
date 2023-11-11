@@ -6122,10 +6122,10 @@ p {
     z-index: 1000;
     bottom:50px;
     /* left:100px; */
-    background-color: #FE2910;
+    background-color: #222;
     gap:10px;
-    padding:10px 30px;
-    border-radius: 500px;
+    padding:15px 30px;
+    border-radius: 15px;
     cursor:pointer;
 }
 
@@ -20230,4 +20230,10 @@ span.outer {
 .banner-big p{
     margin-top: 0rem!important;
     font-size: 3rem!important;
+}
+#scroll-top{
+    background-color: rgba(255, 238, 235, 0.7) !important;
+    color: #FE2910!important;
+    border:2px solid #FE2910;
+    border-radius: 15px;
 }
