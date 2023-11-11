@@ -15,10 +15,10 @@
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li class="megamenu-container">
-                            <a href="/" class="">Home</a>
+                            <a href="/" class="mylinknav">Home</a>
                         </li>
                         <li>
-                            <a href="/shop" class="sf-with-ul">Shop</a>
+                            <a href="/shop" class="sf-with-ul mylinknav">Shop</a>
 
                             <div class="megamenu megamenu-md">
                                 <div class="row no-gutters">
@@ -37,7 +37,7 @@
                                                 </div><!-- End .col-md-6 -->
 
                                                 <div class="col-md-6">
-                                                    <div class="menu-title">Shop Pages</div><!-- End .menu-title -->
+                                                    <div class="menu-title">User</div><!-- End .menu-title -->
                                                     <ul>
                                                         <li><a href="/cart">Cart</a></li>
                                                         <li><a href="/#about">About Us</a></li>
@@ -56,13 +56,13 @@
                             </div><!-- End .megamenu megamenu-md -->
                         </li>
                         <li>
-                            <a href="/#about" class="">About Us</a>
+                            <a href="/#about" class="mylinknav">About Us</a>
                         </li>
                         <li>
                           <% if(!user){ %>
-                            <a href="#signin-modal" data-toggle="modal">Login </a>
+                            <a href="#signin-modal" data-toggle="modal" class="mylinknav">Login </a>
                             <%  } else {%>
-                            <a href="/logout">Logout</a>
+                            <a href="/logout" class="mylinknav">Logout</a>
                             <% } %>
                         </li>
                     </ul><!-- End .menu -->
@@ -71,7 +71,7 @@
 
             <div class="header-right" style="margin-left: 0;">
                 <div class="header-search">
-                    <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                    <a href="#" class="search-toggle" role="button"><i class='bx bx-search-alt-2 myicons'></i></a>
                     <form action="/shop" method="get">
                         <div class="header-search-wrapper">
                             <label for="s" class="sr-only">Search</label>
@@ -79,20 +79,24 @@
                         </div><!-- End .header-search-wrapper -->
                     </form>
                 </div><!-- End .header-search -->
-
+                <a href="/dashboard" id="user-profile-link">
+                    <i class='bx bx-user myicons'></i>
+                </a>
                 <div id="cart-dropdown" class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                        <i class="icon-shopping-cart"></i>
+                        <i class='bx bx-basket myicons' animation="spin"></i>
                         <span class="cart-count" id="cart-count"></span>
                         <span class="cart-txt" id="cart-total-text"></span>
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-menu dropdown-menu-right heightofcart">
                         <div class="dropdown-cart-products">
                             
 
                         </div><!-- End .dropdown-menu -->
                 </div><!-- End .cart-dropdown -->
+
+                
             </div><!-- End .header-right -->
         </div><!-- End .container -->
     </div><!-- End .header-bottom -->
