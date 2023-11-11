@@ -1,43 +1,47 @@
-<footer class="footer footer-2" style="background-color: #222!important;">
+<footer class="footer footer-2" style="background-color: #000!important;">
     <div class="footer-middle">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-lg-6">
+                <div class="col-sm-12 col-lg-8">
                     <div class="widget widget-about">
                         <img src="/frontend/assets/images/demos/demo-8/logo-footer.png" class="footer-logo" alt="Footer Logo" width="82" height="25">
-                        <p><%= info.address %></p>
-                        <div class="widget-about-info">
+                        <p style="margin-bottom: 10px;font-weight: 400;">Mayur Sports with its head office in Mumbai, India has established itself as one of the finest Sports Garment Company, with a motive to set itself up amongst leading universal business service providers.</p>
+                        <p  style="font-weight: 400;"><%= info.address %></p>
+                        <!-- <div class="widget-about-info">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
                                     <span class="widget-about-title" style="color: white;">Got Question? Call us 24/7</span>
                                     <a style="color: #eea287;"href="tel:<%= info.phone %>"><%= info.phone %></a>
-                                </div><!-- End .col-sm-6 -->
-                            </div><!-- End .row -->
-                        </div><!-- End .widget-about-info -->
+                                </div>
+                            </div>
+                        </div> -->
                     </div><!-- End .widget about-widget -->
                 </div><!-- End .col-sm-12 col-lg-3 -->
 
                 <div class="col-sm-6 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title" style="font-family: 'Poppins',sans-serif;font-size: 16px;">CUSTOMER SERVICE</h4><!-- End .widget-title -->
+                        <h4 class="widget-title" style="font-size: 16px;">Overview</h4><!-- End .widget-title -->
 
-                        <ul class="widget-list">
-                            <li><a href="#about">About Us</a></li>
+                        <ul class="widget-list" style="font-weight: 400;">
+                            <li><a href="/">Home</a></li>
                             <li><a href="/shop">All Products</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="/cart">View Cart</a></li>
+                            <li><a href="#signin-modal" data-toggle="modal">Sign In</a></li>
+                            <% if (user) { %>
+                                <li><a href="/dashboard">My Account</a></li>
+                            <% } %>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-4 col-lg-3 -->
 
                 <div class="col-sm-6 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title" style="font-family: 'Poppins',sans-serif;font-size: 16px;">MY ACCOUNT</h4><!-- End .widget-title -->
+                        <h4 class="widget-title" style="font-family: 'Poppins',sans-serif;font-size: 16px;">CONTACT</h4><!-- End .widget-title -->
 
-                        <ul class="widget-list">
-                            <li><a href="#signin-modal" data-toggle="modal">Sign In</a></li>
-                            <li><a href="/cart">View Cart</a></li>
-                            <% if (user) { %>
-                                <li><a href="/dashboard">My Account</a></li>
-                            <% } %>
+                        <ul class="widget-list" style="font-weight: 400;">
+                            <li><a href="tel:<%= info.phone %>">+91 <%= info.phone %></a></li>
+                            <li><a href="https://www.google.com/maps/place/Mayur+Sports,+Shop+No.+3,+Gandhi+Nagar+East+Ward,+Station+Rd,+Gandhi+Nagar+Society,+Jogeshwari+East,+Mumbai,+Maharashtra+400060/@19.1356233,72.8592217,15z/data=!4m6!3m5!1s0x3be7b7d3c3347a9b:0x58d8b2c86ad66b41!8m2!3d19.1356233!4d72.8592217!16s%2Fg%2F1pp2tx380">Google Maps</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-64 col-lg-3 -->
@@ -45,15 +49,14 @@
         </div><!-- End .container -->
     </div><!-- End .footer-middle -->
 
-    <div class="footer-bottom">
-        <div class="container">
-            <p class="footer-copyright">Copyright © <%= new Date().getFullYear();%> Mayur Sports. All Rights Reserved.</p><!-- End .footer-copyright -->
+    <div class="footer-bottom mb-2">
+        <div class="container" style="background-color: #141011;border-radius: 35px;padding: 0;">
+            <p class="footer-copyright" style="margin-left: 15px;display: flex;align-items: center;">Copyright © <%= new Date().getFullYear();%> Mayur Sports. All Rights Reserved.</p><!-- End .footer-copyright -->
 
             <div class="social-icons social-icons-color">
-                <span class="social-label">Social Media</span>
-                <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                <a href="#" class="mysocialsicon" title="Instagram" target="_blank"><i class='bx bxl-instagram'></i></a>
+                <a href="#" class="mysocialsicon" title="Facebook" target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="#" class="mysocialsicon" style="margin-right: 10px;" title="Youtube" target="_blank"><i class='bx bx-globe' ></i></a>
             </div><!-- End .soial-icons -->
         </div><!-- End .container -->
     </div><!-- End .footer-bottom -->
@@ -273,5 +276,5 @@
             }
         })
     }
-
+    
 </script>

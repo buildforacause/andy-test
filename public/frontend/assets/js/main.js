@@ -52,11 +52,12 @@ $(document).ready(function () {
         cart.innerHTML += ` <div class="product">
                 <div class="product-cart-details">
                     <h4 class="product-title">
-                        <a href="product.html">${item.productName}</a>
+                        <a href="product.html" style="display:block;font-weight:600;color:black">${item.productName.split("-")[0]}</a>
+                        <small style="color:#afafaf">${item.productName.split("-")[1]}</small>
                     </h4>
 
                     <span class="cart-product-info">
-                        ₹${item.productPrice}                    
+                        <span style="color:#FE2910">₹</span> ${item.productPrice}                    
                     </span>
                 </div><!-- End .product-cart-details -->
 
@@ -87,7 +88,7 @@ $(document).ready(function () {
       }
     }
     $("#cart-count").text(products.length);
-    $("#cart-total-text").text("₹" + total);
+    $("#cart-total-text").html("<span style='color:#FE2910;'>₹ </span>" + total);
   }
 
   function addProduct(

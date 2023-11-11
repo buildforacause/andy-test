@@ -960,7 +960,7 @@ blockquote.text-white cite span {
 .cart-dropdown .btn-remove,
 .compare-dropdown .btn-remove {
     position: absolute;
-    top: 50%;
+    top: 24px;
     right: -.55rem;
     display: flex;
     align-items: center;
@@ -19929,7 +19929,7 @@ button:focus {
 
 
 .shake-horizontal{-webkit-animation:shake-horizontal .8s ease-in both;animation:shake-horizontal .8s ease-in both}
-@-webkit-keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}@keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}
+@-webkit-keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-3px);transform:translateX(-3px)}20%,40%,60%{-webkit-transform:translateX(3px);transform:translateX(3px)}80%{-webkit-transform:translateX(2px);transform:translateX(2px)}90%{-webkit-transform:translateX(-2px);transform:translateX(-2px)}}@keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-3px);transform:translateX(-3px)}20%,40%,60%{-webkit-transform:translateX(3px);transform:translateX(3px)}80%{-webkit-transform:translateX(2px);transform:translateX(2px)}90%{-webkit-transform:translateX(-2px);transform:translateX(-2px)}}
 
 body{
     /* font-family: 'Albert Sans', sans-serif!important; */
@@ -20236,4 +20236,39 @@ span.outer {
     color: #FE2910!important;
     border:2px solid #FE2910;
     border-radius: 15px;
+}
+.mysocialsicon>i{
+    font-size: 24px;
+    padding: 5px;
+    background-color: #2B2829;
+    border-radius: 50%;
+    color: #FDFDFD;
+    margin: 10px;
+    /* margin-left: 2px!important; */
+    margin-right: 0px;
+}
+.footer-bottom .container:before, .footer-bottom .container-fluid:before{
+    content: none!important;
+}
+
+@media screen and (max-width:550px){
+    .banner-big .banner-title{
+        font-size: 6rem!important;
+    }
+    .d-lg-block{
+        font-size: 2rem;
+    }
+}
+@media screen and (max-width:987px){
+.footer-copyright{
+    justify-content: center;
+}
+}
+.cart-dropdown .product{
+    flex-direction: row-reverse;
+    gap:10px;
+}
+.product-image>img{
+    border-radius: 10px;
+    /* margin-right: 10px!important; */
 }
