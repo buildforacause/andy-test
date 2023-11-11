@@ -20158,7 +20158,7 @@ span.outer {
 }
 
 .myicons{
-    font-size:24px;
+    font-size:20px;
     color:black;
     font-weight: 600;
 }
@@ -20220,4 +20220,14 @@ span.outer {
     border-top-right-radius: 15px !important;
     border-bottom-left-radius: 15px !important; */
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+.banner-big .banner-title{
+    font-size: 8rem!important;
+}
+.banner-content{
+    max-width: 800px!important;
+}
+.banner-big p{
+    margin-top: 0rem!important;
+    font-size: 3rem!important;
 }

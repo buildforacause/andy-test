@@ -223,15 +223,13 @@
       <div class="mb-3 mb-xl-2"></div><!-- End .mb-3 -->
 
       <div class="trending">
-        <a href="<%= banner.link %>">
+        <a href="/shop?filterby=<%= banner.link %>">
           <img src="<%= banner.image %>" style="height: 400px !important; width: 100% !important;" alt="Banner">
         </a>
         <div class="container">
-            <h4 class="banner-subtitle text-white"></h4><!-- End .banner-subtitle -->
-            <h3 class="banner-title text-white"><%= banner.title %></h3><!-- End .banner-title -->
-            <p class="d-none d-lg-block text-white"><%= banner.description %></p>
+
         <div class="banner banner-big d-md-block">
-          <div class="banner-content">
+          <div class="banner-content text-center">
             <h4 class="banner-subtitle text-white"></h4><!-- End .banner-subtitle -->
             <h3 class="banner-title text-white"><%= banner.title %></h3><!-- End .banner-title -->
             <p class="d-none d-lg-block text-white"><%= banner.description %></p>
