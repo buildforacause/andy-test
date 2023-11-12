@@ -8158,7 +8158,7 @@ p {
 }
 
 .btn-cart:before {
-    content: '\e812'
+    /* content: '\e812' */
 }
 
 .btn-wishlist {
@@ -9996,8 +9996,8 @@ p {
 
 .social-icon:hover,
 .social-icon:focus {
-    color: #c96;
-    border-color: #c96;
+    color: #FE2910!important;
+    border-color: #FE2910!important;
     background-color: transparent
 }
 
@@ -12759,9 +12759,11 @@ button:focus {
 }
 
 .product-details .ratings-container {
-    margin-bottom: 1.3rem
+    margin-bottom: 1.8rem
 }
-
+.ratings-text{
+    margin-left: 0px;
+}
 .product-details .product-price {
     font-size: 2.4rem
 }
@@ -12816,8 +12818,8 @@ button:focus {
 
 .product-details .product-cat a:hover,
 .product-details .product-cat a:focus {
-    color: #c96;
-    box-shadow: 0 1px 0 #c96
+    color: #FE2910!important;
+    box-shadow: 0 1px 0 #FE2910!important;
 }
 
 .product-details .product-size {
@@ -12913,7 +12915,7 @@ button:focus {
 
 .size-guide:hover,
 .size-guide:focus {
-    color: #c96
+    color: #FE2910!important;
 }
 
 .product-details-quantity {
@@ -13048,8 +13050,8 @@ button:focus {
 
 .product-details-tab .nav.nav-pills .nav-link:hover,
 .product-details-tab .nav.nav-pills .nav-link:focus {
-    color: #c96;
-    border-bottom-color: #c96
+    color: #FE2910!important;
+    border-bottom-color: #FE2910!important;
 }
 
 .product-details-tab .nav.nav-pills .nav-item+.nav-item {
@@ -20356,4 +20358,16 @@ span.outer {
 }
 .btn-outline-primary-2{
     border: 2px solid #333!important;
+}
+.productsizecard{
+    transition: 0.3s;
+}
+.productsizecard:hover p{
+color: white;
+}
+.productsizecard:hover{
+    background-color: #333!important;
+}
+.cart-count{
+    background-color: #333!important;
 }
