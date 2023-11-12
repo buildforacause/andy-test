@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css" />
     <!-- Main CSS File -->
     <link rel="stylesheet" href="frontend/assets/css/style.css" />
+    
+  <link rel="stylesheet" href="frontend/assets/css/style.css">
+  <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
+  <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   </head>
 
   <body>
@@ -204,17 +209,17 @@
                 totaloffer+=totalprice;
                 cartcontainer.innerHTML+=`<tr>
                 <td class="product-col">
-                    <div class="product">
+                    <div class="product"  style="margin-right:10px;">
                         <figure class="product-media">
                             <a href="#">
                                 <img src="${item.productImage}" alt="Product image">
                             </a>
                         </figure>
                         <div>
-                          <h3 class="product-title">
+                          <h3 class="product-title" style="font-weight:500;">
                               <a href="/view/${item.productId}">${item.productName.split("-")[0]}</a>
                           </h3><!-- End .product-title -->
-                          <p>${item.productName.split("-")[1]}</p>
+                          <p style="color:#afafaf;">${item.productName.split("-")[1]}</p>
                         </div>
                     </div><!-- End .product -->
                 </td>
@@ -222,11 +227,11 @@
                 <td class="quantity-col">
                     <div class="cart-product-quantity">
                         <input type="hidden" name="productids" value="${item.productId}">
-                        <input type="number" name="quantity" class="form-control" value="1" min="1" max="9" step="1" data-decimals="0" required>
+                        <input type="number" name="quantity" class="form-control" value="1" min="1" max="9" step="1" data-decimals="0" style="border:1px solid #dbdbdb; border-radius:10px;" required>
                         <span class="text-danger">${errid === item.productId ? errmsg : ""}</span>
                     </div><!-- End .cart-product-quantity -->                                 
                 </td>
-                <td class="total-col">₹${totalprice}</td>
+                <td class="total-col" style="color:black"><span style='color:#fe2910'>₹</span>${totalprice}</td>
                 <td class="remove-col"><button productid="${item.productId}" class="removebtncart btn-remove"><i class="icon-close"></i></button></td>
             </tr>`
         })
@@ -290,7 +295,7 @@
             }
         }
         $("#cart-count").text(products.length);
-        $("#cart-total-text").text("₹" + total);
+        $("#cart-total-text").text("<span style='color:#fe2910'>₹</span>" + total);
         
     }
 

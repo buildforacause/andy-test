@@ -39,6 +39,11 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+        
+  <link rel="stylesheet" href="frontend/assets/css/style.css">
+  <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
+  <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -81,38 +86,41 @@
                                     <% } %>
                                     <% allProds.forEach(prod => { %>
                                     
-                                    <div class="col-6 col-md-4 col-lg-4">
-                                        <div class="product product-7 text-center">
-                                            <figure class="product-media">
-                                                <% if (prod.offer > 0) { %>
-                                                
-                                                <span class="product-label bg-danger label-new">-<%= prod.offer %>%</span>
-                                                <% } %>
+                                        <div class="col-md-4 col-lg-3">
+                                            <div class="product product-2">
+                                              <% if (prod.offer != 0) { %>
+                                              <span class="product-label label-sale">-<%= prod.offer %>% Off</span>
+                                              <% } %>
+                                              <figure class="product-media">
                                                 <a href="/view/<%= prod._id %>">
-                                                    <img src="<%= prod.image[0] %>" alt="Product image" class="product-image">
+                                                  <img src="<%= prod.image[0] %>" alt="Product image" class="product-image">
+                                                  <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
                                                 </a>
-
                                                 <div class="product-action ">
-                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart  ',style:{background:'#c96'},gravity:'bottom', duration: 3000 }).showToast();" class="btn-product btn-cart"><span>add to cart</span></a>
-                                                </div><!-- End .product-action -->
-                                            </figure><!-- End .product-media -->
-
-                                            <div class="product-body">
-                                                <div class="product-cat">
-                                                    <a href="#" class="uwu"><%= prod.category.cName %></a>
-                                                </div><!-- End .product-cat -->
-                                                <h3 class="product-title"><a href="/view/<%= prod._id %>"><%= prod.name %></a></h3><!-- End .product-title -->
+                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta"><span class="newbtaspan">Add to Cart</span></a>
+                                                </div>
+                                              </figure><!-- End .product-media -->
+                          
+                                              <div class="product-body">
+                                                <div class="product-detailbody">
+                                                  <h3 class="product-title"><a href="/view/<%= prod._id %>"><%= prod.name.length > 23 ? prod.name.substring(0, 20) + '...' : prod.name %></a></h3><!-- End .product-title -->
+                                                  <div class="product-cat">
+                                                    <a href="#"><%= prod.category.cName %></a>
+                                                  </div><!-- End .product-cat -->
+                                                </div>
                                                 <div class="product-price">
-                                                    <% if (prod.offer != 0) { %>
-                                                        <span class="new-price">₹<%= (prod.price - (prod.price/100)*prod.offer).toFixed(2) %></span>
-                                                        <span class="old-price">₹<%= prod.price %></span>
-                                                        <% } else { %>
-                                                            <span class="new-price">₹<%= prod.price.toFixed(2) %></span>
-                                                        <% } %>
+                                                  <% if (prod.offer != 0) { %>
+                                                  <span class="outer">
+                                                    <span class="inner old-price">₹<%= prod.price.toFixed(0) %></span>
+                                                  </span>
+                                                  <span class="new-price"> <span style="color:#FE2910!important">₹</span><%= prod.price - ((prod.price/100)*prod.offer).toFixed(0) %></span>
+                                                  <% } else { %>
+                                                  <span class="new-price">₹<%= prod.price.toFixed(0) %></span>
+                                                  <% } %>
                                                 </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product -->
-                                    </div><!-- End .col-sm-6 col-lg-4 -->
+                                              </div><!-- End .product-body -->
+                                            </div><!-- End .product -->
+                                          </div>
                                     <% }) %>
                                 </div><!-- End .row -->
                             </div><!-- End .products -->

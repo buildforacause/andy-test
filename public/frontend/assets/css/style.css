@@ -20015,7 +20015,7 @@ body,a,p,h1,h2,h3,h4,h5,span{
 }
 
 .newbta{
-    background-color: rgba(255, 238, 235, 0.7) !important;
+    background-color: rgba(255, 238, 235, 0.85) !important;
     color:#FE2910!important;
     border-radius: 50px;
     padding:3px!important;
@@ -20308,7 +20308,7 @@ span.outer {
 }
 .myproduct_title>a{
     display: block;
-    font-weight: 600;
+    font-weight: 500;
     color: black;
     width: 100%;
     font-size: 14px;
@@ -20353,4 +20353,7 @@ span.outer {
 #scroll-top:hover{
     color: white!important;
     background-color: #FE2910!important;
+}
+.btn-outline-primary-2{
+    border: 2px solid #333!important;
 }
