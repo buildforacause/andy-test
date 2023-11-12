@@ -49,39 +49,39 @@ $(document).ready(function () {
       flipTheCard(card);
       products.forEach(function (item) {
         // copy.push(item + item+2);
-        cart.innerHTML += ` <div class="product">
-                <div class="product-cart-details">
-                    <h4 class="product-title">
-                        <a href="product.html" style="display:block;font-weight:600;color:black">${item.productName.split("-")[0]}</a>
-                        <small style="color:#afafaf">${item.productName.split("-")[1]}</small>
-                    </h4>
-
-                    <span class="cart-product-info">
-                        <span style="color:#FE2910">₹</span> ${item.productPrice}                    
-                    </span>
-                </div><!-- End .product-cart-details -->
-
-                <figure class="product-image-container">
-                    <a href="product.html" class="product-image">
-                        <img src="${item.productImage}" alt="product">
-                    </a>
-                </figure>
-                <a href="#" productid="${item.productId}" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-            </div>`;
+        cart.innerHTML += `
+            <div class="myproduct">
+              <img class="myproduct_img" src="${item.productImage}" alt="product">
+              <div class="myproduct_body">
+                <div class="myproduct_title">  
+                  <a href="/view/${item.productId}">${item.productName.split("-")[0].length> 15 ? item.productName.split("-")[0].substring(0, 12) + '...' : item.productName.split("-")[0]}</a>
+                  <small>${item.productName.split("-")[1]}</small>
+                </div>
+                <div style="font-size: 1.3rem;
+                font-weight: 600;
+                letter-spacing: 0;
+                color: #222;
+                line-height: 1.3rem;
+                margin-left: 0rem;"><span style="color:#FE2910">₹</span> ${item.productPrice}</div>
+              </div>
+              <a href="#" productid="${item.productId}" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+            </div>
+            
+            `;
       });
 
       if (products.length > 0) {
         total = products
           .map((prod) => Number(prod.productPrice))
           .reduce((acc, amount) => Number(acc) + Number(amount));
-        cart.innerHTML += `<div class="dropdown-cart-total">
+        cart.innerHTML += `<div class="dropdown-cart-total" style="display:flex;justify-content:space-between">
                                     <span>Total</span>
-                                    <span id="cart-total-price-u" class="cart-total-price">₹ ${total}</span>
+                                    <span id="cart-total-price-u" class="cart-total-price"><span style="color:#FE2910">₹</span> ${total}</span>
                                 </div>
 
                                 <div class="dropdown-cart-action">
                                     
-                                    <a href="/cart" class="btn btn-outline-primary-2 w-100"><span>View Cart</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="/cart" class="btn btn-outline-primary-2 w-100"><span>VIEW CART</span><i class="icon-long-arrow-right"></i></a>
                                 </div>`;
       } else {
         cart.innerHTML += `<center><span>No items in the cart yet</span></center>`;

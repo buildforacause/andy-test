@@ -960,7 +960,7 @@ blockquote.text-white cite span {
 .cart-dropdown .btn-remove,
 .compare-dropdown .btn-remove {
     position: absolute;
-    top: 24px;
+    top: 16px;
     right: -.55rem;
     display: flex;
     align-items: center;
@@ -6127,6 +6127,7 @@ p {
     padding:15px 30px;
     border-radius: 15px;
     cursor:pointer;
+    transition: 0.3s;
 }
 
 @media screen and (max-width:1250px){
@@ -20167,6 +20168,7 @@ span.outer {
     .heightofcart{
         max-height: 80vh;
         overflow: scroll;
+        overflow-x: hidden;
     }
 }
 
@@ -20267,8 +20269,88 @@ span.outer {
 .cart-dropdown .product{
     flex-direction: row-reverse;
     gap:10px;
+    padding-right: 25px;
+    border: 1px solid #ebebeb;
 }
 .product-image>img{
     border-radius: 10px;
     /* margin-right: 10px!important; */
+}
+.cart-dropdown .btn-remove, .compare-dropdown .btn-remove{
+    right: 0.5rem;
+}
+.cart-dropdown .product-title>a {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cart-dropdown .product{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.myproduct{
+    height: 90px;
+    width: 100%;
+    display: grid;
+    gap:10px;
+    grid-template-columns: 1fr 2fr;
+    padding: 7px 30px 7px 7px;
+    border: 1px solid #dedede;
+    box-sizing: border-box;
+}
+.myproduct>*{
+    width: 100%;
+}
+.myproduct_title>*{
+    display: block;
+}
+.myproduct_title>a{
+    display: block;
+    font-weight: 600;
+    color: black;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 3px;
+    text-align: left;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.myproduct_title>small{
+    color: #afafaf;
+    font-weight: 400;
+    line-height: 10px;
+}
+.myproduct_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.myproduct_title{
+    width: 100%;
+}
+.myproduct_img{
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid #dedede;
+    border-radius: 6px;
+}
+.myproduct{
+    position: relative;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.bulk-order:hover{
+    background: #FE2910;
+}
+
+#scroll-top:hover{
+    color: white!important;
+    background-color: #FE2910!important;
 }
