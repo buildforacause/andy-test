@@ -20371,3 +20371,19 @@ color: white;
 .cart-count{
     background-color: #333!important;
 }
+.mobile-menu-container{
+    background-color: black;
+}
+.mobile-search .form-control{
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.mobile-menu>li>a{
+ font-weight: 400;   
+}
+.mobile-menu-container .social-icon+.social-icon{
+    color: white;
+}
+.mobile-menu-container .social-icon{
+    color: white;
+}
