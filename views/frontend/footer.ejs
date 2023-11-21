@@ -27,7 +27,7 @@
                             <li><a href="/shop">All Products</a></li>
                             <li><a href="#about">About Us</a></li>
                             <li><a href="/cart">View Cart</a></li>
-                            <li><a href="#signin-modal" data-toggle="modal">Sign In</a></li>
+                            <li><a href="#signin-modal1" data-toggle="modal">Sign In</a></li>
                             <% if (user) { %>
                                 <li><a href="/dashboard">My Account</a></li>
                             <% } %>
@@ -70,7 +70,6 @@
 <div class="mobile-menu-container">
 <div class="mobile-menu-wrapper">
     <span class="mobile-menu-close"><i class="icon-close"></i></span>
-
     <form action="#" method="get" class="mobile-search">
         <label for="mobile-search" class="sr-only">Search</label>
         <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
@@ -90,7 +89,7 @@
             </li>
             <li>
                 <% if(!user){ %>
-                  <a href="#signin-modal" data-toggle="modal">Login <i class="icon-user"></i></a>
+                  <a href="#signin-modal1" data-toggle="modal">Login <i class="icon-user"></i></a>
                   <%  } else {%>
                   <a href="/logout">Logout</a>
                 <% } %>
@@ -115,7 +114,7 @@
             <button type="button" id="btn-btn0close" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"><i class="icon-close"></i></span>
             </button>
-            <div style="height: 100%;width: 100%;background: url('/frontend/assets/images/loginbg.jpg');background-size: cover;background-position: center;">
+            <div class="mybodymage" style="height: 100%;width: 100%;background: url('/frontend/assets/images/loginbg.jpg');background-size: cover;background-position: center;">
 
             </div>
             <div class="form-box">
@@ -125,10 +124,10 @@
                     </div>
                     <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" style="font-size: 16px;" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">SIGN IN</a>
+                            <a class="nav-link active" style="font-size: 14px;" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">SIGN IN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 16px;" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">REGISTER</a>
+                            <a class="nav-link" style="font-size: 14px;" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">REGISTER</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="tab-content-5">
@@ -150,7 +149,7 @@
                                         <span>LOG IN</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
-
+                                    <a href="#signin-modal" data-toggle="modal" ></a>
                                     <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
                                 </div>
                                 <!-- End .form-footer -->
@@ -281,4 +280,20 @@
         })
     }
     
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Click event handler for the specified link
+        $('a[href="#signin-modal1"]').on("click", function (e) {
+            $('body').removeClass("mmenu-active");
+            setTimeout(function () {
+                console.log($('#signin-modal'));
+                $('#signin-modal').modal('show');
+            }, 10); 
+        });
+    });
 </script>

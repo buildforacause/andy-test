@@ -20401,3 +20401,12 @@ color: white;
 .nav.nav-border-anim .nav-link:before{
     background-color:#fe2910!important;
 }
+
+@media screen and (max-width:500px){
+    .loginmodalbody{
+        grid-template-columns: 1fr;
+    }
+    .mybodymage{
+        display: hidden;
+    }
+}
