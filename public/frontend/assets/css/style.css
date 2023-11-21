@@ -20387,3 +20387,17 @@ color: white;
 .mobile-menu-container .social-icon{
     color: white;
 }
+.form-box{
+    width: 100%;
+    padding: 6rem 3rem;
+}
+.form-tab .form-footer{
+    padding: 0px;
+    border-bottom:0px;
+}
+.loginmodalbody{
+    grid-template-columns: 1fr 1.25fr;
+}
+.nav.nav-border-anim .nav-link:before{
+    background-color:#fe2910!important;
+}

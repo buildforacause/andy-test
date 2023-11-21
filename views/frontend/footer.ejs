@@ -110,20 +110,25 @@
 <!-- Sign in / Register Modal -->
 <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-        <div class="modal-body">
+    <div class="modal-content" style="border-radius:15px;overflow: hidden;">
+        <div class="modal-body loginmodalbody" style="display: grid;">
             <button type="button" id="btn-btn0close" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true"><i class="icon-close"></i></span>
             </button>
+            <div style="height: 100%;width: 100%;background: url('/frontend/assets/images/loginbg.jpg');background-size: cover;background-position: center;">
 
+            </div>
             <div class="form-box">
                 <div class="form-tab">
+                    <div style="display: flex; align-items: center; justify-content: center;margin-bottom: 30px;">
+                        <img style="filter: grayscale(1) invert(1);" src="/frontend/assets/images/demos/demo-8/logo.png" alt="Molla Logo" width="82" height="20">
+                    </div>
                     <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
+                            <a class="nav-link active" style="font-size: 16px;" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">SIGN IN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+                            <a class="nav-link" style="font-size: 16px;" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">REGISTER</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="tab-content-5">
@@ -132,17 +137,16 @@
                                 <center><span class="mb-2 text-danger" id="showloginerr"></span></center>
                                 <div class="form-group">
                                     <label for="singin-email">Email address *</label>
-                                    <input type="email" class="form-control" id="singin-email" name="email" required>
+                                    <input style="border-radius: 8px;" type="email" class="form-control" id="singin-email" name="email" required>
                                 </div><!-- End .form-group -->
 
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px!important;">
                                     <label for="singin-password">Password *</label>
-                                    <input type="password" class="form-control" id="singin-password" name="password" required>
+                                    <input style="border-radius: 8px;" type="password" class="form-control" id="singin-password" name="password" required>
                                 </div><!-- End .form-group -->
-                                <div class="form-footer">
+                                <div class="form-footer" style="align-items: center;justify-content: center;">
                                     
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        
+                                    <button type="submit" class="btn btn-outline-primary-2 mr-0">                                        
                                         <span>LOG IN</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
@@ -157,24 +161,24 @@
                             <form id="signInForm">
                                 <div class="form-group">
                                     <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <input type="text" class="form-control" id="name" name="name" style="border-radius: 8px;" required>
                                     <span id="err-name" class="mb-2 text-danger"></span>
                                 </div><!-- End .form-group -->
 
                                 <div class="form-group">
                                     <label for="register-email">Your email address *</label>
-                                    <input type="email" class="form-control" id="register-email" name="email" required>
+                                    <input type="email" class="form-control" id="register-email" name="email" style="border-radius: 8px;" required>
                                     <span id="err-email" class="mb-2 text-danger"></span>
                                 </div><!-- End .form-group -->
 
-                                <div class="form-group">
+                                <div class="form-group" style="margin-bottom: 20px!important;">
                                     <label for="register-password">Password *</label>
-                                    <input type="password" class="form-control" id="register-password" name="password" required>
-                                    <span id="err-password" class="mb-2 text-danger"></span>
+                                    <input type="password" class="form-control" id="register-password" style="border-radius: 8px;" name="password" required>
+                                    <span id="err-password" class="text-danger"></span>
                                 </div><!-- End .form-group -->
                                 <center><span class="mb-2 text-success" id="successmsg"></span></center>
-                                <div class="form-footer">
-                                    <button type="submit" class="btn btn-outline-primary-2">
+                                <div class="form-footer mb-0"  style="align-items: center;justify-content: center;">
+                                    <button type="submit" class="btn btn-outline-primary-2 mr-0">
                                         <span>SIGN UP</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
