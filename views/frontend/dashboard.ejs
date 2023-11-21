@@ -31,6 +31,12 @@
 	<link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
 	<link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<style>
+		.dropdown-item.active, .dropdown-item:active{
+			background-color: white!important;
+			color:black;
+		}
+	</style>
 </head>
 
 <body>
@@ -58,11 +64,24 @@
             	<div class="dashboard">
 	                <div class="container">
 	                	<div class="row">
-	                		<aside class="col-md-4 col-lg-3">
-	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
-								    <li class="nav-item">
+	                		<aside class="col-md-4 col-lg-3 daboard">
+								<div class="dropdown w-100 mob-dashbar">
+									<button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										ORDERS
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<!-- <a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false">Dashboard</a> -->
+										<a class="dropdown-item" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false" onclick="updateButtonText('ORDERS ')">Orders</a>
+										<a class="dropdown-item" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false" onclick="updateButtonText('ADDRESSES ')">Addresses</a>
+										<a class="dropdown-item" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false" onclick="updateButtonText('CHANGE PASSWORD ')">Change Password</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="/logout">Sign Out</a>
+									</div>
+								</div>
+	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0 comp-dashbar" role="tablist">
+								    <!-- <li class="nav-item">
 								        <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Dashboard</a>
-								    </li>
+								    </li> -->
 								    <li class="nav-item">
 								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>
@@ -79,20 +98,35 @@
 	                		</aside><!-- End .col-lg-3 -->
 
 	                		<div class="col-md-8 col-lg-9">
+								
+								
 	                			<div class="tab-content">
-								    <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+								    <!-- <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
 								    	<p>Hello <span class="font-weight-normal text-dark"><%= verify.name %></span> (not <span class="font-weight-normal text-dark"><%= verify.name %></span>? <a href="/logout">Log out</a>) 
 								    	<br>
 								    	From your account dashboard you can view your <a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your <a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit your password and account details</a>.</p>
-								    </div><!-- .End .tab-pane -->
+								    </div> -->
 
-								    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+								    <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
 										<% orders.forEach(order => {
 
 											if(order.allProduct[0].id){ %>
-										 
-								    	<article style="border: 1px solid #e4e4e4;padding: 1rem 2rem;margin-bottom: 2rem;" class="entry entry-list">
-                                            
+												<div class="myphonecardi">
+												<a href="/track?of=<%= order._id %>" >
+													<div class="d-flex" style="gap:5px;padding: 10px;border: 1px solid #e4e4e4;border-radius: 10px;margin-bottom: 10px;"> 
+														<img src="<%= order.allProduct[0].id.image[0] %>" alt="product photo" style="color:grey;border-radius: 7px;height:100px;aspect-ratio: 1;border: 1px solid #e4e4e4;">
+														<div style="flex:1;display: flex;flex-direction: column;">
+															<p style="font-size: 16px;color:#333;font-weight: 500;line-height: 18px;margin-bottom:6px;"><%= order.allProduct[0].id.name.length > 18 ? order.allProduct[0].id.name.substring(0, 36) + '...' : order.allProduct[0].id.name %></p>
+															<div style="display: flex;align-items: flex-end;">
+																<p style="font-size: 16px;color:#333;font-weight: 600;line-height: 16px;margin-bottom: 5px;"><span style="color:#fe2910">₹</span><%= order.amount %></p>
+																<p style="font-size: 12px;color:#afafaf;font-weight: 400;line-height: 12px;margin-bottom:5px;padding-left: 3px;"> for <%= order.allProduct.length>1?order.allProduct.length+" products":order.allProduct.length+" product" %></p>
+															</div>
+															<a href="/track?of=<%= order._id %>" style="margin-top: auto;display: flex;align-items: center;justify-content: end;translate: 0 5px;font-weight: 400;">View order<i class="icon-long-arrow-right" style="font-size: 19px;line-height: 10px;"></i></a>
+														</div>
+													</div>
+												</a>
+											</div>
+								    	<article style="border: 1px solid #e4e4e4;padding: 1rem 2rem;margin-bottom: 2rem;" class="entry entry-list mycompcardi">
 											<div class="row align-items-center">
                                                 <div class="col-md-3">
                                                     <figure class="entry-media">
@@ -128,8 +162,8 @@
 
 								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
 
-								    	<p>The following addresses will be used on the checkout page.</p>
-										<p><a href="#address-modal" data-toggle="modal">Add New Address</a></p>
+								    	<p style="font-weight: 400;letter-spacing: 0.5px;color:black;display: none;">Add or remove your addresses here.</p>
+										<p style="text-align: center;margin-bottom: 18px;"><a href="#address-modal" data-toggle="modal">+ Add New Address</a></p>
 										<% if (addresses.length < 1) { %>
 										 <h5>No addresses found!</h5>
 										<% } %>
@@ -139,7 +173,7 @@
 											
 								    		<div class="col-lg-6">
 								    			<div class="card card-dashboard">
-								    				<div class="card-body">
+								    				<div class="card-body" style="border:1px solid#cccccc;border-radius: 8px;padding: 20px;">
 								    					<h3 class="card-title">Shipping Address</h3><!-- End .card-title -->
 
 														<p><%= address.aname %><br>
@@ -162,15 +196,15 @@
 			                				<div class="row">
 
 		            						<label>Current password</label>
-		            						<input type="password" name="oldPassword" class="form-control" required>
+		            						<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="password" name="oldPassword" class="form-control merahaibutton" required>
 
 		            						<label>New password</label>
-		            						<input type="password" name="newPassword" class="form-control" required>
+		            						<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="password" name="newPassword" class="form-control merahaibutton" required>
 
-											<input type="hidden" name="uId" value="641f5f9a2b6c7d598c631a77">
+											<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="hidden" name="uId" value="641f5f9a2b6c7d598c631a77">
 											
-		                					<button type="submit" class="btn btn-outline-primary-2">
-			                					<span>SAVE CHANGES</span>
+		                					<button type="submit" style="border-color: #616161!important;" class="btn btn-outline-primary-2">
+			                					<span style="color:#616161;">SAVE CHANGES</span>
 			            						<i class="icon-long-arrow-right"></i>
 			                				</button>
 			                			</form>
@@ -291,8 +325,19 @@
 			    }
 			})
 		}
-	</script>    
 
+	function updateButtonText(option) {
+        document.getElementById('dropdownMenuButton').innerText = option;
+    }
+	$('.dropdown-item').on('click', function () {
+		// Remove class "active" from all siblings
+		$(this).siblings().removeClass('active');
+    });
+	</script>    
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
     
 </html>

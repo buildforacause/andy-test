@@ -20413,3 +20413,86 @@ color: white;
         padding: 5rem 2.5rem 2.5rem 2.5rem;
     }
 }
+.myphonecardi{
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .comp-dashbar{
+        display: none;
+    }
+    .daboard .mob-dashbar{
+        display: block!important;
+    }
+    .breadcrumb-nav.mb-3{
+        margin-bottom:0px!important;
+        font-weight: 400;
+    }
+    #myform{
+        padding: 0 10px;
+    }
+    .footer-bottom.mb-2{
+        scale: 0.97;
+    }
+    .footer-bottom.mb-2>.container{
+        border-radius: 15px!important;
+    }
+    .mycompcardi{
+        display: none;
+    }
+    .myphonecardi{
+        display: block;
+    }
+    .entry-body{
+        text-align: left!important;
+        margin: 20px 0;
+    }
+    .entry-body-top{
+        padding: 20px 1rem!important;
+    }
+    .widget-title>a{
+        font-size: 14px;
+        color: #777!important;
+        font-weight: 400;
+    }
+    .widget-title{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 16px;
+    }
+    .card-dashboard{
+        border: 0px;
+    }
+    .card-body{
+        border:1px solid #e4e4e4;
+    }
+    .merahaibutton:focus {   
+        border-color: rgba(226, 37, 36, 0.8)!important;
+        box-shadow: 0 1px 1px rgba(226, 37, 36, 0.075) inset, 0 0 8px rgba(226, 37, 36, 0.2 );
+        outline: 0 none;
+    }
+}
+.daboard .mob-dashbar{
+    display: none;
+    margin: 4px 0 18px 0;
+}
+.daboard .dropdown-menu.show{
+    width: 100%;
+    font-size: 14px;
+    border-radius: 7px;
+    margin-top: 5px;
+}
+#dropdownMenuButton{
+    background-color: white!important;
+    border: 2px solid #616161;
+    color: #616161;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 7px!important;
+}
+#dropdownMenuButton:focus {   
+    border-color: rgba(226, 37, 36, 0.8);
+    box-shadow: 0 1px 1px rgba(226, 37, 36, 0.075) inset, 0 0 8px rgba(226, 37, 36, 0.6);
+    outline: 0 none;
+}
+
