@@ -81,7 +81,7 @@
                                         <tr>
                                             <td><%= order._id %></td>
                                             <td><%= order.user.name %></td>
-                                            <td><%= order.address.aphone %></td>
+                                            <td><%= (order.address !== null ? order.address.aphone : 0) %></td>
                                             <td><%= order.amount %></td>
                                             <td><a href="/track?of=<%= order._id %>">View</a></td>
                                             <td>

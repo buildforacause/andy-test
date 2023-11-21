@@ -162,7 +162,7 @@
                                     <p style="margin-bottom: 1rem;"><%= order.address.aaddress %> <br>
                                       <%= order.address.acity %> - <%= order.address.apincode %></p>
                                     <p style="font-weight: 500;margin-bottom: 0rem;">Phone number</p>
-                                    <p><%= order.address.aphone %></p>
+                                    <p><%= (order.address !== null ? order.address.aphone : 0) %></p>
                                     <p style="font-weight: 500;margin-bottom: 0rem;"><a href="<%= order.transactionScreenShot %>" target="_blank">View Payment Details</a></p>
                                     
                                     

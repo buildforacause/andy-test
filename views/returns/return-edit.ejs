@@ -58,7 +58,7 @@
       <div class="row">
         <div class="col-xl-12 col-md-12">
           <p><span style="font-weight: 600!important;">Order id: </span><%= order._id %></p>
-          <p><span style="font-weight: 600!important;">Customer Details: </span><%= order.user.name %>, <%= order.user.email %>, <%= order.address.aphone %></p>
+          <p><span style="font-weight: 600!important;">Customer Details: </span><%= order.user.name %>, <%= order.user.email %>, <%= (order.address !== null ? order.address.aphone : 0) %></p>
           <p style="margin: 0!important;"><span style="font-weight: 600!important;">Products: </span></p>
           <% order.allProduct.forEach(element => { %>
           <div class="">
