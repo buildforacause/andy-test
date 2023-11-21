@@ -20409,4 +20409,7 @@ color: white;
     .mybodymage{
         display: hidden;
     }
+    .form-box{
+        padding: 5rem 2.5rem 2.5rem 2.5rem;
+    }
 }

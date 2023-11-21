@@ -143,7 +143,7 @@
                                     <label for="singin-password">Password *</label>
                                     <input style="border-radius: 8px;" type="password" class="form-control" id="singin-password" name="password" required>
                                 </div><!-- End .form-group -->
-                                <div class="form-footer" style="align-items: center;justify-content: center;">
+                                <div class="form-footer mb-0" style="align-items: center;justify-content: center;">
                                     
                                     <button type="submit" class="btn btn-outline-primary-2 mr-0">                                        
                                         <span>LOG IN</span>
@@ -291,7 +291,6 @@
         $('a[href="#signin-modal1"]').on("click", function (e) {
             $('body').removeClass("mmenu-active");
             setTimeout(function () {
-                console.log($('#signin-modal'));
                 $('#signin-modal').modal('show');
             }, 10); 
         });
