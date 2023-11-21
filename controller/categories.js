@@ -70,6 +70,8 @@ class Category {
       let i = previmage;
       if(editImages.length > 0){
         i = "/uploads/categories/" +editImages[0].filename;
+      }else if(previmage.length < 1){
+         return res.json({ error: "Image required" });
       }
       let editCategory = categoryModel.findByIdAndUpdate(cId, {
         cDescription:cDescription,
