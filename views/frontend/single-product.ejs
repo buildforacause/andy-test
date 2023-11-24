@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
     <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
     <style>
         .txt-center {
   text-align: center;
@@ -86,7 +87,16 @@
 .geeks:hover{
     transform: scale(2);
 }
+.btn-outline-primary-2>span{
+    color: #000!important;
+}
 
+.btn-outline-primary-2:hover{
+    background-color: #333!important;
+}
+.btn-outline-primary-2:hover span{
+    color: white!important;
+}
     </style>
 </head>
 
@@ -212,8 +222,9 @@
                                             <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta btn-product btn-cart" style="padding: 10px 30px!important;"><span class="newbtaspan" style="display:flex;align-items: end;"><i class='bx bx-basket' style="font-size: 14px;margin-right: 5px;"></i>Add to Cart</span></a>
                                         
                                         <% } %>
-                                   
-                                        <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
+                                        <a class="size-guide" data-toggle="modal" href="#sizeguidemodal" data-target="#sizeguidemodal">
+                                            <i class="icon-th-list"></i>size guide
+                                        </a>
                                     </div><!-- End .product-action -->
 
                                     <div class="product-details-footer" style="display: flex;justify-content: space-between;">
@@ -551,11 +562,43 @@
                 location.reload();
             }
         })
-    })
-
-    
+    })    
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<div class="modal fade" id="sizeguidemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">SIZE GUIDE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p-3 row" style="height: max-content!important;">
+          <div class="col-sm-12 col-xs-12 col-md-3">
+            <h3 style="font-size: 16px;text-align: center;">Tshirt Size</h3>
+            <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-6">
+            <h3 style="font-size: 16px;text-align: center;">Track Pant Size</h3>
+            <img src="/frontend/assets/images/track.jpeg" style="width: 100%">
+          </div>
+          <div class="col-sm-12 col-xs-12 col-md-3">
+            <h3 style="font-size: 16px;text-align: center;">Shorts Size</h3>
+            <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #E22520;">OKAY</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include("./footer.ejs") %>
 
 </body>
 </html>
