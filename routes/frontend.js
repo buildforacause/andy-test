@@ -136,7 +136,7 @@ router.post("/upload",async (req,res)=>{
     let navCats = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 }).limit(5);
     let Info = await infoModel.find({});
     let data = {
-        amount: amount,
+        amount: amount + 50,
         allProduct : JSON.stringify(allProduct),
         coupon: coupon,
         user: user,

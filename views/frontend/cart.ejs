@@ -160,11 +160,10 @@
                       >PROCEED TO CHECKOUT</button
                     >
                     <% } else { %>
-                      <button
+                      <a
                       class="btn btn-outline-primary-2 btn-order btn-block"
-                      disabled
-                      >Login To Proceed</button
-                    >
+                      href="#signin-modal1" data-toggle="modal" onclick="closenavmodal()"
+                      >Login To Proceed</a>
                     <% } %>
                   </div>
                   <!-- End .summary -->

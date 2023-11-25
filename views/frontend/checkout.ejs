@@ -219,11 +219,15 @@
 		                							<td><span class="pricesabka" ><%= products[index].price - (products[index].offer * (products[index].price/100)) %></span> x <%= quantity[index] %></td>
 		                						</tr>
 												<% } %>	
+												<tr>
+		                							<td><a>Delivery Charge</a></td>
+		                							<td>50</td>
+		                						</tr>
 
 		                						<tr class="summary-total">
 		                							<td>Grand Total:</td>
 													
-		                							<td id="total">₹<%= totalcost %></td>
+		                							<td id="total">₹<%= totalcost + 50 %></td>
 		                						</tr><!-- End .summary-total -->
 
 		                					</tbody>

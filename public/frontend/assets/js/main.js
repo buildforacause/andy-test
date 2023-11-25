@@ -129,7 +129,7 @@ $(document).ready(function () {
     updateCart();
   }
 
-  $(".btn-cart").on("click", function () {
+  $(".newbta").on("click", function () {
     addProduct(
       $(this).attr("productid"),
       $(this).attr("productname"),
