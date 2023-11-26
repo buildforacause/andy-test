@@ -27,7 +27,7 @@ class coupon {
   }
 
   async add(req, res) {
-    let {coupon, discount} = req.body;
+    let {coupon, discount,user} = req.body;
     if (!coupon) {
       return res.json({ error: "Please enter coupon" });
     }
@@ -39,7 +39,8 @@ class coupon {
     try {
       let newcoupon = new couponModel({
         coupon: coupon,
-        discount:discount
+        discount:discount,
+        user:user
       });
       let save = await newcoupon.save();
       if (save) {
@@ -51,12 +52,12 @@ class coupon {
   }
 
   async edit(req, res){
-    let { _id, coupon, discount } = req.body;
-    if (!_id | !coupon | !discount) {
+    let { _id, coupon, discount, user } = req.body;
+    if (!_id | !coupon | !discount | !user) {
       return res.json({ error: "All fields are required" });
     } else {
       try {
-        let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount});
+        let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount,user:user});
         if (del) {
           return res.redirect("/admin/coupon-view")
         }

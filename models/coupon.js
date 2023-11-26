@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 const couponSchema = new mongoose.Schema(
   {
@@ -9,6 +10,10 @@ const couponSchema = new mongoose.Schema(
     discount: {
         type: Number,
         required: true
+    },
+    user: {
+      type: ObjectId,
+      ref: "users",
     }
   },
   { timestamps: true }

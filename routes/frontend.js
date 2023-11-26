@@ -10,12 +10,14 @@ const userModel = require("../models/users");
 const orderModel = require("../models/orders");
 const couponModel = require("../models/coupon");
 const secondarybannerModel = require("../models/secondarybanner");
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 router.get('/',async (req,res) => {
     let Products = await productModel
         .find({featured: true, status: "Active"})
         .populate("category", "_id cName")
-        .sort({ _id: -1 })
+        .sort({ createdAt: -1 })
         .limit(5);
     Products = Products.filter((value, index, self) =>
         index === self.findIndex((t) => (
@@ -69,14 +71,46 @@ router.get("/dashboard",async (req,res)=>{
     if(!user){
         res.redirect("/");
     }
-    let userAddress = await addressModel.find({user: userid})
+    let userAddress = await addressModel.find({user: userid,hidden:0})
     let navCats = await categoryModel.find({cStatus: "Active"}).sort({ _id: -1 }).limit(5);
     let Info = await infoModel.find({});
     let verify = await userModel.find({_id: userid})
     let orders = await orderModel.find({user: userid}).populate("allProduct.id", "name image price")
     .populate("address", "aaddress aphone aname acity apincode")
     .sort({ _id: -1 });
-    res.render("frontend/dashboard.ejs",{orders: orders,verify: verify[0],user:user, addresses: userAddress, userid:userid, navCats: navCats, info: Info[0]})
+    let inforders = await orderModel.aggregate([
+        {
+          '$lookup': {
+            'from': 'coupons', 
+            'localField': 'coupon', 
+            'foreignField': 'coupon', 
+            'as': 'result'
+          }
+        },
+        {
+            '$lookup': {
+              'from': 'products',   
+              'localField': 'allProduct.id', 
+              'foreignField': '_id', 
+              'as': 'allProduct'
+            }
+          },
+        {
+            '$lookup': {
+              'from': 'addresses',  
+              'localField': 'address', 
+              'foreignField': '_id', 
+              'as': 'address'
+            }
+          },
+         {
+          '$match': {
+            'result.user': new ObjectId(userid)
+          }
+        }
+      ]);
+      console.log(inforders[0])
+    res.render("frontend/dashboard.ejs",{inforders: inforders,orders: orders,verify: verify[0],user:user, addresses: userAddress, userid:userid, navCats: navCats, info: Info[0]})
 })
 
 router.get("/track",async (req,res)=>{

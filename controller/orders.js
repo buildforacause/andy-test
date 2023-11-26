@@ -114,6 +114,7 @@ class Order {
           transactionScreenShot: transactionScreenShot,
           address: address,
           notes: notes,
+          coupon: coupon
         });
 
         let save = await newOrder.save();

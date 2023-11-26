@@ -129,7 +129,7 @@ $(document).ready(function () {
     updateCart();
   }
 
-  $(".newbta").on("click", function () {
+  $(".baba").on("click", function () {
     addProduct(
       $(this).attr("productid"),
       $(this).attr("productname"),
@@ -137,6 +137,7 @@ $(document).ready(function () {
       $(this).attr("productprice"),
       $(this).attr("productoffer")
     );
+    window.location = "/cart";
   });
 
   $(document).on("click", ".btn-remove", function () {

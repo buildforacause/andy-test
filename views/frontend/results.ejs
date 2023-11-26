@@ -57,15 +57,9 @@
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="#">Shop</a></li>
-                    </ol>
-                </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
 
-            <div class="page-content">
+            <div class="page-content mt-4">
                 <div class="container">
                 	<div class="row">
                 		<div class="col-lg-12">
@@ -97,7 +91,12 @@
                                                   <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
                                                 </a>
                                                 <div class="product-action ">
-                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta"><span class="newbtaspan">Add to Cart</span></a>
+                                                  <% if (prod.quantity < 1) { %>
+                                                    <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
+                                                    <% }else{ %>
+                                                    <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
+                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
+                                                    <% } %>
                                                 </div>
                                               </figure><!-- End .product-media -->
                           

@@ -104,6 +104,92 @@ class Auth {
     }
   }
 
+  async postSignupInfluencer(req, res) {
+    let { name, email, password } = req.body;
+    let error = {};
+    if (!name || !email || !password) {
+      error = {
+        ...error,
+        name: "Field must not be empty",
+        email: "Field must not be empty",
+        password: "Field must not be empty",
+      };
+      return res.json({ error });
+    }
+    if (name.length < 3 || name.length > 25) {
+      error = { ...error, name: "Name must be 3-25 characters long" };
+      return res.json({ error });
+    } else {
+      if (validateEmail(email)) {
+        name = toTitleCase(name);
+        if ((password.length > 255) | (password.length < 8)) {
+          error = {
+            ...error,
+            password: "Password must be 8 characters long",
+            name: "",
+            email: "",
+          };
+          return res.json({ error });
+        } else {
+          // If Email & Number exists in Database then:
+          try {
+            password = bcrypt.hashSync(password, 10);
+            const data = await userModel.findOne({ email: email });
+            if (data) {
+              error = {
+                ...error,
+                password: "",
+                name: "",
+                email: "Email already exists",
+              };
+              return res.json({ error });
+            } else {
+              let newUser = new userModel({
+                name,
+                email,
+                password,
+                userRole: 2, // role = 0 admin , role = 1 customer, role = 2 influencer
+              });
+              newUser
+                .save()
+                .then((data) => {
+                  return res.json({
+                    success: "Account created successfully. Please login",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } else {
+        error = {
+          ...error,
+          password: "",
+          name: "",
+          email: "Email is not valid",
+        };
+        return res.json({ error });
+      }
+    }
+  }
+
+  async postDeleteUser(req, res) {
+    let { uid } = req.body;
+    if (!uid) {
+      return res.json({ message: "All fields must be required" });
+    } else {
+      let currentUser = userModel.findByIdAndDelete(uid);
+      currentUser.exec((err, result) => {
+        if (err) console.log(err);
+        return res.redirect("/admin/influencers");
+      });
+    }
+  }
+
   /* User Login/Signin controller  */
   async postSignin(req, res) {
     let { email, password } = req.body;

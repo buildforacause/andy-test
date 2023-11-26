@@ -180,7 +180,7 @@
                         <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
                         <% }else{ %>
                         <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta"><span class="newbtaspan">Buy Now</span></a>
+                        <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -279,7 +279,7 @@
                         <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
                         <% }else{ %>
                         <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta"><span class="newbtaspan">Buy Now</span></a>
+                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -333,7 +333,7 @@
                         <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
                         <% }else{ %>
                         <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta"><span class="newbtaspan">Buy Now</span></a>
+                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -387,10 +387,10 @@
                       </a>
                       <div class="product-action ">
                         <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
                         <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="btn-product btn-cart"><span>buy now</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -437,10 +437,10 @@
                       </a>
                       <div class="product-action ">
                         <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
                         <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="btn-product btn-cart"><span>buy now</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -487,10 +487,10 @@
                       </a>
                       <div class="product-action ">
                         <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
                         <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="btn-product"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="btn-product btn-cart"><span>buy now</span></a>
+                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
                         <% } %>
                       </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
@@ -610,12 +610,6 @@
     </main><!-- End .main -->
 
     <%- include("./footer.ejs") %>
-    <script>
-      $(".newbta").on("click", function() {
-        window.location = "/cart";
-      });
-
-    </script>
 </body>
 
 

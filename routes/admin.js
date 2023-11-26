@@ -164,7 +164,7 @@ router.get("/coupon-view", async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    let Coupons = await couponModel.find({}).sort({ _id: -1 });
+    let Coupons = await couponModel.find({}).sort({ _id: -1 }).populate("user", "name");
     res.render("coupon/coupon-view.ejs", {coupons: Coupons });
 })
 
@@ -182,7 +182,8 @@ router.get('/coupon-add',async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    res.render("coupon/coupon-add.ejs");
+    let influencers = await userModel.find({userRole: 2});
+    res.render("coupon/coupon-add.ejs", {influencers: influencers});
 })
 
 router.get('/coupon-edit/:id',async(req,res)=>{
@@ -200,9 +201,9 @@ router.get('/coupon-edit/:id',async(req,res)=>{
         res.redirect("/")
     }
     let id = req.params.id
-    let coupon = await couponModel.findById(id);
-    console.log(coupon)
-    res.render("coupon/coupon-edit.ejs", {coupon: coupon });
+    let coupon = await couponModel.findById(id).populate("user", "name");
+    let influencers = await userModel.find({userRole: 2})
+    res.render("coupon/coupon-edit.ejs", {coupon: coupon, influencers: influencers });
 })
 
 router.get("/pincode-view", async(req,res)=>{
@@ -404,6 +405,24 @@ router.get('/slider-add',async(req,res)=>{
         res.redirect("/")
     }
     res.render("slider/slider-add.ejs");
+})
+
+router.get('/influencers',async(req,res)=>{
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+    let influencers = await userModel.find({userRole: 2})
+    res.render("users/user-view.ejs", {influencers: influencers});
 })
 
 router.get("/order-view", async(req,res)=>{
