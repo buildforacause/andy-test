@@ -99,7 +99,12 @@
                                                   <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
                                                 </a>
                                                 <div class="product-action ">
-                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta"><span class="newbtaspan">Add to Cart</span></a>
+                                                  <% if (prod.quantity < 1) { %>
+                                                    <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
+                                                    <% }else{ %>
+                                                    <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
+                                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
+                                                    <% } %>
                                                 </div>
                                               </figure><!-- End .product-media -->
                           

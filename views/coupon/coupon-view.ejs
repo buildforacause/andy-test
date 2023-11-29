@@ -71,6 +71,7 @@
                                     <tr>
                                         <th>Coupon</th>
                                         <th>Discount</th>
+                                        <th>Influencer</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -80,6 +81,7 @@
                                         <tr>
                                             <td><%= pin.coupon %></td>
                                             <td><%= pin.discount %> %</td>
+                                            <td><%= pin.user ? pin.user.name : "No User" %></td>
                                             <td class="d-flex" style="justify-content: space-evenly;align-items: end;">
                                                 <a href="/admin/coupon-edit/<%= pin._id %>" class="btn btn-secondary">Edit</a>
                                                 <form method="POST" action="/api/coupon/delete">

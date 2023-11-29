@@ -218,8 +218,11 @@
         return matches ? decodeURIComponent(matches[1]) : undefined
     }
 </script>
+
 <script src="/frontend/assets/js/jquery.min.js"></script>
 <script src="/frontend/assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="/frontend/assets/js/jquery.hoverIntent.min.js"></script>
 <script src="/frontend/assets/js/jquery.waypoints.min.js"></script>
 <script src="/frontend/assets/js/superfish.min.js"></script>
@@ -232,7 +235,7 @@
 <script src="/frontend/assets/js/demos/demo-8.js"></script>
 <script>
 
-    const $form = $('#signInForm')
+    var $form = $('#signInForm')
     $form.on('submit', submitHandler)
 
     function submitHandler (e) {
@@ -258,7 +261,7 @@
         })
     }
 
-    const $form2 = $('#userLoginForm')
+    var $form2 = $('#userLoginForm')
     $form2.on('submit', submitHandler2)
 
     function submitHandler2 (e) {
@@ -282,8 +285,7 @@
     
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 <script>
     $(document).ready(function () {

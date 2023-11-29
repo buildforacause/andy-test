@@ -42,7 +42,7 @@ class Address {
       return res.json({ error: "All fields must be required" });
     } else {
       try {
-        let deleteProduct = await addressModel.findByIdAndDelete(_id);
+        let deleteProduct = await addressModel.findByIdAndUpdate(_id,{"hidden": 1});
         if (deleteProduct) {
           return res.redirect("/dashboard#tab-address");
         }

@@ -18,10 +18,14 @@ const addressSchema = new mongoose.Schema(
     apincode: {
       type: Number,
       required: true,
-  },
+    },
     aphone: {
         type: Number,
         required: true,
+    },
+    hidden: {
+      type: Number,
+      default: 0
     },
     user: {
       type: ObjectId,
