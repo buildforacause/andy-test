@@ -12151,7 +12151,7 @@ button:focus {
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1.5;
-  margin-top: 0;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -20605,4 +20605,24 @@ span.outer {
   .mobilefk{
     padding: 0 5px;
   }
+}
+
+@media screen and (max-width:600px) {
+  .disappearphone{
+    display: none;
+  }
+  .social-icons{
+    margin-top: 1rem;
+  }
+}
+
+header{
+  border:1px solid #ebebeb;
+}
+.topnavlink{
+  transition: 0.3s;
+}
+.topnavlink:hover{
+  color:#fe2910!important;
+  font-weight: 600!important;
 }

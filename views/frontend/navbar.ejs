@@ -18,42 +18,9 @@
                             <a href="/" class="mylinknav">Home</a>
                         </li>
                         <li>
-                            <a href="/shop" class="sf-with-ul mylinknav">Shop</a>
+                            <a href="/shop" class="mylinknav">Shop</a>
 
-                            <div class="megamenu megamenu-md">
-                                <div class="row no-gutters">
-                                    <div class="col-md-12">
-                                        <div class="menu-col">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="menu-title">Categories</div><!-- End .menu-title -->
-                                                    <ul>
-                                                        <% navCats.forEach(element => { %>
-                                                         
-                                                        <li><a href="/shop?filterby=<%= element._id %>"><%= element.cName %></a></li>
-                                                        
-                                                        <% }) %>
-                                                    </ul>
-                                                </div><!-- End .col-md-6 -->
-
-                                                <div class="col-md-6">
-                                                    <div class="menu-title">User</div><!-- End .menu-title -->
-                                                    <ul>
-                                                        <li><a href="/cart">Cart</a></li>
-                                                        <li><a href="/#about">About Us</a></li>
-                                                        <% if (user) { %>
-                                                            <li><a href="/dashboard">My Account</a></li>
-                                                        <% } %>
-                                                        
-                                                        
-                                                    </ul>
-                                                </div><!-- End .col-md-6 -->
-                                            </div><!-- End .row -->
-                                        </div><!-- End .menu-col -->
-                                    </div><!-- End .col-md-8 -->
-
-                                </div><!-- End .row -->
-                            </div><!-- End .megamenu megamenu-md -->
+                            
                         </li>
                         <li>
                             <a href="/#about" class="mylinknav">About Us</a>

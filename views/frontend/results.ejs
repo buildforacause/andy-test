@@ -44,41 +44,43 @@
   <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
   <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
     <div class="page-wrapper">
         <%- include("./navbar.ejs") %>
 
+
         <main class="main">
-        	<div class="page-header text-center" style="background-image: url('frontend/assets/images/page-header-bg.jpg')">
-        		<div class="container">
-        			<h1 class="page-title"><%= title %><span>Shop</span></h1>
-        		</div><!-- End .container -->
-        	</div><!-- End .page-header -->
-            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="#">Shop</a></li>
-                    </ol>
-                </div><!-- End .container -->
-            </nav><!-- End .breadcrumb-nav -->
-
             <div class="page-content">
+              <div class="p-0 bg-white" style="border:1px solid #ebebeb;border-top: 0px;">
+                <div class="container py-2 d-flex" style="justify-content: space-between;align-items: center;">
+                  <% navCats.forEach(element => { %>
+                                                         
+                    <a class="topnavlink" style="color:#333;font-weight:400;text-transform: uppercase;" href="/shop?filterby=<%= element._id %>"><%= element.cName %></a>
+                    
+                    <% }) %>
+                </div>
+              </div>
                 <div class="container">
+                  <div class="toolbox">
+                    <div class="toolbox-left">
+                      <div class="toolbox-info">
+                        Showing <span><%= allProds.length %></span> Products
+                      </div><!-- End .toolbox-info -->
+                    </div><!-- End .toolbox-left -->
+
+
+                  </div><!-- End .toolbox -->
                 	<div class="row">
-                		<div class="col-lg-12">
-                			<div class="toolbox">
-                				<div class="toolbox-left">
-                					<div class="toolbox-info">
-                						Showing <span><%= allProds.length %></span> Products
-                					</div><!-- End .toolbox-info -->
-                				</div><!-- End .toolbox-left -->
-
-
-                			</div><!-- End .toolbox -->
-
+                    <div class="col-lg-3">
+                      <div class="product product-2">
+                        <p style="font-weight: 400; color:#333;"><i class='bx bx-filter-alt mr-2'></i>Filter</p>
+                      </div>
+                    </div>
+                		<div class="col-lg-9 ">
+              
                             <div class="products mb-3">
                                 <div class="row justify-content-center">
                                     <% if (allProds.length < 1) { %>
@@ -86,7 +88,7 @@
                                     <% } %>
                                     <% allProds.forEach(prod => { %>
                                     
-                                        <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                                        <div class="col-md-4 col-lg-4 col-sm-6 col-6 mobilefk">
                                             <div class="product product-2">
                                               <% if (prod.offer != 0) { %>
                                               <span class="product-label label-sale">-<%= prod.offer %>% Off</span>

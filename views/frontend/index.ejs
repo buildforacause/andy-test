@@ -163,7 +163,7 @@
               <div class="row justify-content-center">
                 <% products.forEach(prod => { %>
 
-                <div class="col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2">
                     <% if (prod.offer != 0) { %>
                     <span class="product-label label-sale">-<%= prod.offer %>% Off</span>
@@ -250,7 +250,6 @@
             <li class="nav-item">
               <a class="nav-link" id="recent-<%= element.cName %>-link" data-toggle="tab" href="#<%= slugify(element.cName) %>" role="tab" aria-controls="recent-<%= element.cName %>-tab" aria-selected="false"><%= element.cName %></a>
             </li>
-
             <% }) %>
           </ul>
         </div><!-- End .heading -->
@@ -262,7 +261,7 @@
 
                 <% products.forEach(recentprod => { %>
 
-                <div class="col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2">
                     <% if (recentprod.offer != 0) { %>
                     <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
@@ -316,7 +315,7 @@
                 <% recentproducts.forEach(recent => { %>
                 <% if (recent.category==element.cName) { %>
                 <% recent.products.forEach(recentprod => { %>
-                <div class="col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2">
                     <% if (recentprod.offer != 0) { %>
                     <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
@@ -375,7 +374,7 @@
                 <% recentproducts.forEach(recent => { %>
                 <% if (recent.category=='T-shirt') { %>
                 <% recent.products.forEach(recentprod => { %>
-                <div class="col-6 col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2 text-center">
                     <figure class="product-media">
                       <% if (recentprod.offer != 0) { %>
@@ -425,7 +424,7 @@
                 <% recentproducts.forEach(recent => { %>
                 <% if (recent.category=='Tracks & Shorts') { %>
                 <% recent.products.forEach(recentprod => { %>
-                <div class="col-6 col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2 text-center">
                     <figure class="product-media">
                       <% if (recentprod.offer != 0) { %>
@@ -475,7 +474,7 @@
                 <% recentproducts.forEach(recent => { %>
                 <% if (recent.category=='Sando') { %>
                 <% recent.products.forEach(recentprod => { %>
-                <div class="col-6 col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
                   <div class="product product-2 text-center">
                     <figure class="product-media">
                       <% if (recentprod.offer != 0) { %>
