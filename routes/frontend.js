@@ -142,7 +142,6 @@ router.get("/dashboard", async (req, res) => {
       },
     },
   ]);
-  console.log(inforders[0].allProduct[0])
   res.render("frontend/dashboard.ejs", {
     inforders: inforders,
     orders: orders,
