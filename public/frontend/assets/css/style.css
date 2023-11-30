@@ -20626,3 +20626,35 @@ header{
   color:#fe2910!important;
   font-weight: 600!important;
 }
+
+.ball {
+  position: relative;
+  height: 15px;
+  width: 15px;
+  background-color: rgb(255, 44, 44);
+  border-radius: 50%;
+  animation: bounce 0.5s ease-in-out infinite both;
+ }
+ 
+ @keyframes bounce {
+  0%, 100% {
+   transform: translate(0px, 0px);
+  }
+ 
+  50% {
+   transform: translate(0px, 50px) scale(1, 0.77);
+  }
+ }
+
+ section.area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent white background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}

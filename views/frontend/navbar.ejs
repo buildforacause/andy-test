@@ -1,3 +1,20 @@
+<section class="area">
+    <div class="ball"></div>
+</section>
+<script>
+    // Function to hide the preloader when the page is fully loaded
+    function hidePreloader() {
+        document.querySelector('.area').style.display = 'none';
+    }
+
+    // Event listener for the 'DOMContentLoaded' event
+    document.addEventListener('DOMContentLoaded', function() {
+        // Call hidePreloader() when the page is fully loaded
+        hidePreloader();
+    });
+</script>
+
+
 <header class="header">
     <div class="header-bottom sticky-header">
         <div class="container">
@@ -70,3 +87,6 @@
         </div><!-- End .container -->
     </div><!-- End .header-bottom -->
 </header><!-- End .header -->
+
+
+

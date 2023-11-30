@@ -294,4 +294,13 @@
             }, 1000); 
         });
     });
+    // Get the reference to the dropdown-cart-products
+    var cartProductsContainer = document.querySelector('.dropdown-cart-products');
+
+    // Check if the container is empty
+    if (cartProductsContainer.innerHTML.trim() === '') {
+    // If empty, add the specified HTML content
+    cartProductsContainer.innerHTML = '<center><span>No items in the cart yet</span></center>';
+    }
+
 </script>
