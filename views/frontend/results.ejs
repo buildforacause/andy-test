@@ -185,22 +185,25 @@
                     <div class="slidecontainer mb-2">
                       <label class="mt-2" for="sortby" style="margin-bottom:4px;color:#afafaf">Sort By:</label>
                       <select id="sortby" style="margin-bottom: 0px; border-radius: 8px;" class="form-control" name="sortby">
-                        <option value="1">Newest first</option>
-                        <option value="2">Price: Low to High</option>
-                        <option value="3">Price: High to Low</option>
-                        <option value="4">Discount: High to Low</option>
+                        <option value="1" <% sortby==1 && selected %>>Newest first</option>
+                        <option value="2" <% sortby==2 && selected %>>Price: Low to High</option>
+                        <option value="3" <% sortby==3 && selected %>>Price: High to Low</option>
+                        <option value="4" <% sortby==4 && selected %>>Discount: High to Low</option>
                       </select>
                       
                       <label class="mt-2 mb-0" style="color:#afafaf">Max Price: ₹ <span id="maxprice"><%= curMaxPrice || maxPrice %></span></label>
                       <input type="range" min="1" max="<%= maxPrice %>" value="<%= curMaxPrice || maxPrice %>" class="slider w-100" id="maxrate" name="maxrate">
                       
                     </div>
-                    <button type="button" onclick="redirecting()" class="w-100 newbta"><span class="newbtaspan">Add to Cart</span></button>
+                    <button type="button" onclick="redirecting()" class="w-100 newbta"><span class="newbtaspan">Apply</span></button>
                   </form>
                 </div>
               </div>
             </div>
             <script>
+              if (window.innerWidth <= 768) {
+                document.querySelector('#form-container').style.height=0;
+              }
               function toggleForm() {
                 const formContainer = document.querySelector('#form-container');
                 formContainer.style.height = formContainer.clientHeight === 0 ? `${formContainer.scrollHeight}px` : '0';
@@ -209,7 +212,7 @@
             <div class="col-lg-9 ">
 
               <div class="products mb-3">
-                <div class="row justify-content-center">
+                <div class="row justify-content-left">
                   <% if (allProds.length < 1) { %>
                   <center>
                     <h3>No Products Found</h3>
@@ -289,7 +292,7 @@
       }
     </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+    
 </body>
 
 </html>

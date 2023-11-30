@@ -506,6 +506,7 @@ router.get("/shop", async (req, res) => {
     navCats: navCats,
     maxPrice: maxPrice,
     curMaxPrice: req.query.maxrate,
+    sortby: req.query.sortby
   });
 });
 

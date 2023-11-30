@@ -97,6 +97,42 @@
 .btn-outline-primary-2:hover span{
     color: white!important;
 }
+@media screen and (max-width:500px) {
+    .owl-nav{
+        display: none!important;
+    }
+}
+.buycartbtn>a{
+    width: fit-content;
+    min-width: none;
+    white-space: nowrap;
+}
+.buycartbtn{
+    display: flex;
+    gap: 10px;
+}
+@media screen and (max-width:500px){
+    .buycartbtn{
+        position: fixed;
+        bottom:0;
+        left: 0;
+        margin: 0px;
+        z-index: 10000;
+        width: 100vw;
+        background-color: white;
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        min-width: none;
+    }
+    .buycartbtn a{
+        padding: 15px 5px!important;
+        min-width: 0px!important;
+    }
+}
+
     </style>
 </head>
 
@@ -174,8 +210,8 @@
                                         <a class="ratings-text" href="#product-review-link" id="review-link">( <%= product.ratings.length %> Reviews )</a>
                                     </div>
                                     <% } else {%>
-                                        <div class="ratings-container">                                            
-                                            <a class="ratings-text" href="#product-review-link" id="review-link">( No Reviews )</a>
+                                        <div class="ratings-container" >                                            
+                                            <a class="ratings-text" href="#product-review-link" id="review-link" style="color:#afafaf !important">( No Reviews )</a>
                                         </div>
                                     <% } %>
                                     <!-- End .rating-container -->
@@ -199,11 +235,11 @@
                                         <div style="display: flex; gap: 20px;">
                                             <% productsizes.forEach(productsize => { %>
                                             <a href="/view/<%=productsize._id%>">
-                                                <div class="productsizecard" style="text-align: center;border-radius: 10px;padding: 5px;border:1px solid #dbdbdb;<%= (productsize._id.toString() === product._id.toString()) ? "background-color: black!important;" : "background-color: white;" %>" >
+                                                <div class="productsizecard" style="text-align: center;border-radius: 10px;padding: 5px;border:1px solid #dbdbdb;<%= (productsize._id.toString() === product._id.toString()) ? "background-color: #ebebeb!important;" : "background-color: white;" %>" >
                                                     <div class="productsizecardimg" style="width: 60px;height:60px;display: flex;align-items: center;justify-content: center;overflow: hidden;">
                                                         <img style="height:100%;width: auto;border:1px solid #dedede;border-radius: 8px;" src="<%= productsize.image[0] %>">
                                                     </div>
-                                                    <p style="line-height: 1.4rem;transition:0.3s;margin: 7px 0 2px;<%= (productsize._id.toString() === product._id.toString()) ? "color: white!important;" : "" %>" ><%= productsize.name.split("-")[1] %></p>
+                                                    <p style="line-height: 1.4rem;transition:0.3s;margin: 7px 0 2px;<%= (productsize._id.toString() === product._id.toString()) ? "color: black!important;" : "" %>" ><%= productsize.name.split("-")[1] %></p>
                                                 </div>
                                             </a>
                                             <% }) %>
@@ -215,9 +251,10 @@
                                             <button class="btn btn-danger" disabled><span>Out of stock</span></button>
                                         <% }else{ %>
                                             <!-- <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" onclick="Toastify({text: 'Product added to the cart',gravity:'bottom',style:{background:'#c96'}, duration: 3000 }).showToast();" class="btn-product btn-cart"><span>add to cart</span></a> -->
-                                            <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta btn-product btn-cart" style="padding: 10px 30px!important;"><span class="newbtaspan" style="display:flex;align-items: end;"><i class='bx bx-basket' style="font-size: 14px;margin-right: 5px;"></i>Add to Cart</span></a>
-                                            <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" redirect="/cart" class="newbta baba btn-product btn-cart" style="padding: 10px 30px!important;"><span class="newbtaspan">buy now</span></a>
-                                        
+                                            <div class="buycartbtn">
+                                                <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',maxWidth:'100vw',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px',boxShadow: 'rgba(17, 17, 26, 0.1) 0px 0px 16px'},gravity:'top', duration:2000, position:'left' }).showToast();" class="newbta btn-product btn-cart"><span class="newbtaspan" style="display:flex;align-items: end;"><i class='bx bx-basket' style="font-size: 14px;margin-right: 5px;"></i>Add to Cart</span></a>
+                                                <a type="button" productid="<%= product._id %>" productoffer="<%=product.offer%>" productprice="<%= product.price %>" productname="<%= product.name %>" productimage="<%= product.image[0] %>" redirect="/cart" class="newbta baba btn-product btn-cart" ><span class="newbtaspan">buy now</span></a>
+                                            </div>
                                         <% } %>
                                         <a class="size-guide" data-toggle="modal" href="#sizeguidemodal" data-target="#sizeguidemodal">
                                             <i class="icon-th-list"></i>size guide
@@ -539,30 +576,7 @@
 
         </main><!-- End .main -->
 
-<script>
-	$("#cart-total-text").hide();
-    $('#addReviewForm').on('submit', function (e) {
-        e.preventDefault()
-        var formData = new FormData($(this)[0]);
-        $.ajax({
-            url: '/api/product/add-review',
-            type:'POST',
-            data: formData,
-            processData: false,
-            enctype: "multipart/form-data",
-            cache: false,
-            contentType: false
-        }).done(response => {
-            if(response.error){
-                $("#showreview").text(response.error)
-            }else{
-                $("#showreview").text(response.success)
-                $("#btn-btn01close").click()
-                location.reload();
-            }
-        })
-    })    
-</script>
+
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <div class="modal fade" id="sizeguidemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -596,6 +610,36 @@
     </div>
   </div>
 <%- include("./footer.ejs") %>
-
+<script>
+	$("#cart-total-text").hide();
+    $('#addReviewForm').on('submit', function (e) {
+        e.preventDefault()
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: '/api/product/add-review',
+            type:'POST',
+            data: formData,
+            processData: false,
+            enctype: "multipart/form-data",
+            cache: false,
+            contentType: false
+        }).done(response => {
+            if(response.error){
+                $("#showreview").text(response.error)
+            }else{
+                $("#showreview").text(response.success)
+                $("#btn-btn01close").click()
+                location.reload();
+            }
+        })
+    })    
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth <= 768) {
+            document.querySelector('.page-content').classList.remove("mt-4");
+        }
+    });
+    
+</script>
 </body>
 </html>
