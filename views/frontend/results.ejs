@@ -185,10 +185,10 @@
                     <div class="slidecontainer mb-2">
                       <label class="mt-2" for="sortby" style="margin-bottom:4px;color:#afafaf">Sort By:</label>
                       <select id="sortby" style="margin-bottom: 0px; border-radius: 8px;" class="form-control" name="sortby">
-                        <option value="1" <% sortby==1 && selected %>>Newest first</option>
-                        <option value="2" <% sortby==2 && selected %>>Price: Low to High</option>
-                        <option value="3" <% sortby==3 && selected %>>Price: High to Low</option>
-                        <option value="4" <% sortby==4 && selected %>>Discount: High to Low</option>
+                        <option value="1" <% sortby==1 && "selected" %>>Newest first</option>
+                        <option value="2" <% sortby==2 && "selected" %>>Price: Low to High</option>
+                        <option value="3" <% sortby==3 && "selected" %>>Price: High to Low</option>
+                        <option value="4" <% sortby==4 && "selected" %>>Discount: High to Low</option>
                       </select>
                       
                       <label class="mt-2 mb-0" style="color:#afafaf">Max Price: ₹ <span id="maxprice"><%= curMaxPrice || maxPrice %></span></label>

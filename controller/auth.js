@@ -215,7 +215,8 @@ class Auth {
           return res.json({
             token: token,
             user: encode,
-            userid: data._id
+            userid: data._id,
+            role: data.userRole
           });
         } else {
           return res.json({

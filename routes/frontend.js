@@ -95,6 +95,7 @@ router.get("/cart", async (req, res) => {
 router.get("/dashboard", async (req, res) => {
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
+  let userRole = req.cookies.role;
   if (!user) {
     res.redirect("/");
   }
@@ -141,10 +142,11 @@ router.get("/dashboard", async (req, res) => {
       },
     },
   ]);
-  console.log(inforders[0]);
+  console.log(inforders[0].allProduct[0])
   res.render("frontend/dashboard.ejs", {
     inforders: inforders,
     orders: orders,
+    userRole: userRole,
     verify: verify[0],
     user: user,
     addresses: userAddress,

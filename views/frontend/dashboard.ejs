@@ -64,7 +64,9 @@
 										ORDERS
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<!-- <a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false">Dashboard</a> -->
+										<% if (userRole == 2) { %>
+										<a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false" onclick="updateButtonText('INFLUENCER BONUS ')">Influencer Bonus</a>
+										<% } %>
 										<a class="dropdown-item" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false" onclick="updateButtonText('ORDERS ')">Orders</a>
 										<a class="dropdown-item" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false" onclick="updateButtonText('ADDRESSES ')">Addresses</a>
 										<a class="dropdown-item" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false" onclick="updateButtonText('CHANGE PASSWORD ')">Change Password</a>
@@ -73,11 +75,14 @@
 									</div>
 								</div>
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0 comp-dashbar" role="tablist">
+									<% if (userRole == 2) { %>
+										<li class="nav-item">
+											<a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Influencer Bonus</a>
+										</li>
+									<% } %>
+								    
 								    <li class="nav-item">
-								        <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Influencer Bonus</a>
-								    </li>
-								    <li class="nav-item">
-								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								        <a class="nav-link <% if (userRole != 2) { %> active <% } %>" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>
 								    <li class="nav-item">
 								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
@@ -95,7 +100,7 @@
 								
 								
 	                			<div class="tab-content">
-								    <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+								    <div class="tab-pane fade show <% if (userRole == 2) { %> active <% } %>" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
 								    	<p>Hello, <span class="font-weight-normal text-dark"><h5><%= verify.name %></h5></span> 
 								    	<br>
 								    	Within your influencer dashboard, you have the ability to see the orders made using your coupon code.</p>
@@ -103,13 +108,13 @@
 										<hr>
 										<% inforders.forEach(order => {
 
-											if(order.allProduct[0].id){ %>
+											if(order.allProduct[0]._id){ %>
 												<div class="myphonecardi">
 												<a href="#">
 													<div class="d-flex" style="gap:5px;padding: 10px;border: 1px solid #e4e4e4;border-radius: 10px;margin-bottom: 10px;"> 
-														<img src="<%= order.allProduct[0].id.image[0] %>" alt="product photo" style="color:grey;border-radius: 7px;height:100px;aspect-ratio: 1;border: 1px solid #e4e4e4;">
+														<img src="<%= order.allProduct[0].image[0] %>" alt="product photo" style="color:grey;border-radius: 7px;height:100px;aspect-ratio: 1;border: 1px solid #e4e4e4;">
 														<div style="flex:1;display: flex;flex-direction: column;">
-															<p style="font-size: 16px;color:#333;font-weight: 500;line-height: 18px;margin-bottom:6px;"><%= order.allProduct[0].id.name.length > 18 ? order.allProduct[0].id.name.substring(0, 36) + '...' : order.allProduct[0].id.name %></p>
+															<p style="font-size: 16px;color:#333;font-weight: 500;line-height: 18px;margin-bottom:6px;"><%= order.allProduct[0].name.length > 18 ? order.allProduct[0].name.substring(0, 36) + '...' : order.allProduct[0].name %></p>
 															<div style="display: flex;align-items: flex-end;">
 																<p style="font-size: 16px;color:#333;font-weight: 600;line-height: 16px;margin-bottom: 5px;"><span style="color:#fe2910">₹</span><%= order.amount %></p>
 																<p style="font-size: 12px;color:#afafaf;font-weight: 400;line-height: 12px;margin-bottom:5px;padding-left: 3px;"> for <%= order.allProduct.length>1?order.allProduct.length+" products":order.allProduct.length+" product" %></p>
@@ -123,7 +128,7 @@
                                                 <div class="col-md-3">
                                                     <figure class="entry-media">
                                                         <a href="">
-                                                            <img src="<%= order.allProduct[0].id.image[0] %>" alt="image desc">
+                                                            <img src="<%= order.allProduct[0].image[0] %>" alt="image desc">
                                                         </a>
                                                     </figure><!-- End .entry-media -->
                                                 </div><!-- End .col-md-4 -->
@@ -134,7 +139,7 @@
                                                         </div><!-- End .entry-meta -->
                     
                                                         <h2 class="entry-title">
-                                                            <a href="#"><%= order.allProduct[0].id.name %></a>
+                                                            <a href="#"><%= order.allProduct[0].name %></a>
                                                         </h2><!-- End .entry-title -->
                     
                                                         <div class="entry-cats" style="margin-bottom: 0;font-weight: 500;">
@@ -145,14 +150,14 @@
 															Total <%= order.allProduct.length %> product(s)
 														</p>
                                                     </div><!-- End .entry-body -->
-                                                    <div style="margin-left: auto;color:#cc9966;align-self: last baseline;"><a href="/track?of=<%= order._id %>" class="read-more">Order details</a></div>
+          
                                                 </div><!-- End .col-md-8 -->
                                             </div><!-- End .row -->
                                         </article>
 							<% } }) %>
 								    </div>
 
-								    <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+								    <div class="tab-pane fade show <% if (userRole != 2) { %> active <% } %>" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
 										<% orders.forEach(order => {
 
 											if(order.allProduct[0].id){ %>
