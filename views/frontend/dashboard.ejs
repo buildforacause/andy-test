@@ -65,8 +65,10 @@
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<% if (userRole == 2) { %>
+											
 										<a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false" onclick="updateButtonText('INFLUENCER BONUS ')">Influencer Bonus</a>
 										<% } %>
+										
 										<a class="dropdown-item" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false" onclick="updateButtonText('ORDERS ')">Orders</a>
 										<a class="dropdown-item" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false" onclick="updateButtonText('ADDRESSES ')">Addresses</a>
 										<a class="dropdown-item" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false" onclick="updateButtonText('CHANGE PASSWORD ')">Change Password</a>
@@ -76,6 +78,7 @@
 								</div>
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0 comp-dashbar" role="tablist">
 									<% if (userRole == 2) { %>
+										
 										<li class="nav-item">
 											<a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Influencer Bonus</a>
 										</li>
@@ -84,6 +87,7 @@
 								    <li class="nav-item">
 								        <a class="nav-link <% if (userRole != 2) { %> active <% } %>" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>
+									
 								    <li class="nav-item">
 								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
 								    </li>
@@ -106,9 +110,11 @@
 								    	Within your influencer dashboard, you have the ability to see the orders made using your coupon code.</p>
 
 										<hr>
-										<% inforders.forEach(order => {
 
+										<% inforders.forEach(order => {
+											
 											if(order.allProduct[0]._id){ %>
+												
 												<div class="myphonecardi">
 												<a href="#">
 													<div class="d-flex" style="gap:5px;padding: 10px;border: 1px solid #e4e4e4;border-radius: 10px;margin-bottom: 10px;"> 
@@ -333,6 +339,7 @@
 
 
     <script>
+
 	$('#cart-total-text').hide();
 	const $form3 = $('#address-form')
     $form3.on('submit', submitHandler3)
@@ -360,8 +367,6 @@
 		function submitHandler5 (e) {
 			e.preventDefault()
 			console.log($form5.serialize());
-
-			// console.log(document.getElementsByName('prods[]'))
 			$.ajax({
 			    url: '/api/user/change-password',
 			    type:'POST',
@@ -380,8 +385,9 @@
 	function updateButtonText(option) {
         document.getElementById('dropdownMenuButton').innerText = option;
     }
+
 	$('.dropdown-item').on('click', function () {
-		// Remove class "active" from all siblings
+		console.log("object");
 		$(this).siblings().removeClass('active');
     });
 	</script>    

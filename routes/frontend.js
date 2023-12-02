@@ -497,6 +497,14 @@ router.get("/shop", async (req, res) => {
 
     }
   }
+  let currMaxPrice = 0;
+  if(req.query.currMaxPrice){
+    currMaxPrice = req.query.currMaxPrice
+  }
+  let sortby = 1;
+  if(req.query.sortby){
+    sortby = req.query.sortby
+  }
   res.render("frontend/results.ejs", {
     info: Info[0],
     userid: userid,
@@ -506,8 +514,8 @@ router.get("/shop", async (req, res) => {
     title: title,
     navCats: navCats,
     maxPrice: maxPrice,
-    curMaxPrice: req.query.maxrate,
-    sortby: req.query.sortby
+    curMaxPrice: currMaxPrice,
+    sortby: sortby
   });
 });
 
