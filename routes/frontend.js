@@ -497,9 +497,9 @@ router.get("/shop", async (req, res) => {
 
     }
   }
-  let currMaxPrice = 0;
-  if(req.query.currMaxPrice){
-    currMaxPrice = req.query.currMaxPrice
+  let currMaxPrice = maxPrice;
+  if(req.query.maxrate){
+    currMaxPrice = req.query.maxrate
   }
   let sortby = 1;
   if(req.query.sortby){
