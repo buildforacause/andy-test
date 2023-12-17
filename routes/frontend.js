@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
   let banner = await secondarybannerModel.find({});
 
   const allProducts = await productModel
-    .find({})
+    .find({status: "Active"})
     .populate("category")
     .sort({ createdAt: -1 });
   const top5RecentProductsByCategory = new Map();
@@ -57,7 +57,6 @@ router.get("/", async (req, res) => {
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
   let Info = await infoModel.find({});
-  console.log(result[0].products);
   res.render("frontend/index.ejs", {
     banner: banner[0],
     info: Info[0],
@@ -314,7 +313,7 @@ router.post("/checkout", async (req, res) => {
   let cartProducts = await productModel.find({
     _id: { $in: ids },
   });
-  let userAddress = await addressModel.find({ user: userid });
+  let userAddress = await addressModel.find({ user: userid, hidden: 0 });
   if (cartProducts.length === 1) {
     for (let i = 0; i < cartProducts.length; i++) {
       if (cartProducts[i].quantity < quantity[i]) {
