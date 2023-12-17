@@ -8,7 +8,36 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config/keys");
 const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const nodemailer = require('nodemailer');
 
+async function sendEmail(email) {
+  try {
+    // Create a transporter with your Gmail SMTP configuration
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.mail.yahoo.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: 'insurance.notifier@yahoo.com',
+        pass: 'mgjrrdjhwxuwoctu'
+      }
+    });
+
+    // Define the email options
+    const mailOptions = {
+      from: 'insurance.notifier@yahoo.com',
+      to: email,
+      subject: 'Khush Toh Bohot Honge Tum 😎',
+      text: 'Congratulations on becoming an influencer at Mayur Sports! We hope you will like our service. Login Here - www.mayursports.com'
+    };
+
+    // Send the email
+    const info = await transporter.sendMail(mailOptions);
+    return info.response
+  } catch (error) {
+    return error
+  }
+}
 
 class Auth {
   async isAdmin(req, res) {
@@ -29,6 +58,8 @@ class Auth {
       res.status(404);
     }
   }
+
+
 
   /* User Registration/Signup controller  */
   async postSignup(req, res) {
@@ -150,9 +181,12 @@ class Auth {
                 password,
                 userRole: 2, // role = 0 admin , role = 1 customer, role = 2 influencer
               });
+              let abc = await sendEmail(email);
+              console.log(abc)
               newUser
                 .save()
                 .then((data) => {
+                  
                   return res.json({
                     success: "Account created successfully. Please login",
                   });
