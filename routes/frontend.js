@@ -95,6 +95,7 @@ router.get("/cart", async (req, res) => {
 router.get("/dashboard", async (req, res) => {
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
+  let userRole = req.cookies.role;
   if (!user) {
     res.redirect("/");
   }
@@ -141,10 +142,10 @@ router.get("/dashboard", async (req, res) => {
       },
     },
   ]);
-  console.log(inforders[0]);
   res.render("frontend/dashboard.ejs", {
     inforders: inforders,
     orders: orders,
+    userRole: userRole,
     verify: verify[0],
     user: user,
     addresses: userAddress,
@@ -498,6 +499,14 @@ router.get("/shop", async (req, res) => {
 
     }
   }
+  let currMaxPrice = maxPrice;
+  if(req.query.maxrate){
+    currMaxPrice = req.query.maxrate
+  }
+  let sortby = 1;
+  if(req.query.sortby){
+    sortby = req.query.sortby
+  }
   res.render("frontend/results.ejs", {
     info: Info[0],
     userid: userid,
@@ -507,8 +516,8 @@ router.get("/shop", async (req, res) => {
     title: title,
     navCats: navCats,
     maxPrice: maxPrice,
-    curMaxPrice: req.query.maxrate,
-    sortby: req.query.sortby
+    curMaxPrice: currMaxPrice,
+    sortby: sortby
   });
 });
 

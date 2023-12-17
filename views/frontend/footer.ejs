@@ -277,6 +277,7 @@
                 $("#showloginerr").hide()
                 setCookie("autOken", response.token, '/')
                 setCookie("userid", response.userid, '/')
+                setCookie("role", response.role, '/')
                 $("#btn-btn0close").click()
                 location.reload();
             }

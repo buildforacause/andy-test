@@ -71,6 +71,7 @@
                     <th>User Phone</th>
                     <th>Amount</th>
                     <th>Details</th>
+                    <th>Coupon</th>
                     <th>Status</th>
                     <th>Refund</th>
                   </tr>
@@ -84,6 +85,7 @@
                     <td><%= (order.address !== null ? order.address.aphone : 0) %></td>
                     <td><%= order.amount %></td>
                     <td><a href="/track?of=<%= order._id %>">View</a></td>
+                    <td><%= order.coupon ? order.coupon : "No" %></td>
                     <td>
                       <form id="update-order">
                         <input type="hidden" name="oId" id="oId" value="<%= order._id %>">
