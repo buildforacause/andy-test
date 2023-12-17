@@ -249,7 +249,7 @@
                                 </div>
 
                                 <% if(order.status == "Delivered" && (new Date() - order.updatedAt < 86400000)){ %>
-                                  <center class="m-3">Delivered On : <%= order.updatedAt %></center>
+                                  <center class="m-3">Delivered On : <span id="datedelivered"><%= order.updatedAt %></span></center>
                                 <div class="refundsection" style="padding:1rem;border:1px solid #e4e4e4;border-radius:10px;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
                                   <% if (order.refund) { %>
                                     <p style="margin: 0px;">View return details</p>    
@@ -320,6 +320,21 @@
               break;
             }
           }
+
+          const originalDate = new Date($("#datedelivered").text());
+          const options = {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZoneName: 'short'
+          };
+
+          const formattedDate = new Intl.DateTimeFormat('en-US', options).format(originalDate);
+          $("#datedelivered").text(formattedDate)
+          console.log(formattedDate);
         </script>
   </body>
 
