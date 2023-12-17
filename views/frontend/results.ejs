@@ -225,7 +225,7 @@
 
                       <div class="product-body">
                         <div class="product-detailbody">
-                          <h3 class="product-title"><a href="/view/<%= prod._id %>"><%= prod.name.length > 23 ? prod.name.substring(0, 20) + '...' : prod.name %></a></h3><!-- End .product-title -->
+                          <h3 class="product-title"><a href="/view/<%= prod._id %>"><%= prod.name.length > 20 ? prod.name.substring(0, 20) + '...' : prod.name %></a></h3><!-- End .product-title -->
                           <div class="product-cat">
                             <a href="#"><%= prod.category.cName %></a>
                           </div><!-- End .product-cat -->

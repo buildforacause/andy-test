@@ -77,7 +77,7 @@
 
                                     <tr>
                                         <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Featured</th>
                                         <th>Category</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
@@ -90,7 +90,7 @@
                                     <% products.forEach(prod => { %>
                                         <tr>
                                             <td><%= prod.SKU %>-<%= prod.name %></td>
-                                            <td><%= prod.description.substring(0, 50) %>...</td>
+                                            <td><%= prod.featured %></td>
                                             <td><%= prod.category.cName %></td>
                                             <td><%= prod.price %></td>
                                             <td><%= prod.quantity %></td>
