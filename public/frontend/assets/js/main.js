@@ -139,7 +139,15 @@ $(document).ready(function () {
     );
     window.location = "/cart";
   });
-
+  $(".baba2").on("click", function () {
+    addProduct(
+      $(this).attr("productid"),
+      $(this).attr("productname"),
+      $(this).attr("productimage"),
+      $(this).attr("productprice"),
+      $(this).attr("productoffer")
+    );
+  });
   $(document).on("click", ".btn-remove", function () {
     removeProduct($(this).attr("productid"));
   });

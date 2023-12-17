@@ -110,19 +110,20 @@
 		                		<div class="col-lg-9">
 									<div class="saved-address">
 
-										<% addresses.forEach(a => { %>
-										 
-										
-										<div class="address-card">
-											<div class="address-text">
-												<p><%= a.aname %></p>
-												<p><%= a.aphone %></p>
-												<p><%= a.aadress %></p>
-												<p><%= a.acity %> - <%= a.apincode %></p>
-												<input type="radio" class="address-selector" value="<%= a._id %>" name="apkaaddress"  required><label for="123">Use this address.</label>
-											</div>
-										</div>
-										<% }) %>
+										<% if (addresses.length > 0) { %>
+											<% addresses.forEach(a => { %>
+											  <div class="address-card">
+												<div class="address-text">
+												  <p><%= a.aname %></p>
+												  <p><%= a.aphone %></p>
+												  <p><%= a.aaddress %></p>
+												  <p><%= a.acity %> - <%= a.apincode %></p>
+												  <input type="radio" class="address-selector" value="<%= a._id %>" name="apkaaddress" required><label for="123">Use this address.</label>
+												</div>
+											  </div>
+											<% }) %>
+										  <% } %>
+										  
 									
 
 									</div>

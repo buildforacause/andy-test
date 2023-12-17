@@ -305,6 +305,8 @@ router.post("/checkout", async (req, res) => {
   let quantity = req.body.quantity;
   let couponcode = req.body.couponcode;
   let userid = req.cookies.userid;
+  console.log("User ID:", userid); // Add this line to log the userid
+
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })
@@ -313,7 +315,7 @@ router.post("/checkout", async (req, res) => {
   let cartProducts = await productModel.find({
     _id: { $in: ids },
   });
-  let userAddress = await addressModel.find({ user: userid });
+  let userAddress = await addressModel.find({ user: userid, hidden: 0 });
   if (cartProducts.length === 1) {
     for (let i = 0; i < cartProducts.length; i++) {
       if (cartProducts[i].quantity < quantity[i]) {
@@ -368,7 +370,7 @@ router.post("/checkout", async (req, res) => {
     info: Info[0],
   });
 });
-
+ 
 router.get("/view/:id", async (req, res) => {
   let id = req.params.id;
   let Product = await productModel
