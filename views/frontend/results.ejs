@@ -130,6 +130,11 @@
     .sortie:hover{
       box-shadow: none!important;
     }
+    .topnavlinkcontainer{
+      gap: 5px 20px;
+      justify-content: center!important;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 
@@ -141,7 +146,7 @@
     <main class="main">
       <div class="page-content">
         <div class="p-0 bg-white" style="border:1px solid #ebebeb;border-top: 0px;">
-          <div class="container py-2 d-flex" style="justify-content: space-between;align-items: center;">
+          <div class="container py-2 d-flex topnavlinkcontainer" style="justify-content: space-between;align-items: center;">
             <% navCats.forEach(element => { %>
 
             <a class="topnavlink" style="color:#333;font-weight:400;text-transform: uppercase;" href="/shop?filterby=<%= element._id %>"><%= element.cName %></a>
@@ -219,7 +224,7 @@
                           <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
                         </a>
                         <div class="product-action ">
-                          <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta"><span class="newbtaspan">Add to Cart</span></a>
+                          <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" onclick="Toastify({text: 'Product added to the cart!',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000 }).showToast();" class="newbta baba2"><span class="newbtaspan">Add to Cart</span></a>
                         </div>
                       </figure><!-- End .product-media -->
 
