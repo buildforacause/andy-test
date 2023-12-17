@@ -102,7 +102,28 @@
   }
   
   }
-
+  @media screen and (max-width:500px) { 
+    .refundsection{
+      flex-direction: column;
+    }   
+    .refundsection>p{
+      text-align: center;
+      margin-top: 20px!important;
+    }  
+    .entry-body-top{
+      margin-left: 10px;
+      margin-right: 10px!important;
+    }
+  }
+  .widget-title>a{
+    font-size: 14px;
+    color: #777;
+    text-decoration: underline;
+  }
+  h4.widget-title{
+    font-size: 14px;
+    color: black;
+  }
     </style>
 </head>
 
@@ -122,22 +143,22 @@
                                 <center><h2 class="title title-lg mt-1">Track order</h2></center>
                                 <div class="row" style="display: flex;">
                                   
-                                  <div class="col-md-6 entry-body-top" style="border:1px solid #e7e7e7;text-align:center;align-self: self-start;padding: 1rem;text-align: center;align-self: stretch;margin-bottom: 1rem;" >
+                                  <div class="col-md-6 entry-body-top" style="border-radius:10px;display:flex;flex-direction:column;border:1px solid #e7e7e7;text-align:center;align-self: self-start;padding: 1rem;text-align: center;align-self: stretch;margin-bottom: 1rem;" >
                                     <% order.allProduct.forEach(element => { %>
                                      
                                     
                                     <div class="d-flex align-items-center">
-                                      <h4 style="font-weight: 500;margin-bottom: 0rem;" class="widget-title">
+                                      <h4 style="font-weight: 500;margin-bottom: 0rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="widget-title">
                                         <a href="/view/<%= element.id._id %>" target="_blank"><%= element.id.SKU %> - <%= element.id.name %></a>
                                       </h4>
                                       
-                                      <p style="margin-left: auto;font-size:14px;margin-bottom: 0;font-weight: 400;">₹<%= element.id.price %><span style="font-weight: 400;"> x <%= element.quantity %></span></p>
+                                      <p style="margin-left: auto;font-size:14px;margin-bottom: 0;font-weight: 400;white-space: nowrap;">₹<%= element.id.price %><span style="font-weight: 400;"> x <%= element.quantity %></span></p>
                                   </div>
 
                                   
                                   <% }) %>
-                                  <div class="d-flex align-items-center">
-                                    <h4 style="margin-bottom: 0rem;margin-top:0px;color:#333" class="widget-title">
+                                  <div class="d-flex align-items-center" style="margin-top: auto;">
+                                    <h4 style="margin-bottom: 0rem;margin-top:0px;color:black;font-weight: 600;" class="widget-title">
                                       Grand Total
                                     </h4>
                                     
