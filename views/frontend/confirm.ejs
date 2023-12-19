@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting</title>
+  <script>
+    // Assuming this script is part of your client-side code
+    window.onload = function () {
+      window.localStorage.clear();
+      history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+      window.location.replace('/');
+      window.location.href = "/dashboard";
+    };
+    
+  </script>
+</head>
+<body>
+  <!-- Your HTML content here -->
+</body>
+</html>

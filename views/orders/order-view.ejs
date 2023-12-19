@@ -79,6 +79,8 @@
                 <tbody>
                   <!-- loop start -->
                   <% orders.forEach(order => { %>
+                    <% if (order.status !== "Not approved" && order.status !== "Cancelled") { %>
+                      
                   <tr>
                     <td><%= order._id %></td>
                     <td><%= order.user.name %></td>
@@ -92,11 +94,24 @@
                         <input type="hidden" name="trackingid" class="trackingid" value="">
                         <input type="hidden" name="trackingcompany" class="trackingcompany" value="">
                         <select class="form-select" name="status" id="select">
-                          <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
-                          <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
-                          <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
-                          <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
-                          <option <%= order.status == "Cancelled" ? "selected" : "" %>>Cancelled</option>
+                          <% if (order.status == "Not Processed") { %>
+                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
+                          <% } else if(order.status == "Processing") { %>
+                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
+                            <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
+                          <% } else if(order.status == "Shipped") { %>
+                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
+                            <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
+                            <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
+                          <% } else if(order.status == "Processing") { %>
+                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
+                            <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
+                            <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
+                          <% } %>
                         </select>
                       </form>
                     </td>
@@ -107,6 +122,7 @@
                     <% } %>
 
                   </tr>
+                  <% } %>
                   <% }) %>
 
                 </tbody>
@@ -243,8 +259,10 @@
         response = JSON.parse(response);
         if (response.success) {
           alert(response.success);
+          window.location.reload()
         }
       })
+
     }
   </script>
 

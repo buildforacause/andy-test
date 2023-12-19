@@ -264,7 +264,7 @@
                                 <% if(order.status == "Not Processed" || order.status == "Processing"){ %>
                                 <div class="refundsection" style="padding:1rem;border:1px solid #e4e4e4;border-radius:10px;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
                                   <p style="margin: 0px;">Cancel Order?</p>
-                                  <button id="cancel-this" oid="<%= order._id %>" class="btn btn-outline-primary-2">Cancel Order</button>
+                                  <button id="cancel-this" oid="<%= order._id %>" data-toggle="modal" data-target="#cancelOrderModal" class="btn btn-outline-primary-2">Cancel Order</button>
                                 </div>
                                 <% } %>
                                 <% }else{ %>
@@ -278,30 +278,60 @@
                     </article><!-- End .entry -->
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
+            <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cancel Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>To confirm cancellation, enter the string "<strong>confirm</strong>":</p>
+                    <input type="text" class="form-control" id="confirmationInput">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="cancel-this2" class="btn btn-danger" onclick="confirmCancellation()">Confirm Cancellation</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </main><!-- End .main -->
     
     
     <%- include('./footer.ejs') %>
 
         <script>
+$("#cancel-this2").hide()
+$("#confirmationInput").on("input", (e) => {
+  if (e.target.value.toLowerCase() === "confirm") {
+    $("#cancel-this2").show();
+  } else {
+    $("#cancel-this2").hide();
+  }
+});
+
+        function confirmCancellation() {
+          let oId = $("#cancel-this").attr("oid");
+          $.ajax({
+              url: '/api/order/update-order',
+              type:'POST',
+              data: "oId="+oId+"&status=Cancelled"
+          }).done(response => {
+              response = JSON.stringify(response)
+              response = JSON.parse(response);
+              if(response.success){
+                location.reload();
+              }
+          })
+          $('#cancelOrderModal').modal('hide');
+        }
+            
 
 
           $('#cart-total-text').hide();
-
-          $("#cancel-this").on("click", function(){
-            let oId = $("#cancel-this").attr("oid");
-            $.ajax({
-                url: '/api/order/update-order',
-                type:'POST',
-                data: "oId="+oId+"&status=Cancelled"
-            }).done(response => {
-                response = JSON.stringify(response)
-                response = JSON.parse(response);
-                if(response.success){
-                  location.reload();
-                }
-            })
-          })
 
           var status = '<%= order.status %>';
           let ts = document.getElementsByClassName("li");

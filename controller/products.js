@@ -45,6 +45,7 @@ class Product {
     let { name, description,weight, price, quantity, category, offer, status, SKU, company, featured, shipping, previmages, sizes } =
       req.body;
     let images = req.files;
+    let ok = 1;
     // Validation
     if (
       !name |
@@ -67,18 +68,24 @@ class Product {
       });
     }
     // Validate Images
+
     else if (images.length < 2 && previmages == undefined) {
       Product.deleteImages(images, "file");
       return res.json({ error: "Must need to provide 2 images" });
     }else if(images.length < 2 && previmages.length > 1){
       images = previmages.join(",")
-      
+      ok =0;
     }
     else {
       try {
         let allImages = [];
         for (const img of images) {
-          allImages.push("/uploads/products/" +img.filename);
+          if(ok == 1){
+            allImages.push("/uploads/products/" +img.filename);
+          }else{
+            allImages.push(img);
+          }
+          
         }
         let featured_n = (featured == 0 ? false : true);
         let shipping_n = (shipping == 0 ? false : true);
@@ -108,6 +115,7 @@ class Product {
         console.log(err);
       }
     }
+
   }
 
   async postEditProduct(req, res) {

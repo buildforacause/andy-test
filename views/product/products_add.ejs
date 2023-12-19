@@ -243,6 +243,7 @@
           $("#offer").val(responseData.prod.offer);
           $("#quantity").val(responseData.prod.quantity);
           $("#imgdiv").html(str);
+          $("#submitform").removeAttr("enctype");
         }
 
       })

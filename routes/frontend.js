@@ -299,6 +299,10 @@ router.get("/checkout", async (req, res) => {
   res.redirect("/cart");
 });
 
+router.get("/upload", async (req, res) => {
+  res.redirect("/cart");
+});
+
 router.post("/checkout", async (req, res) => {
   let user = req.cookies.autOken;
   let ids = req.body.productids;
@@ -528,9 +532,8 @@ router.get("/check-quantity/:id", async (req, res) => {
 });
 
 router.get("/confirming-order-details", (req, res) => {
-  res.send(
-    '<script>window.localStorage.clear(); window.location="/dashboard"</script>'
-  );
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.render("frontend/confirm.ejs");
 });
 
 module.exports = router;

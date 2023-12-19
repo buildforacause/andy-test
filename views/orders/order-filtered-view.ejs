@@ -70,7 +70,7 @@
                                         <th>User Name</th>
                                         <th>User Phone</th>
                                         <th>Amount</th>
-                                        <th>View Photo</th>
+                                        <th>View Details</th>
                                         <th>Approval Status</th>
                                     </tr>
                                 </thead>
@@ -82,7 +82,7 @@
                                             <td><%= order.user.name %></td>
                                             <td><%= (order.address !== null ? order.address.aphone : 0) %></td>
                                             <td><%= order.amount %></td>
-                                            <td><a href="<%= order.transactionScreenShot %>" target="_blank">View</a></td>
+                                            <td><a href="/track?of=<%= order._id %>">View</a></td>
                                             <td>
                                                 <form id="update-order">
                                                     <input type="hidden" name="oId" value="<%= order._id %>" >

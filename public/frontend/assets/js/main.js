@@ -883,6 +883,22 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
 
+  const logoutTimeout = setTimeout(() => {
+    window.location.href = '/logout'; // Redirect to the logout page
+  }, 60 * 60 * 1000); // 1 hour
+
+    // Reset the timeout if there is user activity
+    function resetLogoutTimeout() {
+      clearTimeout(logoutTimeout);
+      logoutTimeout = setTimeout(() => {
+        window.location.href = '/logout'; // Redirect to the logout page
+      }, 60 * 60 * 1000); // 1 hour
+    }
+
+    document.addEventListener('mousemove', resetLogoutTimeout);
+    document.addEventListener('keydown', resetLogoutTimeout);
+    document.addEventListener('click', resetLogoutTimeout);
+
   $("body").on("click", ".btn-fullscreen", function (e) {
     var galleryArr = [];
     $(this)
