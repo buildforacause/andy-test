@@ -244,10 +244,13 @@
           $("#quantity").val(responseData.prod.quantity);
           $("#imgdiv").html(str);
           $("#submitform").removeAttr("enctype");
+          $("#formFileMultiple").removeAttr('required');
+
         }
 
       })
-    })
+    });
+
   </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 

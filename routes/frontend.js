@@ -251,13 +251,17 @@ router.post("/upload", async (req, res) => {
   // }else{
   //     res.redirect("/dashboard");
   // }
-  return res.render("frontend/upload.ejs", {
-    data: data,
-    user: user,
-    userid: userid,
-    navCats: navCats,
-    info: Info[0],
-  });
+  if(req.body.allProduct){
+    return res.render("frontend/upload.ejs", {
+      data: data,
+      user: user,
+      userid: userid,
+      navCats: navCats,
+      info: Info[0],
+    });
+}else{
+  res.redirect("/dashboard");
+}
 });
 
 router.get("/return", async (req, res) => {
@@ -469,9 +473,7 @@ router.get("/shop", async (req, res) => {
     .sort({ _id: -1 });
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
-  allProds = allProds.filter(
-    (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
-  );
+
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })
