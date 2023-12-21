@@ -62,7 +62,13 @@ class Info {
         let editSponsor = await infoModel.findByIdAndUpdate(_id, editData);
         let save = await editSponsor.save()
         if(save){
-            return res.redirect("/admin");
+          // Assuming you have a message variable with the message you want to pass
+            const message = "✅Updated details successfully!";
+
+            // Redirect with the message as a query parameter
+            return res.redirect(`/admin?message=${encodeURIComponent(message)}`);
+
+            // return res.redirect("/admin");
         }else{
             let editSponsor = await infoModel.findByIdAndUpdate(_id, editData);
             await editSponsor.save()

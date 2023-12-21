@@ -44,10 +44,12 @@ class coupon {
       });
       let save = await newcoupon.save();
       if (save) {
-        return res.redirect("/admin/coupon-view")
+        const message = "✅Successfully added the coupon!";
+        return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
       }
     } catch (err) {
-      console.log(err);
+      const message = "❌Error adding the coupon.";
+      return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
     }
   }
 
@@ -59,7 +61,8 @@ class coupon {
       try {
         let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount,user:user});
         if (del) {
-          return res.redirect("/admin/coupon-view")
+          const message = "✅Successfully Edited the coupon!";
+          return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
         }
       } catch (err) {
         console.log(err);
@@ -75,10 +78,13 @@ async delete(req, res){
     try {
       let deleteCategory = await couponModel.findOneAndDelete({_id: _id});
       if (deleteCategory) {
-        return res.redirect("/admin/coupon-view")
+        // Assuming you have a message variable with the message you want to pass
+        const message = "✅Successfully deleted the coupon!";
+        return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err) { 
+      const message = "❌Deleted the coupon!";
+      return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
     }
   }
 }

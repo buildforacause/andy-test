@@ -111,11 +111,13 @@ class Product {
         });
         let save = await newProduct.save();
         if (save) {
-          return res.redirect("/admin/product-add")
+          let message="✅Successfully added the product!"
+          return res.redirect("/admin/product-view/"+`?message=${encodeURIComponent(message)}`)
           // return res.json({ success: "Product created successfully" });
         }
       } catch (err) {
-        console.log(err);
+        let message="❌Error adding the product!"
+        return res.redirect("/admin/product-view/"+`?message=${encodeURIComponent(message)}`)
       }
     }
 
@@ -151,13 +153,17 @@ class Product {
       !status |
       !company
     ) {
-      return res.json({ error: "All fields must be required" });
+      // return res.json({ error: "All fields must be required" });
+      let message="❌All fields must be required";
+      return res.redirect("/admin/product-edit/" + _id + `?message=${encodeURIComponent(message)}`);
     }
     // Validate Name and description
     else if (name.length > 255 || description.length > 3000) {
-      return res.json({
-        error: "Name 255 & Description must not be 3000 charecter long",
-      });
+      // return res.json({
+      //   error: "Name 255 & Description must not be 3000 charecter long",
+      // });
+      let message="❌Name 255 & Description must not be 3000 charecter long";
+      return res.redirect("/admin/product-edit/" + _id + `?message=${encodeURIComponent(message)}`);
     }
     
     // Validate Update Images
@@ -190,10 +196,12 @@ class Product {
         let editProduct = productModel.findByIdAndUpdate(_id, editData);
         editProduct.exec((err) => {
           if (err) console.log(err);
-          return res.redirect("/admin/product-edit/" + _id)
+          let message="✅Successfully edited the product!"
+          return res.redirect("/admin/product-edit/" + _id + `?message=${encodeURIComponent(message)}`)
         });
       } catch (err) {
-        console.log(err);
+        let message="❌Error editing the product."
+        return res.redirect("/admin/product-edit/" + _id + `?message=${encodeURIComponent(message)}`)
       }
     }
   }

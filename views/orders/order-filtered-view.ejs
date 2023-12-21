@@ -29,6 +29,7 @@
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <style>
        
@@ -132,7 +133,8 @@
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
 
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                             <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
@@ -155,8 +157,11 @@
                                     }).done(response => {
                                         response = JSON.stringify(response)
                                         response = JSON.parse(response);
-                                        alert('Status updated');
                                         if(response.success){
+                                            localStorage.setItem('reloadMessage', '✅Status updated successfully!');
+                                            location.reload();
+                                        }else{
+                                            localStorage.setItem('reloadMessage', '❌There was an issue updating the status');
                                             location.reload();
                                         }
                                         
@@ -164,7 +169,24 @@
                                 }
 
 
-                               
+                               // Retrieve the message from localStorage
+    const reloadMessage = localStorage.getItem('reloadMessage');
+
+                // Check if the message exists and do something with it
+                if (reloadMessage) {
+                Toastify({
+
+                    text: reloadMessage,
+                    gravity: "bottom",
+                    style: {
+                    borderRadius: "10px",
+                    background: "#0d6ef6"
+                    },
+                    duration: 3000
+
+                }).showToast();
+                localStorage.removeItem('reloadMessage');
+                }
                             </script>
 
 </body>

@@ -29,6 +29,8 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -39,11 +41,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>About Us</h1>
+            <h1>Edit product</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                    <li class="breadcrumb-item">About Us</li>
+                    <li class="breadcrumb-item"><a href="/admin/product-view">Products</a></li>
+                    <li class="breadcrumb-item">Edit Product</li>
                 </ol>
             </nav>
         </div>
@@ -204,7 +207,33 @@
     <!-- Template Main JS File -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="/assets/js/main.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+  <% if (message) { %>
+  Toastify({
 
+    text: "<%= message %>",
+    gravity: "bottom",
+    style: {
+      borderRadius: "10px",
+      background: "#0d6ef6"
+    },
+    duration: 3000
+
+  }).showToast();
+  // Get the current URL
+    const currentUrl = new URL(window.location.href);
+
+    // Remove the 'message' query parameter
+    currentUrl.searchParams.delete('message');
+
+    // Update the URL in the address bar without reloading the page
+    window.history.replaceState({}, '', currentUrl.toString());
+
+
+  <% } %>
+
+</script>
 </body>
 
 </html>

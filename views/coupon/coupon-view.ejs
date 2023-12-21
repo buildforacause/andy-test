@@ -28,6 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 
     <style>
@@ -86,7 +87,7 @@
                                                 <a href="/admin/coupon-edit/<%= pin._id %>" class="btn btn-secondary">Edit</a>
                                                 <form method="POST" action="/api/coupon/delete" onsubmit="return confirmDelete();">
                                                     <input type="hidden" value="<%= pin._id %>" name="_id">
-                                                    <div class="text-center mt-3">
+                                                    <div class="text-center mt-0">
                                                         <button id="delete" class="btn btn-danger">Delete</button>
                                                     </div>
                                                 </form>
@@ -151,7 +152,25 @@
                                 }
                                
                             </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+        <% if (message) { %>
+    Toastify({
 
+      text: "<%= message %>",
+      gravity: "bottom",
+      style: {
+        borderRadius: "10px",
+        background: "#0d6ef6"
+      },
+      duration: 3000
+
+    }).showToast();
+    const newUrl = 'http://localhost:8000/admin/influencers';
+    window.history.pushState({}, '', newUrl);
+
+    <% } %>
+  </script>
 </body>
 
 </html>

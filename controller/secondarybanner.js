@@ -93,10 +93,12 @@ class secondarybanner {
         let secondarybanneredit = secondarybannerModel.findByIdAndUpdate(_id, editData);
         secondarybanneredit.exec((err) => {
           if (err) console.log(err);
-          return res.redirect("/admin/banner-edit/" + _id)
+          const message = "✅Edited banner successfully!";
+          return res.redirect("/admin/banner-view/"+`?message=${encodeURIComponent(message)}`);
         });
       } catch (err) {
-        console.log(err);
+          const message = "❌Error editing the banner";
+          return res.redirect("/admin/banner-view/"+`?message=${encodeURIComponent(message)}`);
       }
     }
   }
