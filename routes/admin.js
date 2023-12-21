@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const router = express.Router();
 const categoryModel = require("../models/categories");
 const productModel = require("../models/products");
@@ -74,25 +76,36 @@ router.get('/product-add',async(req,res)=>{
 
 router.get('/product-edit/:id',async(req,res)=>{
     let id = req.params.id
-    let Categories = await categoryModel.find({}).sort({ _id: -1 });
-    let singleProduct = await productModel
-          .findById(id)
-          .populate("category", "_id cName")
-          .populate("pRatingsReviews.user", "name email userImage");
-    let userid = req.cookies.userid;
-    if(userid){
-        let verify = await userModel.find({_id: userid})
-        if(verify.length > 0){
-            if(verify[0].userRole !== 0){
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try {
+        let Categories = await categoryModel.find({}).sort({ _id: -1 });
+        let singleProduct = await productModel
+            .findById(id)
+            .populate("category", "_id cName")
+            .populate("pRatingsReviews.user", "name email userImage");
+        if (!singleProduct) {
+            return res.status(404).send('Product not found');
+        }
+        let userid = req.cookies.userid;
+        if(userid){
+            let verify = await userModel.find({_id: userid})
+            if(verify.length > 0){
+                if(verify[0].userRole !== 0){
+                    res.redirect("/")
+                }
+            }else{
                 res.redirect("/")
             }
         }else{
             res.redirect("/")
         }
-    }else{
-        res.redirect("/")
-    }
+    
     res.render("product/products_edit.ejs", {prod: singleProduct, categories: Categories });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
 })
 
 router.get('/category-view',async(req,res)=>{
@@ -145,8 +158,19 @@ router.get('/category-edit/:id',async(req,res)=>{
         res.redirect("/")
     }
     let id = req.params.id
-    let singleCat = await categoryModel.findById(id);
-    res.render("category/category_edit.ejs", {cat: singleCat });
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try{
+        let singleCat = await categoryModel.findById(id);
+        if (!singleCat) {
+            return res.status(404).send('Category not found');
+        }
+        res.render("category/category_edit.ejs", {cat: singleCat });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
+
 })
 
 
@@ -201,9 +225,19 @@ router.get('/coupon-edit/:id',async(req,res)=>{
         res.redirect("/")
     }
     let id = req.params.id
-    let coupon = await couponModel.findById(id).populate("user", "name");
-    let influencers = await userModel.find({userRole: 2})
-    res.render("coupon/coupon-edit.ejs", {coupon: coupon, influencers: influencers });
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try{
+        let coupon = await couponModel.findById(id).populate("user", "name");
+        if (!coupon) {
+            return res.status(404).send('Coupon not found');
+        }
+        let influencers = await userModel.find({userRole: 2})
+        res.render("coupon/coupon-edit.ejs", {coupon: coupon, influencers: influencers });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
 })
 
 router.get("/pincode-view", async(req,res)=>{
@@ -256,8 +290,18 @@ router.get('/pincode-edit/:id',async(req,res)=>{
         res.redirect("/")
     }
     let id = req.params.id
-    let pincode = await pincodeModel.findById(id);
-    res.render("pincode/pincode-edit.ejs", {pincode: pincode });
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try {
+        let pincode = await pincodeModel.findById(id);
+        if (!pincode) {
+            return res.status(404).send('Pincode not found');
+        }
+        res.render("pincode/pincode-edit.ejs", {pincode: pincode });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
 })
 
 router.get("/sponsor-view", async(req,res)=>{
@@ -310,8 +354,19 @@ router.get('/sponsor-edit/:id',async(req,res)=>{
         res.redirect("/")
     }
     let id = req.params.id
-    let sponsor = await sponsorModel.findById(id);
-    res.render("sponsor/sponsor-edit.ejs", {sponsor: sponsor });
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try {
+        let sponsor = await sponsorModel.findById(id);
+        if (!sponsor) {
+            return res.status(404).send('ID Not found');
+        }
+
+        res.render("sponsor/sponsor-edit.ejs", {sponsor: sponsor });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
 })
 
 
@@ -367,8 +422,18 @@ router.get('/banner-edit/:id',async(req,res)=>{
     }
     let cats = await categoryModel.find({});
     let id = req.params.id
-    let banner = await secondarybannerModel.findById(id);
-    res.render("secondarybanner/banner-edit.ejs", {banner: banner, cats: cats });
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).send('Invalid product ID');
+    }
+    try {
+        let banner = await secondarybannerModel.findById(id);
+        if (!banner) {
+            return res.status(404).send('Banner not found');
+        }
+        res.render("secondarybanner/banner-edit.ejs", {banner: banner, cats: cats });
+    }catch (error) {
+        return res.status(500).send('Internal Server Error');
+    }
 })
 
 router.get("/slider-view", async(req,res)=>{

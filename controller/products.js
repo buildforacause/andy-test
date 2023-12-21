@@ -73,13 +73,14 @@ class Product {
             Product.deleteImages(images, "file");
             return res.json({ error: "Must need to provide 2 images" });
         }
-    
-  }
+    }
   else {
       try {
-        if(previmages.length > 1){
-          images = previmages.join(",")
-          ok = 0;
+        if(previmages !== undefined){
+          if(previmages.length > 1){
+            images = previmages.join(",")
+            ok = 0;
+          }
         }
         let allImages = [];
         if(ok == 1){
