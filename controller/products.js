@@ -2,6 +2,27 @@ const productModel = require("../models/products");
 const fs = require("fs");
 const path = require("path");
 
+async function getProductSize(SKU,SIZE) {
+  SIZE = SIZE.trim().toLowerCase()
+  try { 
+    let Products = await productModel
+      .find({SKU:SKU})
+    if (Products.length > 0) {
+      const secondNameParts = Products.reduce((result, product) => {
+        const parts = product.name.split('-');
+        if (parts.length >= 2) {
+          result.push(parts[parts.length - 1].trim().toLowerCase());
+        }
+        return result;
+      }, []);
+      const isPresent = secondNameParts.includes(SIZE);
+      return isPresent;
+    }
+  } catch (err) {
+    return 0
+  }
+}
+
 class Product {
   // Delete Image from uploads -> products folder
   static deleteImages(images, mode) {
@@ -41,6 +62,8 @@ class Product {
     }
   }
 
+
+
   async postAddProduct(req, res) {
     let { name, description,weight, price, quantity, category, offer, status, SKU, company, featured, shipping, previmages, sizes } =
       req.body;
@@ -74,7 +97,10 @@ class Product {
             return res.json({ error: "Must need to provide 2 images" });
         }
     }
-  else {
+    let check = await getProductSize(SKU,sizes);
+    if(check){
+      return res.json({ error: "Already added a product with that size in this SKU!" });
+    }
       try {
         if(previmages !== undefined){
           if(previmages.length > 1){
@@ -118,7 +144,6 @@ class Product {
       } catch (err) {
         let message="❌Error adding the product!"
         return res.redirect("/admin/product-view/"+`?message=${encodeURIComponent(message)}`)
-      }
     }
 
   }

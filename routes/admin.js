@@ -562,7 +562,7 @@ router.get("/return-view", async(req,res)=>{
         res.redirect("/")
     }
     let Orders = await orderModel
-        .find({"refund": { $exists: true }, "refund.status": { $exists: false }})
+        .find({"refund": { $exists: true }, "refund.status": { $exists: false }, "status": {$ne: "Cancelled"}})
         .populate("allProduct.id", "name image price")
         .populate("user", "name")
         .populate("address", "aaddress aphone aname acity apincode")
@@ -585,7 +585,7 @@ router.get("/return-view-resolved", async(req,res)=>{
         res.redirect("/")
     }
     let Orders = await orderModel
-        .find({ "refund.status": { $ne: null } })
+        .find({ "refund.status": { $ne: null }, "status": {$ne: "Cancelled"} })
         .populate("allProduct.id", "name image price")
         .populate("user", "name")
         .populate("address", "aaddress aphone aname acity apincode")
