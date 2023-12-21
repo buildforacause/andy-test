@@ -28,6 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -57,20 +58,20 @@
                         <div class="row mb-3">
                             <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label">Category Image</label>
                             <div class=" col-md-8 col-lg-9">
-                                <input name="image" class="form-control" type="file" id="formFileMultiple">
+                                <input required name="image" class="form-control" type="file" id="formFileMultiple">
                             </div>
                           </div>
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-lg-3 col-form-label">Category Name</label>
                             <div class="col-md-8 col-lg-9">
-                                <input name="cName" value="<%= cat.cName %>" class="form-control" id="name"></input>
+                                <input required name="cName" value="<%= cat.cName %>" class="form-control" id="name"></input>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="description" class="col-md-4 col-lg-3 col-form-label">Category Description</label>
                             <div class="col-md-8 col-lg-9">
-                                <textarea name="cDescription" class="form-control" rows="10" id="description"><%= cat.cDescription %></textarea>
+                                <textarea required name="cDescription" class="form-control" rows="10" id="description" required><%= cat.cDescription %></textarea>
                             </div>
                         </div>
                         
@@ -125,7 +126,33 @@
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+      <% if (message) { %>
+      Toastify({
+    
+        text: "<%= message %>",
+        gravity: "bottom",
+        style: {
+          borderRadius: "10px",
+          background: "#0d6ef6"
+        },
+        duration: 3000
+    
+      }).showToast();
+      // Get the current URL
+        const currentUrl = new URL(window.location.href);
+    
+        // Remove the 'message' query parameter
+        currentUrl.searchParams.delete('message');
+    
+        // Update the URL in the address bar without reloading the page
+        window.history.replaceState({}, '', currentUrl.toString());
+    
+    
+      <% } %>
+    
+    </script>
 </body>
 
 </html>

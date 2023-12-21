@@ -25,10 +25,12 @@ class Customize {
       });
       let save = await newCustomzie.save();
       if (save) {
-        return res.redirect("/admin/slider-view");
+        const message = "✅Added the slider image successfully!";
+        return res.redirect(`/admin/slider-view?message=${encodeURIComponent(message)}`);
       }
     } catch (err) {
-      console.log(err);
+      const message = `❌${err}`;
+        return res.redirect(`/admin/slider-view?message=${encodeURIComponent(message)}`);
     }
   }
 
@@ -48,11 +50,13 @@ class Customize {
             if (err) {
               console.log(err);
             }
-            return res.redirect("/admin/slider-view");
+            const message = "✅Deleted the slider image successfully!";
+            return res.redirect(`/admin/slider-view?message=${encodeURIComponent(message)}`);
           });
         }
       } catch (err) {
-        console.log(err);
+        const message = `❌${err}`;
+        return res.redirect(`/admin/slider-view?message=${encodeURIComponent(message)}`);
       }
     }
   }

@@ -219,7 +219,10 @@ class Auth {
       let currentUser = userModel.findByIdAndDelete(uid);
       currentUser.exec((err, result) => {
         if (err) console.log(err);
-        return res.redirect("/admin/influencers");
+
+        const message = "✅Influencer deleted successfully!";
+        // Redirect with the message as a query parameter
+        return res.redirect(`/admin/influencers?message=${encodeURIComponent(message)}`);
       });
     }
   }

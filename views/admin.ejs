@@ -37,7 +37,7 @@
   
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
-  
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   </head>
   
   <body>
@@ -237,7 +237,25 @@
   
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
-  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+      <% if (message) { %>
+    Toastify({
+
+      text: "<%= message %>",
+      gravity: "bottom",
+      style: {
+        borderRadius: "10px",
+        background: "#0d6ef6"
+      },
+      duration: 3000
+
+    }).showToast();
+    const newUrl = 'http://localhost:8000/admin/';
+    window.history.pushState({}, '', newUrl);
+
+    <% } %>
+    </script>
   </body>
   
   </html>

@@ -39,7 +39,9 @@ class Category {
         let checkCategoryExists = await categoryModel.findOne({ cName: cName });
         if (checkCategoryExists) {
             Category.deleteImages(images[0], "file");
-            return res.json({ error: "Category already exists" });
+            // return res.json({ error: "Category already exists" });
+            let message="❌Category already exists!"
+            return res.redirect("/admin/category-view"+`?message=${encodeURIComponent(message)}`);
         } else {
           let i = "/uploads/categories/" +images[0].filename;
           let newCategory = new categoryModel({
@@ -50,12 +52,15 @@ class Category {
           });
           await newCategory.save((err) => {
             if (!err) {
-              return res.redirect("/admin/category-view");
+              let message="✅Successfully added the category!"
+              return res.redirect("/admin/category-view"+`?message=${encodeURIComponent(message)}`);
             }
           });
         }
       } catch (err) {
         console.log(err);
+        let message="❌Error adding the category!"
+        return res.redirect("/admin/category-view"+`?message=${encodeURIComponent(message)}`);
       }
   }
 
@@ -64,14 +69,18 @@ class Category {
     let editImages = req.files;
 
     if (!cId | !cName | !cDescription | !cStatus) {
-      return res.json({ error: "All fields are required" });
+      // return res.json({ error: "All fields are required" });
+      let message="❌All fields are required!"
+      return res.redirect("/admin/category-edit/" + cId+`?message=${encodeURIComponent(message)}`);
     }
     try {
       let i = previmage;
       if(editImages.length > 0){
         i = "/uploads/categories/" +editImages[0].filename;
       }else if(previmage.length < 1){
-         return res.json({ error: "Image required" });
+        //  return res.json({ error: "Image required" });
+         let message="❌Images are required!"
+          return res.redirect("/admin/category-edit/" + cId+`?message=${encodeURIComponent(message)}`);
       }
       let editCategory = categoryModel.findByIdAndUpdate(cId, {
         cDescription:cDescription,
@@ -82,10 +91,13 @@ class Category {
       });
       let edit = await editCategory.exec();
       if (edit) {
-        return res.redirect("/admin/category-edit/" + cId);
+        let message="✅Successfully edited the category!"
+        return res.redirect("/admin/category-edit/" + cId+`?message=${encodeURIComponent(message)}`);
       }
     } catch (err) {
-      console.log(err);
+        console.log(err);
+        let message="❌Error editing the category!"
+        return res.redirect("/admin/category-edit/" + cId+`?message=${encodeURIComponent(message)}`);
     }
   }
 

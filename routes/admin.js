@@ -27,7 +27,8 @@ router.get('/',async (req,res) => {
     }else{
         res.redirect("/")
     }
-    res.render("admin.ejs", {info: info[0]});
+    const message = req.query.message;
+    res.render("admin.ejs", {info: info[0], message: message || ''});
 })
 
 router.get('/product-view',async(req,res)=>{
@@ -51,7 +52,8 @@ router.get('/product-view',async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    res.render("product/product_view.ejs", {products: Products,qtyalerts:Qtyalert});
+    const message = req.query.message;
+    res.render("product/product_view.ejs", {products: Products,qtyalerts:Qtyalert,message:message||''});
 })
 
 router.get('/product-add',async(req,res)=>{
@@ -92,7 +94,8 @@ router.get('/product-edit/:id',async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    res.render("product/products_edit.ejs", {prod: singleProduct, categories: Categories });
+    const message = req.query.message;
+    res.render("product/products_edit.ejs", {prod: singleProduct, categories: Categories, message:message||'' });
 })
 
 router.get('/category-view',async(req,res)=>{
@@ -110,7 +113,8 @@ router.get('/category-view',async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    res.render("category/category_view.ejs", {categories: Categories});
+    const message = req.query.message;
+    res.render("category/category_view.ejs", {categories: Categories,message:message||'' });
 })
 
 router.get('/category-add',async(req,res)=>{
@@ -146,7 +150,8 @@ router.get('/category-edit/:id',async(req,res)=>{
     }
     let id = req.params.id
     let singleCat = await categoryModel.findById(id);
-    res.render("category/category_edit.ejs", {cat: singleCat });
+    const message = req.query.message;
+    res.render("category/category_edit.ejs", {cat: singleCat,message:message||'' });
 })
 
 
@@ -165,7 +170,9 @@ router.get("/coupon-view", async(req,res)=>{
         res.redirect("/")
     }
     let Coupons = await couponModel.find({}).sort({ _id: -1 }).populate("user", "name");
-    res.render("coupon/coupon-view.ejs", {coupons: Coupons });
+    const message = req.query.message;
+
+    res.render("coupon/coupon-view.ejs", {coupons: Coupons, message: message || '' });
 })
 
 router.get('/coupon-add',async(req,res)=>{
@@ -330,7 +337,8 @@ router.get("/banner-view", async(req,res)=>{
         res.redirect("/")
     }
     let banner = await secondarybannerModel.find({});
-    res.render("secondarybanner/banner-view.ejs", {banner: banner[0] });
+    const message = req.query.message;
+    res.render("secondarybanner/banner-view.ejs", {banner: banner[0],message: message||'' });
 })
 
 router.get('/banner-add',async(req,res)=>{
@@ -368,6 +376,7 @@ router.get('/banner-edit/:id',async(req,res)=>{
     let cats = await categoryModel.find({});
     let id = req.params.id
     let banner = await secondarybannerModel.findById(id);
+    
     res.render("secondarybanner/banner-edit.ejs", {banner: banner, cats: cats });
 })
 
@@ -387,7 +396,8 @@ router.get("/slider-view", async(req,res)=>{
     }
     let sliders = await customizeModel.find({});
     console.log(sliders);
-    res.render("slider/slider-view.ejs", {sliders: sliders });
+    const message = req.query.message;
+    res.render("slider/slider-view.ejs", {sliders: sliders,message: message || '' });
 })
 
 router.get('/slider-add',async(req,res)=>{
@@ -422,7 +432,8 @@ router.get('/influencers',async(req,res)=>{
         res.redirect("/")
     }
     let influencers = await userModel.find({userRole: 2})
-    res.render("users/user-view.ejs", {influencers: influencers});
+    const message = req.query.message;
+    res.render("users/user-view.ejs", {influencers: influencers,message: message || ''});
 })
 
 router.get("/order-view", async(req,res)=>{
