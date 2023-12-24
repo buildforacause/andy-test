@@ -79,7 +79,7 @@
                 <tbody>
                   <!-- loop start -->
                   <% orders.forEach(order => { %>
-                    <% if (order.status !== "Not approved" && order.status !== "Cancelled") { %>
+                    <% if (order.approval !== "Not approved" && order.status !== "Cancelled") { %>
                       
                   <tr>
                     <td><%= order._id %></td>
@@ -93,26 +93,33 @@
                         <input type="hidden" name="oId" id="oId" value="<%= order._id %>">
                         <input type="hidden" name="trackingid" class="trackingid" value="">
                         <input type="hidden" name="trackingcompany" class="trackingcompany" value="">
+                        <% if (order.approval == "Approved") { %>
+                         
+
                         <select class="form-select" name="status" id="select">
-                          <% if (order.status == "Not Processed") { %>
-                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                          <% if (order.status == "Not processed") { %>
+                            <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                           <% } else if(order.status == "Processing") { %>
-                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                             <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
                           <% } else if(order.status == "Shipped") { %>
-                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                             <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
                             <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
                           <% } else if(order.status == "Processing") { %>
-                            <option <%= order.status == "Not Processed" ? "selected" : "" %>>Not Processed</option>
+                            <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                             <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
                             <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
-                          <% } %>
+                          <% }%>
+
                         </select>
+                        <% }else{ %>
+                          <p><%= order.approval %></p>
+                        <% } %>
                       </form>
                     </td>
                     <% if (order.refund) { %>
@@ -193,11 +200,11 @@
 
 
     const $form3 = $('#update-order')
-    $("#select").on('input', function() {
+    $(".form-select").on('input', function() {
       $(this).siblings('.trackingcompany').val("");
       $(this).siblings('.trackingid').val("");
     })
-    $("#select").on('change', submitHandler3)
+    $(".form-select").on('change', submitHandler3)
 
 
     async function modalCall(oId) {

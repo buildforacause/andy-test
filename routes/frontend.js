@@ -442,25 +442,17 @@ router.get("/shop", async (req, res) => {
       return res.redirect("/");
     }
   } else if (req.query.s) {
+    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(term, 'i'));
+    console.log(searchTerms)
     allProds = await productModel
-      .find({
-        $or: [
-          {
-            name: {
-              $regex: req.query.s,
-              $options: "i",
-            },
-          },
-          {
-            description: {
-              $regex: req.query.s,
-              $options: "i",
-            },
-          },
-        ],
-        status: "Active",
-      })
-      .populate("category", "_id cName");
+    .find({
+      $or: [
+        { name: { $in: searchTerms } },
+        { description: { $in: searchTerms } },
+      ],
+      status: "Active",
+    })
+    .populate("category", "_id cName");
     title = "Search Results For " + req.query.s;
   } else {
     allProds = await productModel
@@ -473,7 +465,9 @@ router.get("/shop", async (req, res) => {
     .sort({ _id: -1 });
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
-
+  allProds = allProds.filter(
+    (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
+  );
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })

@@ -592,6 +592,21 @@
           </button>
         </div>
         <div class="modal-body p-3 row" style="height: max-content!important;">
+        <% if (product.category.cName.match(/t\-?shirt/i)) { %>
+            <div class="d-flex col-sm-12 col-xs-12 col-md-12" style="align-items: center;justify-content: center; flex-direction: column; max-height: 520px;">
+                <h3 style="font-size: 16px;text-align: center;">Tshirt Size</h3>
+                <img src="/frontend/assets/images/tshirt.jpeg" style="height: 336px;">
+              </div>
+        <% } else if (product.category.cName.match(/tracks.*shorts|shorts.*tracks/i)) {  %>
+            <div class="col-sm-12 col-xs-12 col-md-6">
+                <h3 style="font-size: 16px;text-align: center;">Track Pant Size</h3>
+                <img src="/frontend/assets/images/track.jpeg" style="width: 100%">
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-6">
+                <h3 style="font-size: 16px;text-align: center;">Shorts Size</h3>
+                <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
+              </div>
+        <% } else { %>
           <div class="col-sm-12 col-xs-12 col-md-3">
             <h3 style="font-size: 16px;text-align: center;">Tshirt Size</h3>
             <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
@@ -604,7 +619,7 @@
             <h3 style="font-size: 16px;text-align: center;">Shorts Size</h3>
             <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
           </div>
-          
+        <% } %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #E22520;">OKAY</button>
