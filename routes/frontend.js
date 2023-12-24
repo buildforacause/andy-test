@@ -31,10 +31,13 @@ router.get("/", async (req, res) => {
     .limit(5);
   let banner = await secondarybannerModel.find({});
 
-  const allProducts = await productModel
+  let allProducts = await productModel
     .find({status: "Active"})
     .populate("category")
     .sort({ createdAt: -1 });
+    allProducts = allProducts.filter(
+      (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
+    );
   const top5RecentProductsByCategory = new Map();
   allProducts.forEach((product) => {
     const category = product.category.cName; // Assuming "category" is the name field of your category model
