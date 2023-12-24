@@ -35,9 +35,6 @@ router.get("/", async (req, res) => {
     .find({status: "Active"})
     .populate("category")
     .sort({ createdAt: -1 });
-    allProducts = allProducts.filter(
-      (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
-    );
   const top5RecentProductsByCategory = new Map();
   allProducts.forEach((product) => {
     const category = product.category.cName; // Assuming "category" is the name field of your category model
@@ -48,12 +45,15 @@ router.get("/", async (req, res) => {
       top5RecentProductsByCategory.get(category).push(product);
     }
   });
-  const result = Array.from(
+  let result = Array.from(
     top5RecentProductsByCategory,
     ([category, products]) => ({
       category,
       products,
     })
+  );
+  result = result.filter(
+    (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
   );
   let Sponsors = await sponsorModel.find({}).sort({ _id: -1 });
   let sliders = await customizeModel.find({});
