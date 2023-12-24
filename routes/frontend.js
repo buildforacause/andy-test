@@ -406,6 +406,14 @@ router.get("/view/:id", async (req, res) => {
   let ProductSize = await productModel
     .find({ SKU: SKU })
     .populate("category", "_id cName");
+    const order = ["XS", "S", "M", "L", "XL", "XXL"];
+    ProductSize = ProductSize.sort((productA, productB) => {
+      const sizeA = productA.name.split('-').pop().toUpperCase();
+      const sizeB = productB.name.split('-').pop().toUpperCase();
+    
+      return order.indexOf(sizeA) - order.indexOf(sizeB);
+    });
+  console.log(ProductSize)
   let allProds = await productModel
     .find({ _id: { $ne: id } })
     .populate("category", "_id cName");
