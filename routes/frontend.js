@@ -54,9 +54,15 @@ router.get("/", async (req, res) => {
   );
   result = result.map(categoryData => ({
     category: categoryData.category,
-    products: categoryData.products.filter(
-      (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
-    ),
+    products: categoryData.products.reduce((uniqueProducts, currentProduct) => {
+      const isDuplicate = uniqueProducts.some(product => product.SKU === currentProduct.SKU);
+  
+      if (!isDuplicate) {
+        uniqueProducts.push(currentProduct);
+      }
+  
+      return uniqueProducts;
+    }, []),
   }));
   let Sponsors = await sponsorModel.find({}).sort({ _id: -1 });
   let sliders = await customizeModel.find({});
