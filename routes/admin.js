@@ -163,7 +163,8 @@ router.get('/category-edit/:id',async(req,res)=>{
     }
     let id = req.params.id
     let singleCat = await categoryModel.findById(id);
-    res.render("category/category_edit.ejs", {cat: singleCat });
+    const message = req.query.message;
+    res.render("category/category_edit.ejs", {cat: singleCat, message:message || '' });
 })
 
 
