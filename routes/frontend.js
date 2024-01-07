@@ -13,6 +13,13 @@ const secondarybannerModel = require("../models/secondarybanner");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
+
+function cleanText(inputText) {
+  let lowercaseText = inputText.toLowerCase();
+  let cleanedText = lowercaseText.replace(/\s+/g, '').replace(/[^\w\s]/g, '');
+  return cleanedText;
+}
+
 router.get("/", async (req, res) => {
   let Products = await productModel
     .find({ featured: true, status: "Active" })
@@ -464,7 +471,7 @@ router.get("/shop", async (req, res) => {
       return res.redirect("/");
     }
   } else if (req.query.s) {
-    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(term, 'i'));
+    const searchTerms=cleanText(req.query.s).split(/\s+/).map(term => new RegExp(term, 'i'));
     console.log(searchTerms);
     allProds = await productModel
       .find({
