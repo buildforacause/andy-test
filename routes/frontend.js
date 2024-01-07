@@ -473,6 +473,7 @@ router.get("/shop", async (req, res) => {
               { name: { $in: searchTerms } },
               { description: { $in: searchTerms } },
               { material: { $in: searchTerms } },
+              { searchTerms: {$in: searchTerms}},
             ]
           },
           { status: "Active" },

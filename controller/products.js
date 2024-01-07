@@ -1,6 +1,14 @@
 const productModel = require("../models/products");
+const categoryModel = require("../models/categories");
+
 const fs = require("fs");
 const path = require("path");
+
+function cleanText(inputText) {
+  let lowercaseText = inputText.toLowerCase();
+  let cleanedText = lowercaseText.replace(/\s+/g, '').replace(/[^\w\s]/g, '');
+  return cleanedText;
+}
 
 async function getProductSize(SKU,SIZE) {
   SIZE = SIZE.trim().toLowerCase()
@@ -97,6 +105,8 @@ class Product {
             return res.json({ error: "Must need to provide 2 images" });
         }
     }
+
+
     let check = await getProductSize(SKU,sizes);
     if(check){
       let message="❌Already added a product with that size in this SKU!"
@@ -121,6 +131,18 @@ class Product {
         let shipping_n = (shipping == 0 ? false : true);
         name = name.replace(/-/g, ' ');
         name = name + "-" + sizes;
+        let searchTerms='';
+        try{
+          let catname= await categoryModel.findById(category);
+          catname=catname.cName;
+          searchTerms= cleanText(description)+cleanText(name)+cleanText(catname)+cleanText(SKU);
+        }catch(error){
+        
+          // let message="❌Category doesnt exist!"
+          let message=error;
+          return res.redirect("/admin/product-view/"+`?message=${encodeURIComponent(message)}`)
+        }
+
         let newProduct = new productModel({
           image: allImages,
           name: name,
@@ -134,7 +156,8 @@ class Product {
           SKU: SKU,
           company: company,
           featured: featured_n,
-          shipping: shipping_n
+          shipping: shipping_n,
+          searchTerms:searchTerms,
         });
         let save = await newProduct.save();
         if (save) {
