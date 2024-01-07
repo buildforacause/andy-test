@@ -68,6 +68,7 @@
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Earnings</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -77,6 +78,7 @@
                   <tr>
                     <td><%= inf.name %></td>
                     <td><%= inf.email %></td>
+                    <td><a href="/admin/earning-view/<%= inf._id %>">View Earnings</a></td>
                     <td>
                       <form method="POST" action="/api/delete/influencer" onsubmit="return confirmDelete();">
                         <input type="hidden" value="<%= inf._id %>" name="uid">

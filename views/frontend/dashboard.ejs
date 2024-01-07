@@ -112,6 +112,18 @@
 
 										<hr>
 
+										<% var earnings = 0; %>
+										<% var etot = 0; %>
+										<% inforders.forEach(o => { %>
+										<% if(o.allProduct[0]._id && !o.refund){ %>
+										 <% etot = Number(o.amount) - 50; %>
+										 <% earnings = earnings + Number(etot/100)*(Number(o.result[0].discount)/2) %>
+										<% }}) %>
+										
+										
+										<h6>Estimated Earnings: ₹ <span id="gross-estimation" style="color: #fe2910;"><%= earnings.toFixed(2) %></span></h6>
+										
+
 										<% inforders.forEach(order => {
 											
 											if(order.allProduct[0]._id){ %>
@@ -165,6 +177,9 @@
 								    </div>
 
 								    <div class="tab-pane fade show <% if (userRole != 2) { %> active <% } %>" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+										<span class="font-weight-normal text-dark"><h5>Your Orders:</h5></span> 
+
+										<hr>
 										<% orders.forEach(order => {
 
 											if(order.allProduct[0].id){ %>
@@ -215,6 +230,10 @@
                                             </div><!-- End .row -->
                                         </article><!-- End .entry -->
 							<% } }) %>
+							<% if (orders.length === 0) { %>
+								<center>No orders found !</center>
+							<% } %>
+							
 								    </div><!-- .End .tab-pane -->
 
 								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">

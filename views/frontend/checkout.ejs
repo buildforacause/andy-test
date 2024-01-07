@@ -272,7 +272,7 @@
 				let newprice = pastprice - discount
 				let newdiscount = pastdiscount + discount
 				price = newprice + 50
-				$("#total").text(`₹${newprice + 50}`)
+				$("#total").text(`₹${price.toFixed(2)}`)
 				$("#offerwala").text(`${newdiscount.toFixed(2)}`)
 				}
 			})

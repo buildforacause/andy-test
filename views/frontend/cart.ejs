@@ -235,7 +235,7 @@
         }
         document.getElementById("subtotalcart").innerText=`₹${total}`;
         document.getElementById("totalofferprice").innerText=`₹${totaloffer}`;
-        document.getElementById("totaloffer").innerText=`₹${(total-totaloffer).toFixed(1)}`;
+        document.getElementById("totaloffer").innerText=`₹${(total-totaloffer).toFixed(2)}`;
     }
     }
     cartpageupdate();
@@ -316,8 +316,8 @@
       $("#couponid").val("")
       $("#couponresponse").text("")
 
-      $("#totalofferprice").text(`₹${pastprice}`);
-      $("#totaloffer").text(`₹${pastdiscount}`);
+      $("#totalofferprice").text(`₹${pastprice.toFixed(2)}`);
+      $("#totaloffer").text(`₹${pastdiscount.toFixed(2)}`);
       $("#couponcode").attr("value", "");
     })
     function submitHandler999 (e) {
@@ -333,13 +333,13 @@
               pastprice = Number($("#totalofferprice").text().split("₹")[1])
               discount = (pastprice / 100) * Number(response.discount)
               newprice = pastprice - discount
-              $("#totalofferprice").text(`₹${newprice}`);
+              $("#totalofferprice").text(`₹${newprice.toFixed(2)}`);
               $("#cmutton").html("Applied")
               $("#cmutton").attr("type","button")
               $("#cremove").show()
               pastdiscount = Number($("#totaloffer").text().split("₹")[1])
               newdiscount = pastdiscount + discount
-              $("#totaloffer").text(`₹${newdiscount}`)
+              $("#totaloffer").text(`₹${newdiscount.toFixed(2)}`)
               $("#couponcode").attr("value", response.coupon)
               Toastify({text: 'Coupon applied successfully',style:{background:'#c96'}, gravity:'bottom',duration: 3000 }).showToast();
             }

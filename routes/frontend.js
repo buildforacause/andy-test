@@ -150,6 +150,7 @@ router.get("/dashboard", async (req, res) => {
     {
       $match: {
         "result.user": new ObjectId(userid),
+        "status": "Delivered",
       },
     },
   ]);
@@ -230,13 +231,14 @@ router.post("/upload", async (req, res) => {
   );
 
   let amount = totalValue - (totalValue / 100) * couponValue;
+  amount = amount + 50;
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })
     .limit(5);
   let Info = await infoModel.find({});
   let data = {
-    amount: amount + 50,
+    amount: amount,
     allProduct: JSON.stringify(allProduct),
     coupon: coupon,
     user: user,
@@ -464,7 +466,6 @@ router.get("/shop", async (req, res) => {
   } else if (req.query.s) {
     const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(term, 'i'));
     console.log(searchTerms);
-    
     allProds = await productModel
       .find({
         $and: [
