@@ -109,7 +109,7 @@ class Order {
         let newOrder = new orderModel({
           allProduct: allProduct,
           user: user,
-          amount: amount,
+          amount: amount + 50,
           transactionId: transactionId,
           transactionScreenShot: transactionScreenShot,
           address: address,

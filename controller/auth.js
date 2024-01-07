@@ -18,14 +18,14 @@ async function sendEmail(email) {
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: 'insurance.notifier@yahoo.com',
-        pass: 'mgjrrdjhwxuwoctu'
+        user: 'noreplymayursportsestore@yahoo.com',
+        pass: '@Msj2004'
       }
     });
 
     // Define the email options
     const mailOptions = {
-      from: 'insurance.notifier@yahoo.com',
+      from: 'noreplymayursportsestore@yahoo.com',
       to: email,
       subject: 'Khush Toh Bohot Honge Tum 😎',
       text: 'Congratulations on becoming an influencer at Mayur Sports! We hope you will like our service. Login Here - www.mayursports.com'

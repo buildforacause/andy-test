@@ -479,6 +479,68 @@ router.get('/influencers',async(req,res)=>{
     res.render("users/user-view.ejs", {influencers: influencers,message: message || ''});
 })
 
+router.get('/earning-view/:id',async(req,res)=>{
+    let id = req.params.id;
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+
+    let inforders = await orderModel.aggregate([
+        {
+          $lookup: {
+            from: "coupons",
+            localField: "coupon",
+            foreignField: "coupon",
+            as: "result",
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "allProduct.id",
+            foreignField: "_id",
+            as: "allProduct",
+          },
+        },
+        {
+          $lookup: {
+            from: "addresses",
+            localField: "address",
+            foreignField: "_id",
+            as: "address",
+          },
+        },
+        {
+            $lookup: {
+              from: "users",
+              localField: "user",
+              foreignField: "_id",
+              as: "user",
+            },
+          },
+        {
+          $match: {
+            "result.user": new ObjectId(id),
+            "status": "Delivered",
+          },
+        },
+      ]);
+
+
+    const message = req.query.message;
+    res.render("users/earning-view.ejs", {inforders: inforders,message: message || ''});
+})
+
 router.get("/order-view", async(req,res)=>{
     let userid = req.cookies.userid;
     if(userid){
