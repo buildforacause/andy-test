@@ -161,7 +161,10 @@
           </div>
           <div class="modal-body p-3 row" style="height: max-content!important;">
             <div class="col-sm-12 col-xs-12 col-md-12">
-              <img src="<%= order.refund.proof %>" style="width: 100%">
+              <% if (order.refund.proof) { %>
+                <img src="<%= order.refund.proof %>" style="width: 100%">
+              <% } %>
+              
             </div>
           </div>
           <div class="modal-footer">
