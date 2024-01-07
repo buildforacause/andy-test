@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Unapproved Orders</title>
+    <title>Rejected Orders</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -47,11 +47,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>All Categories</h1>
+            <h1>Rejected Orders</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                    <li class="breadcrumb-item active">Unapproved Orders</li>
+                    <li class="breadcrumb-item active">Rejected Orders</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -78,6 +78,7 @@
                                 <tbody>
                                     <!-- loop start -->
                                     <% orders.forEach(order => { %>
+
                                         <tr>
                                             <td><%= order._id %></td>
                                             <td><%= order.user.name %></td>

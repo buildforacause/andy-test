@@ -70,10 +70,12 @@
           <p><span style="font-weight: 600!important;">Total Cost </span>₹<%= order.amount %></p>
         </div>
       </div>
+      <a target="_blank" href="<%= order.refund.proof %>" class="btn btn-danger mb-3">View Attachment From Customer</a>
       <div class="row">
         <div class="col-xl-10 col-md-10" style="padding: 30px;background-color: #c9d0df;">
           <form id="return-form">
             <center><span id="adresponse" class="text-danger"></span></center>
+            
             <input type="hidden" name="userid" value="<%= order.user._id %>">
             <input type="hidden" name="orderid" value="<%= order._id %>">
 

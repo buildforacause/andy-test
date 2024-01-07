@@ -462,17 +462,23 @@ router.get("/shop", async (req, res) => {
       return res.redirect("/");
     }
   } else if (req.query.s) {
-    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(term, 'i'));
-    console.log(searchTerms)
+    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(`^${term}$`, 'i'));
+    console.log(searchTerms);
+    
     allProds = await productModel
-    .find({
-      $or: [
-        { name: { $in: searchTerms } },
-        { description: { $in: searchTerms } },
-      ],
-      status: "Active",
-    })
-    .populate("category", "_id cName");
+      .find({
+        $and: [
+          {
+            $or: [
+              { name: { $in: searchTerms } },
+              { description: { $in: searchTerms } },
+              { material: { $in: searchTerms } },
+            ]
+          },
+          { status: "Active" },
+        ],
+      })
+      .populate("category", "_id cName");
     title = "Search Results For " + req.query.s;
   } else {
     allProds = await productModel

@@ -156,17 +156,17 @@
 		                						<label>Town / City *</label>
 		                						<input type="text" name="city" id="city" class="form-control"  >
 		                					</div><!-- End .col-sm-6 -->
-
 		                					<div class="col-sm-6">
-		                						<label>State / County *</label>
-		                						<input type="text" name="state" id="state" id="district" class="form-control" disabled>
+		                						<label>Postcode / ZIP *</label>
+		                						<input type="text" name="pincode" id="pincode" class="form-control"  >
 		                					</div><!-- End .col-sm-6 -->
+
 		                				</div><!-- End .row -->
 
 		                				<div class="row">
 		                					<div class="col-sm-6">
-		                						<label>Postcode / ZIP *</label>
-		                						<input type="text" name="pincode" id="pincode" class="form-control"  >
+		                						<label>State / County *</label>
+		                						<input type="text" name="state" id="state" id="district" class="form-control" disabled>
 		                					</div><!-- End .col-sm-6 -->
 
 		                					<div class="col-sm-6">
@@ -207,13 +207,20 @@
 
 		                					<tbody>
 												<% var totalcost=0 %>
+												<% var total=0 %>
+
 												<% for( let index = 0; index < products.length; index++ ) { %>
 													<% totalcost=totalcost+(Number(products[index].price - (products[index].offer * (products[index].price/100)))*Number(quantity[index])); %>
+													<% total = total + (Number(products[index].price)*Number(quantity[index])) %>
 		                						<tr>
 		                							<td><a href="#"><%= products[index].name %></a></td>
 		                							<td><span class="pricesabka" ><%= products[index].price - (products[index].offer * (products[index].price/100)) %></span> x <%= quantity[index] %></td>
 		                						</tr>
 												<% } %>	
+												<tr>
+		                							<td><a>Total Savings</a></td>
+		                							<td id="offerwala" class="fw-bold"><%= (total - totalcost).toFixed(2) %></td>
+		                						</tr>
 												<tr>
 		                							<td><a>Delivery Charge</a></td>
 		                							<td>50</td>
@@ -222,7 +229,7 @@
 		                						<tr class="summary-total">
 		                							<td>Grand Total:</td>
 													
-		                							<td id="total">₹<%= totalcost + 50 %></td>
+		                							<td id="total">₹<%= totalcost %></td>
 		                						</tr><!-- End .summary-total -->
 
 		                					</tbody>
@@ -259,11 +266,14 @@
 				data: {coupon: couponcodepost}
 			}).done(response => {
 				if(response.success){
-				let pastprice = Number($("#total").text().split("₹")[1])
+				let pastprice = Number('<%= totalcost %>')
 				let discount = (pastprice / 100) * Number(response.discount)
+				let pastdiscount = Number($("#offerwala").text());
 				let newprice = pastprice - discount
-				price = newprice
-				$("#total").text(`₹${newprice}`)
+				let newdiscount = pastdiscount + discount
+				price = newprice + 50
+				$("#total").text(`₹${newprice + 50}`)
+				$("#offerwala").text(`${newdiscount.toFixed(2)}`)
 				}
 			})
 		

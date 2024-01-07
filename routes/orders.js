@@ -22,7 +22,7 @@ router.post("/update-order-status", ordersController.postUpdateOrder2)
 router.post("/create-order", upload.any(), ordersController.postCreateOrder);
 router.post("/update-order", ordersController.postUpdateOrder);
 router.post("/delete-order", ordersController.postDeleteOrder);
-router.post("/return-add", ordersController.addReturn);
+router.post("/return-add", upload.any(), ordersController.addReturn);
 
 
 module.exports = router;

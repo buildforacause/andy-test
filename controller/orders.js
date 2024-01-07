@@ -200,24 +200,43 @@ class Order {
 
   async addReturn(req, res) {
     let { userid, orderid, reason, description, payment } = req.body;
+    let images = req.files;
     let Order = await orderModel
       .find({ _id: orderid })
       .populate("allProduct.id", "name image price")
       .populate("user", "name email userRole")
       .sort({ _id: -1 });
+    let proof ="";
+    let Refund = null;
 
     //checking if someone else apart from the admin is trying to access
-    if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
-      return res.json({ error: "There was an error processing your request." });
+    if(images === undefined){
+      if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
+        return res.json({ error: "There was an error processing your request." });
+      }
+      if (!Order[0] || !reason || !description || !payment) {
+        return res.json({
+          error: "There was an error processing your request. Please try again.",
+        });
+      }
+      Refund = Order[0].refund;
+    }else{
+      if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
+        Order.deleteImages(images[0], "file");
+        return res.json({ error: "There was an error processing your request." });
+      }
+  
+      if (!Order[0] || !reason || !description || !payment) {
+        Order.deleteImages(images[0], "file");
+        return res.json({
+          error: "There was an error processing your request. Please try again.",
+        });
+      }
+      proof = "/uploads/customer/" + images[0].filename;
+      Refund = { reason, description, payment, proof };
+
     }
 
-    if (!Order[0] || !reason || !description || !payment) {
-      return res.json({
-        error: "There was an error processing your request. Please try again.",
-      });
-    }
-
-    let Refund = { reason, description, payment };
     if (req.body.status) {
       Refund.status = req.body.status;
     }

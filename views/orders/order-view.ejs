@@ -79,7 +79,7 @@
                 <tbody>
                   <!-- loop start -->
                   <% orders.forEach(order => { %>
-                    <% if (order.approval !== "Not approved" && order.status !== "Cancelled") { %>
+                    <% if (order.approval === "Approved" && order.status !== "Cancelled" && !order.refund) { %>
                       
                   <tr>
                     <td><%= order._id %></td>
@@ -93,9 +93,7 @@
                         <input type="hidden" name="oId" id="oId" value="<%= order._id %>">
                         <input type="hidden" name="trackingid" class="trackingid" value="">
                         <input type="hidden" name="trackingcompany" class="trackingcompany" value="">
-                        <% if (order.approval == "Approved") { %>
-                         
-
+                        
                         <select class="form-select" name="status" id="select">
                           <% if (order.status == "Not processed") { %>
                             <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
@@ -109,7 +107,7 @@
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                             <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
                             <option <%= order.status == "Delivered" ? "selected" : "" %>>Delivered</option>
-                          <% } else if(order.status == "Processing") { %>
+                          <% } else if(order.status == "Delivered") { %>
                             <option <%= order.status == "Not processed" ? "selected" : "" %>>Not processed</option>
                             <option <%= order.status == "Processing" ? "selected" : "" %>>Processing</option>
                             <option <%= order.status == "Shipped" ? "selected" : "" %>>Shipped</option>
@@ -117,9 +115,6 @@
                           <% }%>
 
                         </select>
-                        <% }else{ %>
-                          <p><%= order.approval %></p>
-                        <% } %>
                       </form>
                     </td>
                     <% if (order.refund) { %>

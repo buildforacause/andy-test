@@ -56,9 +56,9 @@
                         <input type="hidden" value="<%= cat._id %>" name="cId">
                         <input type="hidden" value="<%= cat.cImage %>" name="previmage">
                         <div class="row mb-3">
-                            <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label">Category Image</label>
+                            <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label">Category Image (Optional)</label>
                             <div class=" col-md-8 col-lg-9">
-                                <input required name="image" class="form-control" type="file" id="formFileMultiple">
+                                <input name="image" class="form-control" type="file" accept="image/*" id="formFileMultiple">
                             </div>
                           </div>
 

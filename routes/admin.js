@@ -525,6 +525,30 @@ router.get("/cancelled-order-view", async(req,res)=>{
     res.render("orders/cancelled-orders.ejs", {orders: Orders });
 })
 
+router.get("/rejected-orders", async(req,res)=>{
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+    let Orders = await orderModel
+        .find({approval: "Reject"})
+        .populate("allProduct.id", "name image price")
+        .populate("user", "name")
+        .populate("address", "aaddress aphone aname acity apincode")
+        .sort({ _id: -1 });
+    res.render("orders/rejected-orders.ejs", {orders: Orders });
+})
+
+
 router.get("/order-filtered-view", async(req,res)=>{
     let userid = req.cookies.userid;
     if(userid){

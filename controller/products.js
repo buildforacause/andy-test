@@ -99,7 +99,8 @@ class Product {
     }
     let check = await getProductSize(SKU,sizes);
     if(check){
-      return res.json({ error: "Already added a product with that size in this SKU!" });
+      let message="❌Already added a product with that size in this SKU!"
+      return res.redirect("/admin/product-view/"+`?message=${encodeURIComponent(message)}`)
     }
       try {
         if(previmages !== undefined){

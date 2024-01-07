@@ -65,9 +65,17 @@
                         </div><!-- End .header-search-wrapper -->
                     </form>
                 </div><!-- End .header-search -->
-                <a href="/dashboard" id="user-profile-link">
-                    <i class='bx bx-user myicons'></i>
-                </a>
+                <% if(!user){ %>
+                    <a href="#signin-modal1" data-toggle="modal" id="user-profile-link" onclick="closenavmodal()">
+                        <i class='bx bx-user myicons'></i>
+                    </a>
+                    <%  }else{ %> 
+                        <a href="/dashboard" id="user-profile-link">
+                            <i class='bx bx-user myicons'></i>
+                        </a> 
+                        <% } %>
+
+
                 <div id="cart-dropdown" class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class='bx bx-basket myicons' animation="spin"></i>
