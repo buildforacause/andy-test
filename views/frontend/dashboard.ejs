@@ -115,7 +115,7 @@
 										<% var earnings = 0; %>
 										<% var etot = 0; %>
 										<% inforders.forEach(o => { %>
-										<% if(o.allProduct[0]._id){ %>
+										<% if(o.allProduct[0]._id && !o.refund){ %>
 										 <% etot = Number(o.amount) - 50; %>
 										 <% earnings = earnings + Number(etot/100)*(Number(o.result[0].discount)/2) %>
 										<% }}) %>

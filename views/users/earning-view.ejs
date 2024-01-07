@@ -74,6 +74,9 @@
                   <% var earnings = 0; %>
                   
                   <% inforders.forEach(o => { %>
+                    <% if (!o.refund) { %>
+                     
+                    
                     <% var etot = 0; %>
                 <% etot = Number(o.amount) - 50; %>
                 <% etot = Number(etot/100)*(Number(o.result[0].discount)/2) %>
@@ -84,7 +87,7 @@
                     <td>Rs. <%= o.amount.toFixed(2)%></td>
                     <td>Rs. <%= etot.toFixed(2) %></td>
                   </tr>
-                  <% }) %>
+                  <% }}) %>
 
                 </tbody>
 
