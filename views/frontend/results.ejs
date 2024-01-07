@@ -28,7 +28,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-
+ 
   <link rel="stylesheet" href="frontend/assets/css/style.css">
   <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
   <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
@@ -148,10 +148,12 @@
         <div class="p-0 bg-white" style="border:1px solid #ebebeb;border-top: 0px;">
           <div class="container py-2 d-flex topnavlinkcontainer" style="justify-content: space-between;align-items: center;">
             <% navCats.forEach(element => { %>
-
-            <a class="topnavlink" style="color:#333;font-weight:400;text-transform: uppercase;" href="/shop?filterby=<%= element._id %>"><%= element.cName %></a>
-
-            <% }) %>
+              <% if (element._id == filteredby) { %>
+                  <a class="topnavlink" style="color:#e22520;font-weight:600;text-transform: uppercase;" href="/shop?filterby=<%= element._id %>"><%= element.cName %></a>             
+              <% } else { %>
+                  <a class="topnavlink" style="color:#333;font-weight:400;text-transform: uppercase;" href="/shop?filterby=<%= element._id %>"><%= element.cName %></a>
+              <% } %>
+            <% }) %>          
           </div>
         </div>
         <div class="container">

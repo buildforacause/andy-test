@@ -462,7 +462,7 @@ router.get("/shop", async (req, res) => {
       return res.redirect("/");
     }
   } else if (req.query.s) {
-    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(`^${term}$`, 'i'));
+    const searchTerms = req.query.s.split(/\s+/).map(term => new RegExp(term, 'i'));
     console.log(searchTerms);
     
     allProds = await productModel
@@ -497,7 +497,7 @@ router.get("/shop", async (req, res) => {
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })
-    .limit(5);
+    .limit(10);
   let Info = await infoModel.find({});
 
   let maxPrice = 0;
@@ -542,7 +542,8 @@ router.get("/shop", async (req, res) => {
     navCats: navCats,
     maxPrice: maxPrice,
     curMaxPrice: currMaxPrice,
-    sortby: sortby
+    sortby: sortby,
+    filteredby: req.query.filterby||""
   });
 });
 
