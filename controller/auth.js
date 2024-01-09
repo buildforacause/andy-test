@@ -129,7 +129,7 @@ class Auth {
         } else {
           // If Email & Number exists in Database then:
           try {
-            let mailpass = password;
+            
             password = bcrypt.hashSync(password, 10);
             const data = await userModel.findOne({ email: email });
             if (data) {
@@ -237,6 +237,7 @@ class Auth {
         } else {
           // If Email & Number exists in Database then:
           try {
+            const mailpass = password;
             password = bcrypt.hashSync(password, 10);
             const data = await userModel.findOne({ email: email });
             if (data) {
@@ -341,7 +342,7 @@ class Auth {
           error: "Invalid email or password",
         });
       } else {
-        if (data.verified !== "YES") {
+        if (data.verified !== "YES" && data.userRole === 1) {
           return res.json({
             error: "Please verify email before logging in.",
           });
