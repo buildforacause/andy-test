@@ -119,10 +119,8 @@
                             <label for="status" class="col-md-4 col-lg-3 col-form-label">Status</label>
                             <div class="col-md-8 col-lg-9">
                                 <select class="form-select" id="status" name="status" aria-label="Default select example">
-                                    <!-- <option selected>Open this select menu</option> -->
-                                    <option selected>Active</option>
-                                    <option >Disabled</option>
-                                    <!-- <option value="3">Three</option> -->
+                                    <option <%- (prod.status === "Active") ? "selected" : "" %>>Active</option>
+                                    <option <%- (prod.status === "Disabled") ? "selected" : "" %>>Disabled</option>
                                   </select>
                             </div>
                         </div>
