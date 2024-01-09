@@ -4,9 +4,9 @@ class coupon {
   async check(req, res){
     let pin = req.body.coupon;
     try {
-      let couponAvailable = await couponModel.findOne({coupon: pin});
-      if(couponAvailable){
-        return res.json({ success: true, message: "Coupon Applied" , coupon: couponAvailable.coupon , color: "green", discount: couponAvailable.discount});
+      let couponAvailable = await couponModel.find({coupon: pin, status:1});
+      if(couponAvailable.length > 0){
+        return res.json({ success: true, message: "Coupon Applied" , coupon: couponAvailable[0].coupon , color: "green", discount: couponAvailable[0].discount});
       }else{
         return res.json({ success: false, message: "This is not a valid coupon" , color: "red"});
       }
@@ -37,6 +37,11 @@ class coupon {
       }
 
     try {
+    let coupon123 = couponModel.findOne({coupon:coupon});
+    if(coupon123){
+      const message = "❌Coupon has been used before.";
+      return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
+    }
       let newcoupon = new couponModel({
         coupon: coupon,
         discount:discount,
@@ -59,6 +64,11 @@ class coupon {
       return res.json({ error: "All fields are required" });
     } else {
       try {
+        let coupon123 = couponModel.findOne({coupon:coupon});
+        if(coupon123){
+          const message = "❌Coupon has been used before.";
+          return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
+        }
         let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount,user:user});
         if (del) {
           const message = "✅Successfully Edited the coupon!";
@@ -76,7 +86,7 @@ async delete(req, res){
     return res.json({ error: "All fields are required" });
   } else {
     try {
-      let deleteCategory = await couponModel.findOneAndDelete({_id: _id});
+      let deleteCategory = await couponModel.findByIdAndUpdate(_id,{status:0});
       if (deleteCategory) {
         // Assuming you have a message variable with the message you want to pass
         const message = "✅Successfully deleted the coupon!";

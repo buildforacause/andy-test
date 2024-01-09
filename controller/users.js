@@ -1,6 +1,37 @@
 const userModel = require("../models/users");
 const bcrypt = require("bcryptjs");
+const dotenv = require('dotenv');
+dotenv.config({ path: '../.env' });
+const nodemailer = require('nodemailer');
 
+async function sendEmailNoReply(email, subject, text) {
+  try {
+    // Create a transporter with your Gmail SMTP configuration
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: 'mayursportsnoreply@gmail.com',
+        pass: process.env.NOREPLY
+      }
+    });
+
+    // Define the email options
+    const mailOptions = {
+      from: 'mayursportsnoreply@gmail.com',
+      to: email,
+      subject: subject,
+      html: text
+    };
+
+    // Send the email
+    const info = await transporter.sendMail(mailOptions);
+    return info.response
+  } catch (error) {
+    return error
+  }
+}
 class User {
   async getAllUser(req, res) {
     try {
@@ -105,7 +136,6 @@ class User {
       return res.json({ error: "All fields must be required" });
     } else {
       const data = await userModel.findById(uId);
-      console.log(uId)
       if (!data) {
         return res.json({
           error: "Invalid user",
@@ -117,6 +147,18 @@ class User {
           let passChange = userModel.findByIdAndUpdate(uId, {
             password: newPassword,
           });
+          let user123 = await userModel.findById(uId);
+          let subject = 'Password Has Been Changed | Mayur Sports';
+          let text = `<div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        <h2 style="color: #007bff;">Password Changed:</h2>
+                        <p>Dear ${user123.name},</p>
+                        <p>Your password to login at Mayur Sports was changed successfully! <br> Shop for trending products <a href="https://www.mayursports.com/shop">here</a>.</p>
+                        <div style="text-align: center; padding: 10px; background-color: #f5f5f5;">
+                          <p style="color: #333;">Follow us on social media: <a href="https://www.facebook.com/mayursports1/">Facebook</a> | <a href="https://www.instagram.com/mayursports1/">Instagram</a></p>
+                        </div>
+                      </div>`;
+          let abc = await sendEmailNoReply(email, subject, text);
+
           passChange.exec((err, result) => {
             if (err) console.log(err);
             return res.json({ success: "Password updated successfully" });

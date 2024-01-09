@@ -883,6 +883,8 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
 
+
+
   const logoutTimeout = setTimeout(() => {
     window.location.href = '/logout'; // Redirect to the logout page
   }, 60 * 60 * 1000); // 1 hour

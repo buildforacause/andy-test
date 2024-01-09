@@ -68,7 +68,6 @@
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Earnings</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -78,7 +77,6 @@
                   <tr>
                     <td><%= inf.name %></td>
                     <td><%= inf.email %></td>
-                    <td><a href="/admin/earning-view/<%= inf._id %>">View Earnings</a></td>
                     <td>
                       <form method="POST" action="/api/delete/influencer" onsubmit="return confirmDelete();">
                         <input type="hidden" value="<%= inf._id %>" name="uid">
@@ -100,6 +98,7 @@
 
         </div>
       </div>
+
     </section>
 
   </main><!-- End #main -->
@@ -110,6 +109,8 @@
       Designed by <a href="#">JVSH Technologies</a>
     </div>
   </footer><!-- End Footer -->
+
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

@@ -14,7 +14,11 @@ const couponSchema = new mongoose.Schema(
     user: {
       type: ObjectId,
       ref: "users",
-    }
+    }, 
+    status: {
+      type: Number,
+      default: 1
+    },
   },
   { timestamps: true }
 );
