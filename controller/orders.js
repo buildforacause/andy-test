@@ -45,14 +45,14 @@ async function sendEmailNoReply(email, subject, text) {
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: 'mayursportsnoreply@gmail.com',
+        user: 'noreplymayursportsestore@gmail.com',
         pass: process.env.NOREPLY
       }
     });
 
     // Define the email options
     const mailOptions = {
-      from: 'mayursportsnoreply@gmail.com',
+      from: 'noreplymayursportsestore@gmail.com',
       to: email,
       subject: subject,
       html: text

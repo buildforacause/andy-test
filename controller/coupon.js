@@ -27,7 +27,7 @@ class coupon {
   }
 
   async add(req, res) {
-    let {coupon, discount,user} = req.body;
+    let {coupon, discount, user} = req.body;
     if (!coupon) {
       return res.json({ error: "Please enter coupon" });
     }
@@ -37,22 +37,31 @@ class coupon {
       }
 
     try {
-    let coupon123 = couponModel.findOne({coupon:coupon});
+    let coupon123 = await couponModel.findOne({coupon:coupon});
     if(coupon123){
       const message = "❌Coupon has been used before.";
       return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
     }
-      let newcoupon = new couponModel({
+    let newcoupon = null;
+    if(user){
+      newcoupon = new couponModel({
         coupon: coupon,
         discount:discount,
         user:user
       });
+    }else{
+      newcoupon = new couponModel({
+        coupon: coupon,
+        discount:discount
+      });
+    }
       let save = await newcoupon.save();
       if (save) {
         const message = "✅Successfully added the coupon!";
         return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
       }
     } catch (err) {
+      console.log(err)
       const message = "❌Error adding the coupon.";
       return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
     }
@@ -64,12 +73,8 @@ class coupon {
       return res.json({ error: "All fields are required" });
     } else {
       try {
-        let coupon123 = couponModel.findOne({coupon:coupon});
-        if(coupon123){
-          const message = "❌Coupon has been used before.";
-          return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)
-        }
-        let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount,user:user});
+        let del = await couponModel.findByIdAndUpdate(_id, {coupon: coupon, discount: discount, user:user});
+        
         if (del) {
           const message = "✅Successfully Edited the coupon!";
           return res.redirect(`/admin/coupon-view?message=${encodeURIComponent(message)}`)

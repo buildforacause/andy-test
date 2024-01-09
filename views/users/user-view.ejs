@@ -68,15 +68,16 @@
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>View Earnings</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- loop start -->
                   <% influencers.forEach(inf => { %>
                   <tr>
                     <td><%= inf.name %></td>
                     <td><%= inf.email %></td>
+                    <td><a href="/admin/earning-view/<%= inf._id %>">View here</a></td>
                     <td>
                       <form method="POST" action="/api/delete/influencer" onsubmit="return confirmDelete();">
                         <input type="hidden" value="<%= inf._id %>" name="uid">

@@ -413,7 +413,7 @@ router.post("/checkout", async (req, res) => {
 router.get("/view/:id", async (req, res) => {
   let id = req.params.id;
   let Product = await productModel
-    .find({ _id: id })
+    .find({ _id: id})
     .populate("category", "_id cName")
     .populate("ratings.user");
   let SKU = Product[0].SKU;
@@ -423,7 +423,7 @@ router.get("/view/:id", async (req, res) => {
   });
   total = total / Product[0].ratings.length;
   let ProductSize = await productModel
-    .find({ SKU: SKU })
+    .find({ SKU: SKU,status: "Active" })
     .populate("category", "_id cName");
     const order = ["XS", "S", "M", "L", "XL", "XXL"];
     ProductSize = ProductSize.sort((productA, productB) => {
@@ -434,7 +434,7 @@ router.get("/view/:id", async (req, res) => {
     });
   console.log(ProductSize)
   let allProds = await productModel
-    .find({ _id: { $ne: id } })
+    .find({ _id: { $ne: id },status: "Active" })
     .populate("category", "_id cName");
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;

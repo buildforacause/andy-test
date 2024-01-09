@@ -341,7 +341,7 @@
               newdiscount = pastdiscount + discount
               $("#totaloffer").text(`₹${newdiscount.toFixed(2)}`)
               $("#couponcode").attr("value", response.coupon)
-              Toastify({text: 'Coupon applied successfully',style:{background:'#c96'}, gravity:'bottom',duration: 3000 }).showToast();
+              Toastify({text: 'Coupon applied successfully',style:{background:'rgba(255, 238, 235, 1)',color:'#FE2910',border:'1px solid #FE2910',borderRadius:'10px'},gravity:'bottom', duration: 1000  }).showToast();
             }
         })
     }
