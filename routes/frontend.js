@@ -24,11 +24,19 @@ router.get("/", async (req, res) => {
   let Products = await productModel
     .find({ featured: true, status: "Active" })
     .populate("category", "_id cName")
-    .sort({ createdAt: -1 })
-    .limit(5);
+    .sort({ createdAt: -1 });
   Products = Products.filter(
     (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
   );
+  Products = Products.filter((_, index) => index < 5);
+  let FProducts = await productModel
+  .find({ status: "Active" })
+  .populate("category", "_id cName")
+  .sort({ createdAt: -1 });
+  FProducts = FProducts.filter(
+  (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
+);
+  FProducts = FProducts.filter((_, index) => index < 5);
   let Categories = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 });
@@ -59,11 +67,11 @@ router.get("/", async (req, res) => {
       products,
     })
   );
+  console.log(result);
   result = result.map(categoryData => ({
     category: categoryData.category,
     products: categoryData.products.reduce((uniqueProducts, currentProduct) => {
       const isDuplicate = uniqueProducts.some(product => product.SKU === currentProduct.SKU);
-  
       if (!isDuplicate) {
         uniqueProducts.push(currentProduct);
       }
@@ -71,6 +79,7 @@ router.get("/", async (req, res) => {
       return uniqueProducts;
     }, []),
   }));
+
   let Sponsors = await sponsorModel.find({}).sort({ _id: -1 });
   let sliders = await customizeModel.find({});
   let user = req.cookies.autOken;
@@ -87,6 +96,7 @@ router.get("/", async (req, res) => {
     sponsors: Sponsors,
     user: user,
     sliders: sliders,
+    fproducts: FProducts
   });
 });
 
@@ -129,40 +139,40 @@ router.get("/dashboard", async (req, res) => {
     .populate("allProduct.id", "name image price")
     .populate("address", "aaddress aphone aname acity apincode")
     .sort({ _id: -1 });
-  let inforders = await orderModel.aggregate([
-    {
-      $lookup: {
-        from: "coupons",
-        localField: "coupon",
-        foreignField: "coupon",
-        as: "result",
-      },
-    },
-    {
-      $lookup: {
-        from: "products",
-        localField: "allProduct.id",
-        foreignField: "_id",
-        as: "allProduct",
-      },
-    },
-    {
-      $lookup: {
-        from: "addresses",
-        localField: "address",
-        foreignField: "_id",
-        as: "address",
-      },
-    },
-    {
-      $match: {
-        "result.user": new ObjectId(userid),
-        "status": "Delivered",
-      },
-    },
-  ]);
+  // let inforders = await orderModel.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: "coupons",
+  //       localField: "coupon",
+  //       foreignField: "coupon",
+  //       as: "result",
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       from: "products",
+  //       localField: "allProduct.id",
+  //       foreignField: "_id",
+  //       as: "allProduct",
+  //     },
+  //   },
+  //   {
+  //     $lookup: {
+  //       from: "addresses",
+  //       localField: "address",
+  //       foreignField: "_id",
+  //       as: "address",
+  //     },
+  //   },
+  //   {
+  //     $match: {
+  //       "result.user": new ObjectId(userid),
+  //       "status": "Delivered",
+  //     },
+  //   },
+  // ]);
   res.render("frontend/dashboard.ejs", {
-    inforders: inforders,
+    inforders: [],
     orders: orders,
     userRole: userRole,
     verify: verify[0],
@@ -307,7 +317,7 @@ router.get("/return", async (req, res) => {
     .populate("address", "aaddress aphone aname acity apincode");
   if (!orders[0]._id || orders[0].user != userid) {
     res.redirect("/dashboard");
-    //if order id doesnt exist or if given order id's user isnt the same
+    //if order id doesnt exist or if given order id's user isnt the same47
   }
   res.render("frontend/return.ejs", {
     order: orders[0],
@@ -403,7 +413,7 @@ router.post("/checkout", async (req, res) => {
 router.get("/view/:id", async (req, res) => {
   let id = req.params.id;
   let Product = await productModel
-    .find({ _id: id })
+    .find({ _id: id})
     .populate("category", "_id cName")
     .populate("ratings.user");
   let SKU = Product[0].SKU;
@@ -413,7 +423,7 @@ router.get("/view/:id", async (req, res) => {
   });
   total = total / Product[0].ratings.length;
   let ProductSize = await productModel
-    .find({ SKU: SKU })
+    .find({ SKU: SKU,status: "Active" })
     .populate("category", "_id cName");
     const order = ["XS", "S", "M", "L", "XL", "XXL"];
     ProductSize = ProductSize.sort((productA, productB) => {
@@ -424,7 +434,7 @@ router.get("/view/:id", async (req, res) => {
     });
   console.log(ProductSize)
   let allProds = await productModel
-    .find({ _id: { $ne: id } })
+    .find({ _id: { $ne: id },status: "Active" })
     .populate("category", "_id cName");
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
@@ -566,6 +576,35 @@ router.get("/check-quantity/:id", async (req, res) => {
 router.get("/confirming-order-details", (req, res) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   res.render("frontend/confirm.ejs");
+});
+
+router.get('/verify', async (req, res) => {
+  const { token } = req.query;
+
+  const user = await userModel.findOneAndUpdate({secretKey:token}, {verified: "YES"});
+
+  if (!user) {
+    return res.status(404).send('Invalid verification token');
+  }
+
+  const htmlResponse = `
+    <html>
+      <head>
+        <meta http-equiv="refresh" content="5;url=/">
+      </head>
+      <body>
+        <h1>Email verification successful.</h1>
+        <p>You will be redirected to the home page in 5 seconds. If not, <a href="/">click here</a>.</p>
+        <script>
+          setTimeout(function() {
+            window.location.href = '/';
+          }, 5000);
+        </script>
+      </body>
+    </html>
+  `;
+
+  res.send(htmlResponse);
 });
 
 module.exports = router;

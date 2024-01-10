@@ -78,15 +78,15 @@
 									</div>
 								</div>
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0 comp-dashbar" role="tablist">
-									<% if (userRole == 2) { %>
-										
+									<% //if (userRole == 2) { %>
+<!-- 										
 										<li class="nav-item">
 											<a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Influencer Bonus</a>
-										</li>
-									<% } %>
+										</li> -->
+									<%// } %>
 								    
 								    <li class="nav-item">
-								        <a class="nav-link <% if (userRole != 2) { %> active <% } %>" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								        <a class="nav-link active " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>
 									
 								    <li class="nav-item">
@@ -105,78 +105,8 @@
 								
 								
 	                			<div class="tab-content">
-								    <div class="tab-pane fade show <% if (userRole == 2) { %> active <% } %>" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-								    	<p>Hello, <span class="font-weight-normal text-dark"><h5><%= verify.name %></h5></span> 
-								    	<br>
-								    	Within your influencer dashboard, you have the ability to see the orders made using your coupon code.</p>
 
-										<hr>
-
-										<% var earnings = 0; %>
-										<% var etot = 0; %>
-										<% inforders.forEach(o => { %>
-										<% if(o.allProduct[0]._id && !o.refund){ %>
-										 <% etot = Number(o.amount) - 50; %>
-										 <% earnings = earnings + Number(etot/100)*(Number(o.result[0].discount)/2) %>
-										<% }}) %>
-										
-										
-										<h6>Estimated Earnings: ₹ <span id="gross-estimation" style="color: #fe2910;"><%= earnings.toFixed(2) %></span></h6>
-										
-
-										<% inforders.forEach(order => {
-											
-											if(order.allProduct[0]._id){ %>
-												
-												<div class="myphonecardi">
-												<a href="#">
-													<div class="d-flex" style="gap:5px;padding: 10px;border: 1px solid #e4e4e4;border-radius: 10px;margin-bottom: 10px;"> 
-														<img src="<%= order.allProduct[0].image[0] %>" alt="product photo" style="color:grey;border-radius: 7px;height:100px;aspect-ratio: 1;border: 1px solid #e4e4e4;">
-														<div style="flex:1;display: flex;flex-direction: column;">
-															<p style="font-size: 16px;color:#333;font-weight: 500;line-height: 18px;margin-bottom:6px;"><%= order.allProduct[0].name.length > 18 ? order.allProduct[0].name.substring(0, 36) + '...' : order.allProduct[0].name %></p>
-															<div style="display: flex;align-items: flex-end;">
-																<p style="font-size: 16px;color:#333;font-weight: 600;line-height: 16px;margin-bottom: 5px;"><span style="color:#fe2910">₹</span><%= order.amount %></p>
-																<p style="font-size: 12px;color:#afafaf;font-weight: 400;line-height: 12px;margin-bottom:5px;padding-left: 3px;"> for <%= order.allProduct.length>1?order.allProduct.length+" products":order.allProduct.length+" product" %></p>
-															</div>
-														</div>
-													</div>
-												</a>
-											</div>
-								    	<article style="border: 1px solid #e4e4e4;padding: 1rem 2rem;margin-bottom: 2rem;" class="entry entry-list mycompcardi">
-											<div class="row align-items-center">
-                                                <div class="col-md-3">
-                                                    <figure class="entry-media">
-                                                        <a href="">
-                                                            <img src="<%= order.allProduct[0].image[0] %>" alt="image desc">
-                                                        </a>
-                                                    </figure><!-- End .entry-media -->
-                                                </div><!-- End .col-md-4 -->
-                    
-                                                <div class="col-md-9 d-flex" >
-                                                    <div class="entry-body" style="padding-left: 0;">
-                                                        <div class="entry-meta">
-                                                        </div><!-- End .entry-meta -->
-                    
-                                                        <h2 class="entry-title">
-                                                            <a href="#"><%= order.allProduct[0].name %></a>
-                                                        </h2><!-- End .entry-title -->
-                    
-                                                        <div class="entry-cats" style="margin-bottom: 0;font-weight: 500;">
-                                                            <p style="margin-bottom: 0;font-weight: 500;">Total: ₹<%= order.amount %></p>
-                                                        </div><!-- End .entry-cats -->
-														
-														<p style="padding: 0;margin: 0;">
-															Total <%= order.allProduct.length %> product(s)
-														</p>
-                                                    </div><!-- End .entry-body -->
-          
-                                                </div><!-- End .col-md-8 -->
-                                            </div><!-- End .row -->
-                                        </article>
-							<% } }) %>
-								    </div>
-
-								    <div class="tab-pane fade show <% if (userRole != 2) { %> active <% } %>" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+								    <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
 										<span class="font-weight-normal text-dark"><h5>Your Orders:</h5></span> 
 
 										<hr>
@@ -277,7 +207,7 @@
 		            						<label>New password</label>
 		            						<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="password" name="newPassword" class="form-control merahaibutton" required>
 
-											<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="hidden" name="uId" value="641f5f9a2b6c7d598c631a77">
+											<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="hidden" name="uId" value="<%= userid %>">
 											
 		                					<button type="submit" style="border-color: #616161!important;" class="btn btn-outline-primary-2">
 			                					<span style="color:#616161;">SAVE CHANGES</span>

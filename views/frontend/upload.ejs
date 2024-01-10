@@ -67,7 +67,7 @@
                     <center><span id="adresponse" class="text-danger"></span></center>
                     <div class="form-group col-md-12">
                       <label for="image">Payment Screenshot *</label>
-                      <input accept="image/*" type="file" class="form-control" id="image" name="image" required>
+                      <input accept="image/*" type="file" onchange="checkSize(this)" class="form-control" id="image" name="image" required>
                     </div>
 
                     <div class="form-footer col-md-12">
@@ -93,6 +93,13 @@
       function noBack() { 
           window.history.forward(); 
       } 
+      function checkSize(input) {
+        let size = input.files[0]?.size || 0 ;
+        if( size > 4194304){
+          alert('File size exceeds the maximum limit of 4 MB');
+          input.value = "";
+        }
+      }
   </script> 
     <%- include('./footer.ejs') %>
 

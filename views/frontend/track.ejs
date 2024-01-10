@@ -193,11 +193,15 @@
                                   <p>If you think this is mistaken, please contact our customer care number!</p>
                                 </center>
                                 <% }else{ %>
-                                <% if (order.approval == "Not approved") { %>
+                                <% if (order.approval == "Not approved" && order.status !== "Cancelled") { %>
                                  <center>
                                   <h4>Waiting for the order to be approved!</h4>
                                   <p>Let our team approve the payment of this order!</p>
                                 </center>
+                                  <div class="refundsection" style="padding:1rem;border:1px solid #e4e4e4;border-radius:10px;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
+                                    <p style="margin: 0px;">Cancel Order?</p>
+                                    <button id="cancel-this" oid="<%= order._id %>" data-toggle="modal" data-target="#cancelOrderModal" class="btn btn-outline-primary-2">Cancel Order</button>
+                                  </div>
                                 <% } else { %>
                               <% if(order.status !== "Cancelled"){ %>
                                 <div class="p-5" style="border:1px solid #e4e4e4;text-align:center;border-radius:10px;">  
@@ -269,12 +273,6 @@
                                   <% }else{ %> 
                                     <p style="margin: 0px;">Return Period for this order is over!</p>
                                     <% } %>
-                                </div>
-                                <% } %>
-                                <% if(order.status == "Not Processed" || order.status == "Processing"){ %>
-                                <div class="refundsection" style="padding:1rem;border:1px solid #e4e4e4;border-radius:10px;text-align:left;display:flex;align-items: center;justify-content:space-between;margin-top: 1rem;">
-                                  <p style="margin: 0px;">Cancel Order?</p>
-                                  <button id="cancel-this" oid="<%= order._id %>" data-toggle="modal" data-target="#cancelOrderModal" class="btn btn-outline-primary-2">Cancel Order</button>
                                 </div>
                                 <% } %>
                                 

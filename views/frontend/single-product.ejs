@@ -533,7 +533,7 @@
                                                 <div class="form-group row mb-3">
                                                     <label for="formFileMultiple" class="col-md-4 col-lg-3 form-label"  style="font-weight: 400!important;color:#666">Review Images (if any)</label>
                                                     <div class=" col-md-8 col-lg-9">
-                                                        <input accept="image/*" name="image" class="form-control" type="file" id="formFileMultiple" multiple>
+                                                        <input onchange="checkSize(this)" accept="image/*" name="image" class="form-control" type="file" id="formFileMultiple" multiple>
                                                     </div>
                                                   </div>
                                                 <div class="form-group">
@@ -559,7 +559,7 @@
                                                 </div><!-- End .form-group -->
 
                                                 <div class="form-footer m-0 p-0">
-                                                    <button type="submit" class="btn btn-outline-dark-3 btn-more" style="border: 1px solid black;"><span>+ View More</span></button>
+                                                    <button type="submit" class="btn btn-outline-dark-3 btn-more" style="border: 1px solid black;"><span>Post Review</span></button>
                 
                                                     <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
                                                 </div>
@@ -657,6 +657,14 @@
             document.querySelector('.page-content').classList.remove("mt-4");
         }
     });
+
+    function checkSize(input) {
+        let size = input.files[0]?.size || 0 ;
+        if( size > 4194304){
+          alert('File size exceeds the maximum limit of 4 MB');
+          input.value = "";
+        }
+      }
     
 </script>
 </body>

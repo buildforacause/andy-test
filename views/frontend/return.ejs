@@ -111,7 +111,7 @@
 
                     <div class="form-group">
                       <label for="proof">Attach A Proof *</label>
-                      <input type="file" class="form-control" id="proof" name="proof" accept="image/*" required>
+                      <input type="file" onchange="checkSize(this)" class="form-control" id="proof" name="proof" accept="image/*" required>
                     </div>
 
                     <div class="form-footer">
@@ -199,6 +199,13 @@
             window.location = '/dashboard';
           }
         })
+      }
+      function checkSize(input) {
+        let size = input.files[0]?.size || 0 ;
+        if( size > 4194304){
+          alert('File size exceeds the maximum limit of 4 MB');
+          input.value = "";
+        }
       }
     </script>
 </body>

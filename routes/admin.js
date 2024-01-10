@@ -182,7 +182,7 @@ router.get("/coupon-view", async(req,res)=>{
     }else{
         res.redirect("/")
     }
-    let Coupons = await couponModel.find({}).sort({ _id: -1 }).populate("user", "name");
+    let Coupons = await couponModel.find({status: 1}).sort({ _id: -1 }).populate("user", "name");
     const message = req.query.message;
 
     res.render("coupon/coupon-view.ejs", {coupons: Coupons, message: message || '' });
