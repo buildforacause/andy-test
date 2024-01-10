@@ -185,7 +185,7 @@
 														<p><%= address.aname %><br>
 														<%= address.aaddress %><br>
 														<%= address.aphone %><br>
-														<form action="/api/address/delete" method="POST" >
+														<form method="POST" action="/api/address/delete" onsubmit="return confirmDelete();">
 															<input type="hidden" name="_id" value="<%= address._id %>" >
 														<button type="submit" class="btn btn-danger">Delete</button>
 													</form>
@@ -209,7 +209,7 @@
 
 											<input style="border-radius: 7px;border:1px solid#e4e4e4;" type="hidden" name="uId" value="<%= userid %>">
 											
-		                					<button type="submit" style="border-color: #616161!important;" class="btn btn-outline-primary-2">
+		                					<button id="returnbtn" type="submit" style="border-color: #616161!important;" class="btn btn-outline-primary-2">
 			                					<span style="color:#616161;">SAVE CHANGES</span>
 			            						<i class="icon-long-arrow-right"></i>
 			                				</button>
@@ -261,7 +261,13 @@
 												<div class="form-group col-md-6">
 													<label for="aaa-email">Pincode *</label>
 													<input type="number" class="form-control" id="aaa-email" name="apincode" required>
-												</div><!-- End .form-group -->
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-12">
+													<label for="aa-state">State *</label>
+													<input type="text" class="form-control" id="state" name="astate" required readonly>
+												</div>
 											</div>
 											<div class="form-footer">
 												
@@ -289,6 +295,28 @@
 
 
     <script>
+	function confirmDelete() {
+      // Display a confirmation dialog
+      var confirmation = confirm("Are you sure you want to delete this row?");
+
+      // If the user clicks "OK" (true), the form will be submitted
+      return confirmation;
+    }
+		$("#pincode").on("input", function (event) {
+				// console.log(1);
+				var pincodeinput = $("#pincode").val();
+				// console.log(pincodeinput);
+				var pincodeurl = "https://api.postalpincode.in/pincode/" + pincodeinput;
+				// console.log(pincodeurl);
+				$.getJSON(pincodeurl, function (result) {
+				if (result[0].Status == "Error") {
+					// console.log("Please enter a valid pincode");
+					$("#state").val("Please enter a valid pincode");
+				} else {
+					$("#state").val(result[0].PostOffice[0].State);
+				}
+				});
+			});
 
 	$('#cart-total-text').hide();
 	const $form3 = $('#address-form')
@@ -312,10 +340,12 @@
         })
     }
 
+
 		const $form5 = $('#myform')
 		$form5.on('submit', submitHandler5)
 		function submitHandler5 (e) {
 			e.preventDefault()
+			$("#returnbtn").prop("disabled", true);
 			console.log($form5.serialize());
 			$.ajax({
 			    url: '/api/user/change-password',
@@ -325,10 +355,13 @@
 			    response = JSON.stringify(response)
 			    response = JSON.parse(response);
 			    if(response.error){
+					$("#returnbtn").prop("disabled", false);
 			        $("#myspan").text(response.error);
 			    }else{
+					$("#returnbtn").prop("disabled", false);
 			        $("#myspan").text(response.success);
 			    }
+				
 			})
 		}
 

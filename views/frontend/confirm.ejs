@@ -9,10 +9,7 @@
     window.onload = function () {
       window.localStorage.clear();
       history.pushState(null, null, document.URL);
-    window.addEventListener('popstate', function () {
-        history.pushState(null, null, document.URL);
-    });
-      window.location.replace('/');
+      window.history.forward(); 
       window.location.href = "/dashboard";
     };
     

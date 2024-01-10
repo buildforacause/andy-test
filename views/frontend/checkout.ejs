@@ -165,7 +165,7 @@
 
 		                				<div class="row">
 		                					<div class="col-sm-6">
-		                						<label>State / County *</label>
+		                						<label>State *</label>
 		                						<input type="text" name="state" id="state" id="district" class="form-control" disabled>
 		                					</div><!-- End .col-sm-6 -->
 
@@ -189,6 +189,7 @@
 										<input name="user" value="<%= userid %>" type="hidden">
 										<input name="acity" value="" id="maincity" type="hidden">
 										<input name="apincode" value="" id="mainpincode" type="hidden">
+										<input name="astate" value="" id="mainstate" type="hidden">
 									</form>
 
 									</div> <!--end of hide-->
@@ -251,12 +252,7 @@
         </main><!-- End .main -->
 
         <%- include("./footer.ejs") %>
-		<script type="text/javascript"> 
-			window.history.forward(); 
-			function noBack() { 
-				window.history.forward(); 
-			} 
-		</script> 
+
         <script>
 			let couponcodepost = '<%= couponcode %>';
 			var price = 0;
@@ -289,6 +285,7 @@
 		$('#mainphone').val($('#phone').val());
 		$('#maincity').val($('#city').val());
 		$('#mainpincode').val($('#pincode').val());
+		$("#mainstate").val($("#state").val());
         $.ajax({
             url: '/api/address/add',
             type:'POST',

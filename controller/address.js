@@ -3,7 +3,7 @@ const addressModel = require("../models/address");
 class Address {
 
   async postAddress(req, res) {
-    let { aname, aaddress, aphone, user, acity, apincode } =
+    let { aname, aaddress, aphone, user, acity, apincode, astate } =
       req.body;
     if (
       !aname |
@@ -11,7 +11,8 @@ class Address {
       !aaddress |
       !user |
       !acity |
-      !apincode
+      !apincode |
+      !astate
     ) {
       return res.json({ error: "All fields are required" });
     }
@@ -23,11 +24,11 @@ class Address {
           aaddress: aaddress,
           acity: acity,
           apincode: apincode,
+          astate: astate,
           user: user
         });
         let save = await newAddress.save();
         if (save) {
-          
           return res.redirect("/dashboard#tab-address")
         }
       } catch (err) {

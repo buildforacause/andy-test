@@ -79,7 +79,8 @@
                                 </thead>
                                 <tbody>
                                     <!-- loop start -->
-                                    <% orders.forEach(order => { %>
+                                    <% orders.forEach(order => { 
+                                        if(order.status !== "Cancelled"){ %>
                                         <tr>
                                             <td><%= order._id %></td>
                                             <td><%= order.user.name %></td>
@@ -97,7 +98,7 @@
                                                 </form>
                                             </td>                                         
                                         </tr>
-                                    <% }) %>
+                                    <% }}) %>
                                         
                                 </tbody>
 

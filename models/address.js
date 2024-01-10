@@ -19,6 +19,10 @@ const addressSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    astate: {
+      type: String,
+      required: true,
+    },
     aphone: {
         type: Number,
         required: true,
