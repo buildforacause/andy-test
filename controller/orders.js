@@ -165,9 +165,9 @@ class Order {
 
             totalValue += total;
             tr += `<tr>
-            <td style="padding: 10px; border-bottom: 1px solid #ddd;">${prod.name}</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">${p[0].name}</td>
             <td style="padding: 10px; border-bottom: 1px solid #ddd;">${quantity}</td>
-            <td style="padding: 10px; border-bottom: 1px solid #ddd;">₹ ${prod.total}</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">₹ ${total}</td>
           </tr>`
           })
         );
@@ -330,7 +330,7 @@ class Order {
   async addReturn(req, res) {
     let { userid, orderid, reason, description, payment } = req.body;
     let images = req.files;
-    let Order = await orderModel
+    let Order123 = await orderModel
       .find({ _id: orderid })
       .populate("allProduct.id", "name image price")
       .populate("user", "name email userRole")
@@ -340,22 +340,19 @@ class Order {
 
     //checking if someone else apart from the admin is trying to access
     if(images === undefined){
-      if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
-        return res.json({ error: "There was an error processing your request." });
-      }
-      if (!Order[0] || !reason || !description || !payment) {
+      if (!Order123[0] || !reason || !description || !payment) {
         return res.json({
           error: "There was an error processing your request. Please try again.",
         });
       }
-      Refund = Order[0].refund;
+      Refund = Order123[0].refund;
     }else{
-      if (Order[0].user._id != userid || Order[0].user.userRole == 1) {
+      if (Order123[0].user._id != userid) {
         Order.deleteImages(images[0], "file");
         return res.json({ error: "There was an error processing your request." });
       }
   
-      if (!Order[0] || !reason || !description || !payment) {
+      if (!Order123[0] || !reason || !description || !payment) {
         Order.deleteImages(images[0], "file");
         return res.json({
           error: "There was an error processing your request. Please try again.",
@@ -383,7 +380,7 @@ class Order {
                     <h2 style="color: #007bff;">Check what the seller says:</h2>
                     <p>Dear ${user123.name},</p>
                     <p>Your Order <strong>#${orderid}</strong> was seen by the seller! Please check the status response below: <br>
-                    <a href="https://www.mayursports.com/return?of=${oId}">Open Message</a>.</p>
+                    <a href="https://www.mayursports.com/return?of=${orderid}">Open Message</a>.</p>
                     <div style="text-align: center; padding: 10px; background-color: #f5f5f5;">
                       <p style="color: #333;">Follow us on social media: <a href="https://www.facebook.com/mayursports1/">Facebook</a> | <a href="https://www.instagram.com/mayursports1/">Instagram</a></p>
                     </div>

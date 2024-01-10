@@ -157,6 +157,7 @@ class User {
                           <p style="color: #333;">Follow us on social media: <a href="https://www.facebook.com/mayursports1/">Facebook</a> | <a href="https://www.instagram.com/mayursports1/">Instagram</a></p>
                         </div>
                       </div>`;
+          let email = user123.email;
           let abc = await sendEmailNoReply(email, subject, text);
 
           passChange.exec((err, result) => {
