@@ -80,6 +80,22 @@
     		transform: translateY(0.09em);
 			accent-color: orangered;
 		}
+		.mybtnaddanaddress{
+			opacity: 1!important;
+		}
+		.mybtnaddanaddress .btn-text{ 
+			color: #222!important;
+			font-weight: 500;
+			font-size: 1.4rem;
+		}
+		.mybtnaddanaddress:hover{
+			background-color: none!important;
+		}
+		.mybtnaddanaddress:hover .btn-hover-text{
+			color: #222!important;
+			font-weight: 500!important;
+			font-size: 1.4rem;
+		}
 	</style>
 	<script src="https://js.braintreegateway.com/web/dropin/1.36.0/js/dropin.js"></script>
 </head>
@@ -122,8 +138,9 @@
 												</div>
 											  </div>
 											<% }) %>
-										  <% } %>
-										  
+										  <% }else{ %>
+											<h2 class="checkout-title">Please add an address before proceeding!</h2>
+										  <% } %>										  
 									
 
 									</div>
@@ -236,11 +253,18 @@
 		                				</table><!-- End .table table-summary -->
 
 		                				<div id="dropin-container"></div>
-										<center><span id="showerr"></span></center>
-		                				<button type="submit" form="myform" class="btn btn-outline-primary-2 btn-order btn-block">
-		                					<span class="btn-text">Place Order</span>
-		                					<span class="btn-hover-text">Proceed to Payment</span>
-		                				</button>
+										<center><span id="showerr"></span></center>		                				
+										<% if (addresses.length < 1) { %>
+											<button type="button" class="btn btn-outline-primary-2 btn-order btn-block mybtnaddanaddress" disabled>
+												<span class="btn-text">Please add an address!</span>
+												<span class="btn-hover-text">Please add an address!</span>
+											</button>
+										<% } else { %>
+											<button type="submit" form="myform" class="btn btn-outline-primary-2 btn-order btn-block" style="cursor: pointer;">
+												<span class="btn-text">Place Order</span>
+												<span class="btn-hover-text">Proceed to Payment</span>
+											</button>
+										<% } %>
 		                			</div><!-- End .summary -->
 		                		</aside><!-- End .col-lg-3 -->
 		                	</div><!-- End .row -->
