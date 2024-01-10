@@ -885,7 +885,7 @@ $(document).ready(function () {
 
 
 
-  const logoutTimeout = setTimeout(() => {
+  var logoutTimeout = setTimeout(() => {
     window.location.href = '/logout'; // Redirect to the logout page
   }, 60 * 60 * 1000); // 1 hour
 
