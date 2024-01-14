@@ -139,40 +139,9 @@ router.get("/dashboard", async (req, res) => {
     .populate("allProduct.id", "name image price")
     .populate("address", "aaddress aphone aname acity apincode")
     .sort({ _id: -1 });
-  // let inforders = await orderModel.aggregate([
-  //   {
-  //     $lookup: {
-  //       from: "coupons",
-  //       localField: "coupon",
-  //       foreignField: "coupon",
-  //       as: "result",
-  //     },
-  //   },
-  //   {
-  //     $lookup: {
-  //       from: "products",
-  //       localField: "allProduct.id",
-  //       foreignField: "_id",
-  //       as: "allProduct",
-  //     },
-  //   },
-  //   {
-  //     $lookup: {
-  //       from: "addresses",
-  //       localField: "address",
-  //       foreignField: "_id",
-  //       as: "address",
-  //     },
-  //   },
-  //   {
-  //     $match: {
-  //       "result.user": new ObjectId(userid),
-  //       "status": "Delivered",
-  //     },
-  //   },
-  // ]);
+  let inforders = await couponModel.find({user:userid, status:1})
   res.render("frontend/dashboard.ejs", {
-    inforders: [],
+    inforders: inforders,
     orders: orders,
     userRole: userRole,
     verify: verify[0],

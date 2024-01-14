@@ -6,6 +6,7 @@
   <title>Redirecting</title>
   <script>
     // Assuming this script is part of your client-side code
+    window.history.forward(); 
     window.onload = function () {
       window.localStorage.clear();
       history.pushState(null, null, document.URL);
