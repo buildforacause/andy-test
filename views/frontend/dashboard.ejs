@@ -46,7 +46,7 @@
         <main class="main">
         	<div class="page-header text-center" style="background-image: url('frontend/assets/images/page-header-bg.jpg')">
         		<div class="container">
-        			<h1 class="page-title">My Account<span>Shop</span></h1>
+        			<h1 class="page-title">Welcome <%= verify.name %>!<span>Dashboard</span></h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
@@ -67,7 +67,7 @@
 									<div class="dropdown-menu" id="myDropdown" aria-labelledby="dropdownMenuButton">
 										<% if (userRole == 2) { %>
 											
-										<a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false" onclick="updateButtonText('INFLUENCER BONUS ')">Influencer Bonus</a>
+										<a class="dropdown-item" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false" onclick="updateButtonText('YOUR COUPONS')">Influencer Bonus</a>
 										<% } %>
 										
 										<a class="dropdown-item" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false" onclick="updateButtonText('ORDERS ')">Orders</a>
@@ -78,15 +78,15 @@
 									</div>
 								</div>
 	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0 comp-dashbar" role="tablist">
-									<% //if (userRole == 2) { %>
-<!-- 										
+									<% if (userRole == 2) { %>
+										
 										<li class="nav-item">
-											<a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Influencer Bonus</a>
-										</li> -->
-									<%// } %>
+											<a class="nav-link active" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">Your Coupons</a>
+										</li>
+									<% } %>
 								    
 								    <li class="nav-item">
-								        <a class="nav-link active " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								        <a class="nav-link <% if (userRole != 2){ %> active <% } %> " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								    </li>
 									
 								    <li class="nav-item">
@@ -105,8 +105,38 @@
 								
 								
 	                			<div class="tab-content">
-
-								    <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+									<% if (userRole == 2) { %>
+										<div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-orders-link">
+											<span class="font-weight-normal text-dark"><h5>Coupons Under You:</h5></span> 
+	
+											<hr>
+											<% inforders.forEach(coupon => { %>
+											<article style="border: 1px solid #e4e4e4;padding: 1rem 2rem;margin-bottom: 2rem;" class="entry entry-list mycompcardi">
+												<div class="row align-items-center">
+													<div class="col-md-12 d-flex" >
+														<div class="entry-body" style="padding-left: 0;">
+															<div class="entry-meta">
+															</div><!-- End .entry-meta -->
+						
+															<h2 class="entry-title">
+																<a href="#"><%= coupon.coupon %></a>
+															</h2><!-- End .entry-title -->
+						
+															<div class="entry-cats" style="margin-bottom: 0;font-weight: 500;">
+																<p style="margin-bottom: 0;font-weight: 500;">Discount (%): <b><%= coupon.discount %>%</b></p>
+															</div><!-- End .entry-cats -->
+														</div><!-- End .entry-body -->
+													</div><!-- End .col-md-8 -->
+												</div><!-- End .row -->
+											</article>
+								<%  }) %>
+								<% if (inforders.length === 0) { %>
+									<center>No coupons found !</center>
+								<% } %>
+								
+										</div>
+										<% } %>
+								    <div class="tab-pane fade show <% if (userRole != 2){ %> active <% } %>" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
 										<span class="font-weight-normal text-dark"><h5>Your Orders:</h5></span> 
 
 										<hr>
@@ -164,7 +194,7 @@
 								<center>No orders found !</center>
 							<% } %>
 							
-								    </div><!-- .End .tab-pane -->
+								    </div>
 
 								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
 
