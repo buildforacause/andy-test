@@ -96,6 +96,12 @@
 			font-weight: 500!important;
 			font-size: 1.4rem;
 		}
+		.btn-outline-primary-2:disabled{
+			color: #222;
+		}
+		.btn-outline-primary-2:disabled:hover{
+			color: #222!important;
+		}
 	</style>
 	<script src="https://js.braintreegateway.com/web/dropin/1.36.0/js/dropin.js"></script>
 </head>
@@ -188,14 +194,17 @@
 
 		                					<div class="col-sm-6">
 		                						<label>Reciever's Phone *</label>
-		                						<input type="tel" name="phone" id="phone" class="form-control"  >
+												<input type="tel" name="phone" id="phone" class="form-control" oninput="validatePhoneNumber()" maxlength="10">
+
 		                					</div><!-- End .col-sm-6 -->
 		                				</div><!-- End .row -->
-										<button type="submit" form="postaddress" class="btn btn-outline-primary-2 btn-order btn-block">
+										<button type="submit" form="postaddress" id="addressadderbtn" class="btn btn-outline-primary-2 mb-1 btn-order btn-block">
 		                					Add
 		                				</button>
-
+							
 										<center><span id="adresponse" class="text-danger"></span></center>
+										<center><span id="phoneError" class="text-danger"></span></center>
+										<center><span id="pincodeError" class="text-danger"></span></center>
 
 										
 
@@ -278,8 +287,20 @@
         <%- include("./footer.ejs") %>
 
         <script>
+			
 			let couponcodepost = '<%= couponcode %>';
 			var price = 0;
+
+
+			let pastprice = Number('<%= totalcost %>')
+			let discount = 0
+			let pastdiscount = Number($("#offerwala").text());
+			let newprice = pastprice - discount
+			let newdiscount = pastdiscount + discount
+			price = newprice + 50
+			$("#total").text(`₹${price.toFixed(2)}`)
+			$("#offerwala").text(`${newdiscount.toFixed(2)}`)
+
 			$.ajax({
 				url: '/api/coupon/check',
 				type:'POST',
@@ -292,6 +313,8 @@
 				let newprice = pastprice - discount
 				let newdiscount = pastdiscount + discount
 				price = newprice + 50
+				console.log(newprice);
+				console.log(price);
 				$("#total").text(`₹${price.toFixed(2)}`)
 				$("#offerwala").text(`${newdiscount.toFixed(2)}`)
 				}
@@ -335,8 +358,13 @@
 				if (result[0].Status == "Error") {
 					// console.log("Please enter a valid pincode");
 					$("#state").val("Please enter a valid pincode");
+					$("#pincodeError").text("Please enter a valid pincode");	
+					$("#addressadderbtn").prop("disabled", true);	
+									
 				} else {
 					$("#state").val(result[0].PostOffice[0].State);
+					$("#addressadderbtn").prop("disabled", false);	
+
 				}
 				});
 			});
@@ -414,7 +442,27 @@
 
 			
         </script>
+<script>
+	function validatePhoneNumber() {
+		const phoneInput = document.getElementById('phone');
+		const phoneError = document.getElementById('phoneError');
+		
+		// Remove any non-numeric characters from the input
+		const phoneNumber = phoneInput.value.replace(/\D/g, '');
+	
+		if (phoneNumber.length === 10) {
+			phoneError.textContent = ''; // Clear the error message
+			// You can proceed with the form submission or other actions if needed
+			$("#addressadderbtn").prop("disabled", false);	
 
+		} else {
+			phoneError.textContent = 'Please enter a 10-digit phone number.';
+			// You might want to disable form submission or show an additional error message
+			$("#addressadderbtn").prop("disabled", true);	
+
+		}
+	}
+	</script>
 </body>
 
 
