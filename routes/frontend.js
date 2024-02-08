@@ -13,6 +13,8 @@ const secondarybannerModel = require("../models/secondarybanner");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
+const delivery = 50;
+const extradelivery = 30;
 
 function cleanText(inputText) {
   let lowercaseText = inputText.toLowerCase();
@@ -36,7 +38,41 @@ router.get("/", async (req, res) => {
   FProducts = FProducts.filter(
   (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
 );
-  FProducts = FProducts.filter((_, index) => index < 5);
+//   FProducts = FProducts.filter((_, index) => index < 8);
+const groupedProducts = {};
+FProducts.forEach(product => {
+    if (!groupedProducts[product.category._id]) {
+        groupedProducts[product.category._id] = [];
+    }
+    groupedProducts[product.category._id].push(product);
+});
+const numCategories = Object.keys(groupedProducts).length;
+const minProductsPerCategory = Math.floor(8 / numCategories);
+const remainingProducts = 8 % numCategories;
+const productsFromEachCategory = [];
+for (const categoryId in groupedProducts) {
+    if (groupedProducts.hasOwnProperty(categoryId)) {
+        const productsInCategory = groupedProducts[categoryId].slice(0, minProductsPerCategory);
+        productsFromEachCategory.push(...productsInCategory);
+    }
+}
+if (remainingProducts > 0) {
+    const remainingCategories = Object.keys(groupedProducts).slice(0, remainingProducts);
+    remainingCategories.forEach(categoryId => {
+        const productToAdd = groupedProducts[categoryId][minProductsPerCategory];
+        if (productToAdd) {
+            productsFromEachCategory.push(productToAdd);
+        }
+    });
+}
+
+// You can sort the products if needed
+productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
+
+FProducts = productsFromEachCategory;
+
+// You can sort the products if needed
+productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
   let Categories = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 });
@@ -67,7 +103,6 @@ router.get("/", async (req, res) => {
       products,
     })
   );
-  console.log(result);
   result = result.map(categoryData => ({
     category: categoryData.category,
     products: categoryData.products.reduce((uniqueProducts, currentProduct) => {
@@ -196,6 +231,7 @@ router.post("/upload", async (req, res) => {
   allProduct = JSON.parse(allProduct);
   var couponValue = 0;
   var totalValue = 0;
+  var totalweight = 0;
   if (coupon) {
     let couponName = await couponModel.find({ coupon: coupon });
     if (couponName) {
@@ -205,19 +241,21 @@ router.post("/upload", async (req, res) => {
   await Promise.all(
     allProduct.map(async (prod) => {
       let p = await productModel.find({ _id: prod.id });
-
       let quantity = Number(prod.quantity);
       let price = Number(p[0].price);
       let offer = p[0].offer;
       price = price - (price / 100) * offer;
       let total = price * quantity;
-
+      totalweight += (Number(p[0].weight) ? Number(p[0].weight) * quantity : 1 * quantity);
       totalValue += total;
     })
   );
 
   let amount = totalValue - (totalValue / 100) * couponValue;
-  amount = amount + 50;
+  amount = amount + delivery;
+  if(totalweight > 500){
+    amount += extradelivery;
+  }
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 })
@@ -326,6 +364,7 @@ router.post("/checkout", async (req, res) => {
   let cartProducts = await productModel.find({
     _id: { $in: ids },
   });
+  let totalweight = 0;
   let userAddress = await addressModel.find({ user: userid, hidden: 0 });
   if (cartProducts.length === 1) {
     for (let i = 0; i < cartProducts.length; i++) {
@@ -342,6 +381,7 @@ router.post("/checkout", async (req, res) => {
         });
       } else {
         cartProducts[i].quantity = quantity[i];
+        totalweight += (Number(cartProducts[i].weight) ? Number(cartProducts[i].weight) * quantity[i] : 1 * quantity[i]);
       }
     }
   } else {
@@ -365,9 +405,15 @@ router.post("/checkout", async (req, res) => {
           });
         } else {
           cartProducts[i].quantity = quantity[i];
+          totalweight += (Number(cartProducts[i].weight) ? Number(cartProducts[i].weight) * quantity[i] : 1 * quantity[i]);
         }
       }
     }
+  }
+
+  let finaldelivery = delivery;
+  if(totalweight > 500){
+    finaldelivery += extradelivery;
   }
 
   res.render("frontend/checkout.ejs", {
@@ -379,6 +425,7 @@ router.post("/checkout", async (req, res) => {
     addresses: userAddress,
     navCats: navCats,
     info: Info[0],
+    delivery:finaldelivery
   });
 });
  
@@ -404,7 +451,6 @@ router.get("/view/:id", async (req, res) => {
     
       return order.indexOf(sizeA) - order.indexOf(sizeB);
     });
-  console.log(ProductSize)
   let allProds = await productModel
     .find({ _id: { $ne: id },status: "Active" })
     .populate("category", "_id cName");
@@ -420,7 +466,11 @@ router.get("/view/:id", async (req, res) => {
   const url = req.originalUrl;
   const port = process.env.PORT;
   let fullUrl = `${protocol}://${host}:${port}${url}`;
-  console.log(fullUrl);
+  let reviewcheck = await orderModel.find({
+    'user': ObjectId(userid),
+    'allProduct.id': id
+  });
+
   res.render("frontend/single-product.ejs", {
     fullUrl: fullUrl,
     total: total,
@@ -432,6 +482,7 @@ router.get("/view/:id", async (req, res) => {
     user: user,
     userid: userid,
     navCats: navCats,
+    reviewcheck: reviewcheck
   });
 });
 

@@ -412,9 +412,11 @@
                                     </div><!-- End .review -->
 
                                     <% }) %>
-                                    <% if (user) { %>
+                                    <% if (user && reviewcheck.length < 1){ %>
+                                        <center><a href="#">Purchase This Product First</a></center>
+                                    <%} else if (user && reviewcheck.length > 0) { %>
                                         <center><a href="#addreviewmodal" style="text-decoration: underline;color:#333" data-toggle="modal">+ Add Review</a></center>
-                                    <% }else{ %>
+                                    <% } else{ %>
                                         <center><a href="#signin-modal" data-toggle="modal">Login To Add Review</a></center>
                                     <% } %>
                                 </div><!-- End .reviews -->

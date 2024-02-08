@@ -241,7 +241,7 @@
 													<% total = total + (Number(products[index].price)*Number(quantity[index])) %>
 		                						<tr>
 		                							<td><a href="#"><%= products[index].name %></a></td>
-		                							<td><span class="pricesabka" ><%= products[index].price - (products[index].offer * (products[index].price/100)) %></span> x <%= quantity[index] %></td>
+		                							<td><span class="pricesabka" ><%= (products[index].price - (products[index].offer * (products[index].price/100))).toFixed(2) %></span> x <%= quantity[index] %></td>
 		                						</tr>
 												<% } %>	
 												<tr>
@@ -250,7 +250,7 @@
 		                						</tr>
 												<tr>
 		                							<td><a>Delivery Charge</a></td>
-		                							<td>50</td>
+		                							<td><%= delivery %></td>
 		                						</tr>
 
 		                						<tr class="summary-total">
@@ -290,14 +290,12 @@
 			
 			let couponcodepost = '<%= couponcode %>';
 			var price = 0;
-
-
 			let pastprice = Number('<%= totalcost %>')
 			let discount = 0
 			let pastdiscount = Number($("#offerwala").text());
 			let newprice = pastprice - discount
 			let newdiscount = pastdiscount + discount
-			price = newprice + 50
+			price = newprice + Number('<%= delivery %>')
 			$("#total").text(`₹${price.toFixed(2)}`)
 			$("#offerwala").text(`${newdiscount.toFixed(2)}`)
 
@@ -312,7 +310,7 @@
 				let pastdiscount = Number($("#offerwala").text());
 				let newprice = pastprice - discount
 				let newdiscount = pastdiscount + discount
-				price = newprice + 50
+				price = newprice + Number('<%= delivery %>')
 				console.log(newprice);
 				console.log(price);
 				$("#total").text(`₹${price.toFixed(2)}`)
