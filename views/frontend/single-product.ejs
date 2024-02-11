@@ -595,31 +595,363 @@
         </div>
         <div class="modal-body p-3 row" style="height: max-content!important;">
         <% if (product.category.cName.match(/t\-?shirt/i)) { %>
-            <div class="d-flex col-sm-12 col-xs-12 col-md-12" style="align-items: center;justify-content: center; flex-direction: column; max-height: 520px;">
-                <h3 style="font-size: 16px;text-align: center;">Tshirt Size</h3>
-                <img src="/frontend/assets/images/tshirt.jpeg" style="height: 336px;">
+            <div class="d-flex col-sm-12 col-xs-12 col-md-12" style="align-items: center;justify-content: center; flex-direction: column; max-height: 520px;">        
+                <div class="container" style="width:100%;text-align: center;">
+                    <table style="width:100%;">
+                        <h6>T-shirt Size Guide</h6>
+                        <thead style="background-color: #E22520;color: #fff;font-weight: 300;height: 39px;">
+                        <tr>
+                            <th>Size</th>
+                            <th>Dimensions</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background-color: #ffffff;height: 39px;">
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Small</span>
+                            </td>
+                            <td>
+                            <span class="default">36 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Medium</span>
+                            </td>
+                            <td>
+                            <span class="default">38 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Large</span>
+                            </td>
+                            <td>
+                            <span class="default">40 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">42 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">2XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">44 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">3XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">46 inch</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
               </div>
         <% } else if (product.category.cName.match(/tracks.*shorts|shorts.*tracks/i)) {  %>
-            <div class="col-sm-12 col-xs-12 col-md-6">
-                <h3 style="font-size: 16px;text-align: center;">Track Pant Size</h3>
-                <img src="/frontend/assets/images/track.jpeg" style="width: 100%">
-              </div>
-              <div class="col-sm-12 col-xs-12 col-md-6">
-                <h3 style="font-size: 16px;text-align: center;">Shorts Size</h3>
-                <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
-              </div>
+            <div class="col-sm-12 col-xs-12 col-md-12">
+                <div class="container" style="width:100%;text-align: center;">
+                    <table style="width:100%;">
+                        <h6>Tracks & Shorts Size Guide</h6>
+                        <thead style="background-color: #E22520;color: #fff;font-weight: 300;height: 39px;">
+                        <tr>
+                            <th>Size</th>
+                            <th>Waist Size</th>
+                            <th>Tracks Length</th>
+                            <th>Shorts Length</th>
+                        </tr>
+                        </thead>
+                        <tbody style="background-color: #ffffff;height: 39px;">
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">XSmall</span>
+                            </td>
+                            <td>
+                            <span class="default">28 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">38 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">16.5 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Small</span>
+                            </td>
+                            <td>
+                            <span class="default">30 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">40 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">17 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Medium</span>
+                            </td>
+                            <td>
+                            <span class="default">32 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">40 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">17.5 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">Large</span>
+                            </td>
+                            <td>
+                            <span class="default">34 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">40 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">18 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">36 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">40 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">18.5 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">2XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">38 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">42 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">19 inch</span>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                            <td>
+                            <span class="default">3XLarge</span>
+                            </td>
+                            <td>
+                            <span class="default">40 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">42 inch</span>
+                            </td>
+                            <td>
+                                <span class="default">19.5 inch</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         <% } else { %>
-          <div class="col-sm-12 col-xs-12 col-md-3">
-            <h3 style="font-size: 16px;text-align: center;">Tshirt Size</h3>
-            <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
+          <div class="col-sm-12 col-xs-12 col-md-12">
+            <div class="container" style="width:100%;text-align: center;">
+                <table style="width:100%;">
+                    <h6>T-shirt & Sando Size Guide</h6>
+                    <thead style="background-color: #E22520;color: #fff;font-weight: 300;height: 39px;">
+                    <tr>
+                        <th>Size</th>
+                        <th>Dimensions</th>
+                    </tr>
+                    </thead>
+                    <tbody style="background-color: #ffffff;height: 39px;">
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Small</span>
+                        </td>
+                        <td>
+                        <span class="default">36 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Medium</span>
+                        </td>
+                        <td>
+                        <span class="default">38 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Large</span>
+                        </td>
+                        <td>
+                        <span class="default">40 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">42 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">2XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">44 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">3XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">46 inch</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
           </div>
-          <div class="col-sm-12 col-xs-12 col-md-6">
-            <h3 style="font-size: 16px;text-align: center;">Track Pant Size</h3>
-            <img src="/frontend/assets/images/track.jpeg" style="width: 100%">
-          </div>
-          <div class="col-sm-12 col-xs-12 col-md-3">
-            <h3 style="font-size: 16px;text-align: center;">Shorts Size</h3>
-            <img src="/frontend/assets/images/tshirt.jpeg" style="width: 100%">
+          <div class="col-sm-12 col-xs-12 col-md-12 mt-4">
+            <div class="container" style="width:100%;text-align: center;">
+                <table style="width:100%;">
+                    <h6>Tracks & Shorts Size Guide</h6>
+                    <thead style="background-color: #E22520;color: #fff;font-weight: 300;height: 39px;">
+                    <tr>
+                        <th>Size</th>
+                        <th>Waist Size</th>
+                        <th>Tracks Length</th>
+                        <th>Shorts Length</th>
+                    </tr>
+                    </thead>
+                    <tbody style="background-color: #ffffff;height: 39px;">
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">XSmall</span>
+                        </td>
+                        <td>
+                        <span class="default">28 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">38 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">16.5 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Small</span>
+                        </td>
+                        <td>
+                        <span class="default">30 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">40 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">17 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Medium</span>
+                        </td>
+                        <td>
+                        <span class="default">32 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">40 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">17.5 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">Large</span>
+                        </td>
+                        <td>
+                        <span class="default">34 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">40 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">18 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">36 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">40 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">18.5 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">2XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">38 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">42 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">19 inch</span>
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid #dedede;color: #000; font-weight: 400;">
+                        <td>
+                        <span class="default">3XLarge</span>
+                        </td>
+                        <td>
+                        <span class="default">40 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">42 inch</span>
+                        </td>
+                        <td>
+                            <span class="default">19.5 inch</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
           </div>
         <% } %>
         </div>
