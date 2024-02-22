@@ -253,8 +253,16 @@ router.post("/upload", async (req, res) => {
 
   let amount = totalValue - (totalValue / 100) * couponValue;
   amount = amount + delivery;
-  if(totalweight > 500){
-    amount += extradelivery;
+  if(totalweight > 1600 && totalweight <=2600){
+    amount += 20;
+  }else if(totalweight > 2600 && totalweight <=3600){
+    amount += 40
+  }else if(totalweight > 3600 && totalweight <=4600){
+    amount += 60
+  }else if(totalweight > 4600 && totalweight <=5600){
+    amount += 80
+  }else if(totalweight > 5600){
+    amount += 100
   }
   let navCats = await categoryModel
     .find({ cStatus: "Active" })
@@ -271,6 +279,7 @@ router.post("/upload", async (req, res) => {
     address: address,
     prods: prods,
     quant: quant,
+    totalweight: totalweight
   };
   // let order = []
   // if(req.query.order){
@@ -412,8 +421,16 @@ router.post("/checkout", async (req, res) => {
   }
 
   let finaldelivery = delivery;
-  if(totalweight > 500){
-    finaldelivery += extradelivery;
+  if(totalweight > 1600 && totalweight <=2600){
+    finaldelivery += 20;
+  }else if(totalweight > 2600 && totalweight <=3600){
+    finaldelivery += 40
+  }else if(totalweight > 3600 && totalweight <=4600){
+    finaldelivery += 60
+  }else if(totalweight > 4600 && totalweight <=5600){
+    finaldelivery += 80
+  }else if(totalweight > 5600){
+    finaldelivery += 100
   }
 
   res.render("frontend/checkout.ejs", {
@@ -425,7 +442,8 @@ router.post("/checkout", async (req, res) => {
     addresses: userAddress,
     navCats: navCats,
     info: Info[0],
-    delivery:finaldelivery
+    delivery:finaldelivery,
+    totalweight:totalweight
   });
 });
  
@@ -435,15 +453,14 @@ router.get("/view/:id", async (req, res) => {
     .find({ _id: id})
     .populate("category", "_id cName")
     .populate("ratings.user");
+  if(Product.length < 1){
+    res.redirect("/");
+  }
   let SKU = Product[0].SKU;
-  let total = 0;
-  Product[0].ratings.map((rating) => {
-    total = total + Number(rating.rating);
-  });
-  total = total / Product[0].ratings.length;
   let ProductSize = await productModel
     .find({ SKU: SKU,status: "Active" })
-    .populate("category", "_id cName");
+    .populate("category", "_id cName")
+    .populate("ratings.user");
     const order = ["XS", "S", "M", "L", "XL", "XXL"];
     ProductSize = ProductSize.sort((productA, productB) => {
       const sizeA = productA.name.split('-').pop().toUpperCase();
@@ -452,8 +469,20 @@ router.get("/view/:id", async (req, res) => {
       return order.indexOf(sizeA) - order.indexOf(sizeB);
     });
   let allProds = await productModel
-    .find({ _id: { $ne: id },status: "Active" })
+    .find({ SKU: { $ne: SKU },status: "Active" })
     .populate("category", "_id cName");
+  var allReviews = [];
+  ProductSize.forEach(product => {
+    product.ratings.forEach(pro => {
+      allReviews.push(pro);
+    })
+  });
+  let total = 0;
+  allReviews.forEach(r => {
+    total = total + Number(r.rating);
+  });
+  
+  total = total / allReviews.length;
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
   let navCats = await categoryModel
@@ -470,7 +499,6 @@ router.get("/view/:id", async (req, res) => {
     'user': ObjectId(userid),
     'allProduct.id': id
   });
-
   res.render("frontend/single-product.ejs", {
     fullUrl: fullUrl,
     total: total,
@@ -482,7 +510,8 @@ router.get("/view/:id", async (req, res) => {
     user: user,
     userid: userid,
     navCats: navCats,
-    reviewcheck: reviewcheck
+    reviewcheck: reviewcheck,
+    allReviews:allReviews
   });
 });
 

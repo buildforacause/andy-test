@@ -135,6 +135,15 @@
         min-width: 0px!important;
     }
 }
+.example123::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example123 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
     </style>
 </head>
@@ -202,7 +211,7 @@
                                         <span style="font-size: 14px;padding: 4px 14px;color: white;background-color: #E22520;margin-left: 10px!important;border-radius: 5px;">-<%= product.offer %>%</span>
                                             <% } %>
                                     </h1><!-- End .product-title -->
-                                <% if (product.ratings.length > 0) { %>
+                                <% if (allReviews.length > 0) { %>
                                  
                                 
                                     <div class="ratings-container">
@@ -210,7 +219,7 @@
                                             <div class="ratings-val" style="width: <%= total %>%;"></div>
                                         </div>
                                         
-                                        <a class="ratings-text" href="#product-review-link" id="review-link">( <%= product.ratings.length %> Reviews )</a>
+                                        <a class="ratings-text" href="#product-review-link" id="review-link">( <%= allReviews.length %> Reviews )</a>
                                     </div>
                                     <% } else {%>
                                         <div class="ratings-container" >                                            
@@ -235,7 +244,7 @@
                                     </div><!-- End .product-content -->
                                     <label for="size" style="color:#afafaf;margin-bottom:0;font-weight: 400;">Available Sizes:</label>
                                     <div class="details-filter-row details-row-size">
-                                        <div style="display: flex; gap: 20px;">
+                                        <div class="example123" style="display: flex; gap: 20px;overflow:scroll;">
                                             <% productsizes.forEach(productsize => { %>
                                             <a href="/view/<%=productsize._id%>">
                                                 <div class="productsizecard" style="text-align: center;border-radius: 10px;padding: 5px;border:1px solid #dbdbdb;<%= (productsize._id.toString() === product._id.toString()) ? "background-color: #ebebeb!important;" : "background-color: white;" %>" >
@@ -295,7 +304,7 @@
                                 <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (<%= product.ratings.length %>)</a>
+                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (<%= allReviews.length %>)</a>
                             </li>
                         </ul>
                         <div class="tab-content" style="border-radius: 15px;">
@@ -316,12 +325,12 @@
                             </div><!-- .End .tab-pane -->
                             <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
-                                    <% product.ratings.forEach(rating => { %>
+                                    <% allReviews.forEach(rating => { %>
                                      
                                     
                                     <div class="review">
                                         <div class="row no-gutters">
-                                            <div class="col-auto">
+                                            <div class="col-3">
                                                 <h4><a href="#"><%= rating.user.name %></a></h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings">
@@ -338,7 +347,7 @@
 
                                                 <span class="review-date"><%= newdate %></span>
                                             </div><!-- End .col -->
-                                            <div class="col">
+                                            <div class="col-8">
                                                 <div class="review-content">
                                                     <p><%= rating.review %></p>
                                                 </div><!-- End .review-content -->
