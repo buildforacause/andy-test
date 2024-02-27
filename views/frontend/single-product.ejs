@@ -135,15 +135,22 @@
         min-width: 0px!important;
     }
 }
-.example123::-webkit-scrollbar {
-  display: none;
+.example123::-webkit-scrollbar
+{
+	background-color: #F5F5F5;
+    height: 5px;
+}
+.example123::-webkit-scrollbar-thumb
+{
+	background-color: #333;
+    height: 5px;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.example123 {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+/* .example123 {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} */
 
     </style>
 </head>
