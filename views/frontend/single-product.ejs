@@ -249,7 +249,7 @@
                                             <a href="/view/<%=productsize._id%>">
                                                 <div class="productsizecard" style="text-align: center;border-radius: 10px;padding: 5px;border:1px solid #dbdbdb;<%= (productsize._id.toString() === product._id.toString()) ? "background-color: #ebebeb!important;" : "background-color: white;" %>" >
                                                     <div class="productsizecardimg" style="width: 60px;height:60px;display: flex;align-items: center;justify-content: center;overflow: hidden;">
-                                                        <img style="height:100%;width: auto;border:1px solid #dedede;border-radius: 8px;" src="<%= productsize.image[0] %>">
+                                                        <img style="height:100%;width: auto;border:1px solid #dedede;border-radius: 8px;" src="<%= product.image[0] %>">
                                                     </div>
                                                     <p style="line-height: 1.4rem;transition:0.3s;margin: 7px 0 2px;<%= (productsize._id.toString() === product._id.toString()) ? "color: black!important;" : "" %>" ><%= productsize.name.split("-")[1] %></p>
                                                 </div>
