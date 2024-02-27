@@ -461,7 +461,7 @@ router.get("/view/:id", async (req, res) => {
     .find({ SKU: SKU,status: "Active" })
     .populate("category", "_id cName")
     .populate("ratings.user");
-    const order = ["XS", "S", "M", "L", "XL", "XXL"];
+    const order = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
     ProductSize = ProductSize.sort((productA, productB) => {
       const sizeA = productA.name.split('-').pop().toUpperCase();
       const sizeB = productB.name.split('-').pop().toUpperCase();

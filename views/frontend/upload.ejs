@@ -26,7 +26,9 @@
   <link rel="stylesheet" href="frontend/assets/css/plugins/magnific-popup/magnific-popup.css">
   <!-- Main CSS File -->
   <link rel="stylesheet" href="frontend/assets/css/style.css">
-  <link rel="stylesheet" href="frontend/assets/css/plugins/nouislider/nouislider.css">
+  <link rel="stylesheet" href="frontend/assets/css/skins/skin-demo-8.css">
+  <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
     .btn-outline-primary-2:hover{
       background-color: #333!important;
@@ -70,14 +72,17 @@
                       <input accept="image/*" type="file" onchange="checkSize(this)" class="form-control" id="image" name="image" required>
                     </div>
 
-                    <div class="form-footer col-md-12">
+                    <div class="form-footer col-md-12 d-flex" style="flex-direction: row; gap: 10px;">
+                      <a href="/shop" class="btn btn-outline-primary-2 btn-order">
+                        <span style="color: #333;">Continue Shopping</span>
+                        <i style="color: #333;" class="icon-long-arrow-right"></i>
+                      </a>
                       <button type="submit" class="btn btn-outline-primary-2 btn-order">
                         <span style="color: #333;">I Made The Payment</span>
                         <i style="color: #333;" class="icon-long-arrow-right"></i>
                       </button>
-                      
-                      <!-- <a href="#" class="forgot-link">Forgot Your Password?</a> -->
                     </div>
+                    
                     <!-- End .form-footer -->
                   </form>
                 </div>
