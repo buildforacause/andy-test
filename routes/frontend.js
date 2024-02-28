@@ -23,6 +23,11 @@ function cleanText(inputText) {
 }
 
 router.get("/", async (req, res) => {
+  const targetDate = new Date('February 28, 2024 11:00:00 GMT+0530');
+  const currentDate = new Date();
+  if (currentDate.getTime() < targetDate.getTime()) {
+      return res.redirect('/timer');
+  }
   let Products = await productModel
     .find({ featured: true, status: "Active" })
     .populate("category", "_id cName")
@@ -471,6 +476,14 @@ router.get("/view/:id", async (req, res) => {
   let allProds = await productModel
     .find({ SKU: { $ne: SKU },status: "Active" })
     .populate("category", "_id cName");
+  let uniqueProds = {};
+  let uniqueProducts = [];
+  allProds.forEach(prod => {
+      if (!uniqueProds[prod.SKU]) {
+          uniqueProds[prod.SKU] = true;
+          uniqueProducts.push(prod);
+      }
+  });
   var allReviews = [];
   ProductSize.forEach(product => {
     product.ratings.forEach(pro => {
@@ -506,7 +519,7 @@ router.get("/view/:id", async (req, res) => {
     userid: userid,
     product: Product[0],
     productsizes: ProductSize,
-    allProds: allProds,
+    allProds: uniqueProducts,
     user: user,
     userid: userid,
     navCats: navCats,
@@ -630,6 +643,15 @@ router.get("/confirming-order-details", (req, res) => {
   res.render("frontend/confirm.ejs");
 });
 
+router.get("/timer", (req, res) => {
+  const targetDate = new Date('February 28, 2024 11:00:00 GMT+0530');
+  const currentDate = new Date();
+  if (currentDate.getTime() >= targetDate.getTime()) {
+      return res.redirect('/');
+  }
+  res.render("frontend/timer.ejs");
+});
+
 router.get('/verify', async (req, res) => {
   const { token } = req.query;
 
@@ -658,5 +680,7 @@ router.get('/verify', async (req, res) => {
 
   res.send(htmlResponse);
 });
+
+
 
 module.exports = router;
