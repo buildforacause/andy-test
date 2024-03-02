@@ -89,7 +89,7 @@
                     <td><a href="/track?of=<%= order._id %>">View</a></td>
                     <td><%= order.coupon ? order.coupon : "No" %></td>
                     <td>
-                      <form id="update-order">
+                      <form id="update-order<%= order._id %>">
                         <input type="hidden" name="oId" id="oId" value="<%= order._id %>">
                         <input type="hidden" name="trackingid" class="trackingid" value="">
                         <input type="hidden" name="trackingcompany" class="trackingcompany" value="">
@@ -194,7 +194,7 @@
     });
 
 
-    const $form3 = $('#update-order')
+    
     $(".form-select").on('input', function() {
       $(this).siblings('.trackingcompany').val("");
       $(this).siblings('.trackingid').val("");
@@ -251,7 +251,9 @@
         $(this).siblings('.trackingcompany').val(trackingModalOperator);
         $(this).siblings('.trackingid').val(trackingModalId);
       }
-      // alert($form3.serialize());
+
+      let orderId = $(this).siblings("#oId").val()
+      const $form3 = $('#update-order' + orderId)
       $.ajax({
         url: '/api/order/update-order',
         type: 'POST',
