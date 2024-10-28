@@ -129,7 +129,7 @@ class Auth {
         } else {
           // If Email & Number exists in Database then:
           try {
-            
+
             password = bcrypt.hashSync(password, 10);
             const data = await userModel.findOne({ email: email });
             if (data) {
@@ -153,7 +153,7 @@ class Auth {
               });
               const verificationLink = `https://www.mayursports.com/verify?token=${verificationToken}`;
               let res123 = await newUser.save();
-              if(res123){
+              if (res123) {
                 let subject = 'Email Verification | Mayur Sports';
                 let text = `<div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                               <h2 style="color: #007bff;">Email Verification:</h2>
@@ -164,11 +164,11 @@ class Auth {
                               </div>
                             </div>`;
                 let abc = await sendEmailNoReply(email, subject, text);
-                if(abc){
+                if (abc) {
                   return res.json({
                     success: "Success! An Email has been sent on your registered email address.",
                   });
-                }else{
+                } else {
                   let data1 = await userModel.findOneAndDelete({ email: email });
                   error = {
                     ...error,
@@ -180,7 +180,7 @@ class Auth {
                   };
                   return res.json({ error });
                 }
-              }else {
+              } else {
                 error = {
                   ...error,
                   password: "",
@@ -256,9 +256,9 @@ class Auth {
                 userRole: 2, // role = 0 admin , role = 1 customer, role = 2 influencer
                 verified: "YES"
               });
-              
+
               let res123 = await newUser.save();
-              if(res123){
+              if (res123) {
                 let subject = 'Khush Toh Bohot Honge Tum 😎';
                 let text = `
                 <div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
@@ -281,17 +281,17 @@ class Auth {
                 </div>
                 `;
                 let abc = await sendEmail(email, subject, text);
-                if(abc){
+                if (abc) {
                   return res.json({
                     success: "Account created successfully. Please login",
                   });
-                }else{
+                } else {
                   return res.json({
                     success: "Account created successfully. EMAIL ERROR",
                   });
                 }
-              }else {
-                  console.log(err);
+              } else {
+                console.log(err);
               };
             }
           } catch (err) {
@@ -371,6 +371,82 @@ class Auth {
     }
   }
 
+  async emailVerification(req, res) {
+    let { email } = req.body;
+    let error = {};
+    console.log("Inside Function");
+    if (!email) {
+      return res.json({
+        error: "Email cannot be empty!",
+      });
+    } else if (validateEmail(email)) {
+      try {
+        const data = await userModel.findOne({ email: email });
+        if (!data) {
+          error = "Sorry email is not registered with us";
+          return res.json({ error });
+        } else {
+          const verificationToken = uuid.v4();
+          let data1 = await userModel.findOneAndUpdate({ email: email }, { secretKey: verificationToken, pwdReset: "No" })
+          const verificationLink = `https://www.mayursports.com/resetpassword?token=${verificationToken}`;
+          if (data1) {
+            let subject = 'Reset Password | Mayur Sports';
+            let text = `<div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                            <h2 style="color: #007bff;">Reset Password:</h2>
+                            <p>Dear ${data.name},</p>
+                            <p>To reset your password, please click on this link: <a href="${verificationLink}">Reset Password</a></p>
+                            <div style="text-align: center; padding: 10px; background-color: #f5f5f5;">
+                              <p style="color: #333;">Follow us on social media: <a href="https://www.facebook.com/mayursports1/">Facebook</a> | <a href="https://www.instagram.com/mayursports1/">Instagram</a></p>
+                            </div>
+                          </div>`;
+            let abc = await sendEmailNoReply(email, subject, text);
+            if (abc) {
+              return res.json({
+                success: "Success! An Email has been sent on your registered email address.",
+              });
+            } else {
+              error = "Something Went Wrong!";
+              return res.json({ error });
+            }
+          } else {
+            error = "Something Went Wrong!";
+            return res.json({ error });
+          };
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      error = "Email is not valid";
+      return res.json({ error });
+    }
+  }
+
+  async resetPassword(req, res) {
+    let { password, uId, name, email } = req.body;
+    if (password) {
+      password = bcrypt.hashSync(password, 10);
+      let passChange = userModel.findByIdAndUpdate(uId, {
+        password: password,
+      });
+      let subject = 'Password Has Been Changed | Mayur Sports';
+      let text = `<div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        <h2 style="color: #007bff;">Password Changed:</h2>
+                        <p>Dear ${name},</p>
+                        <p>Your password to login at Mayur Sports was changed successfully! <br> Shop for trending products <a href="https://www.mayursports.com/shop">here</a>.</p>
+                        <div style="text-align: center; padding: 10px; background-color: #f5f5f5;">
+                          <p style="color: #333;">Follow us on social media: <a href="https://www.facebook.com/mayursports1/">Facebook</a> | <a href="https://www.instagram.com/mayursports1/">Instagram</a></p>
+                        </div>
+                      </div>`;
+      let abc = await sendEmailNoReply(email, subject, text);
+
+      passChange.exec((err, result) => {
+        if (err) console.log(err);
+        return res.json({ success: "Password updated successfully" });
+      });
+    }
+  }
+
   // // Configure Google OAuth 2.0 strategy
   //   passport.use(new GoogleStrategy({
   //     clientID: 'your-client-id',
@@ -402,7 +478,7 @@ class Auth {
   //         });
   //       }
   //     });
-  
+
   //     return done(null, profile);
   //   }
   // ));

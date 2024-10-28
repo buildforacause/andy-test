@@ -3,23 +3,26 @@
 
 <head>
   <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="JVSH Technologies">
-    <meta name="description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
-    <meta property="og:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
-    <meta property="og:description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
-    <meta property="og:image" content="frontend/assets/images/demos/demo-8/logo.png">
-    <meta name="twitter:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
-    <meta name="twitter:description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="JVSH Technologies">
+  <meta name="description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta property="og:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
+  <meta property="og:description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta property="og:image" content="frontend/assets/images/demos/demo-8/logo.png">
+  <meta name="twitter:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
+  <meta name="twitter:description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Make Payment | Mayur Sports</title>
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <!-- Plugins CSS File -->
   <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="frontend/assets/css/plugins/owl-carousel/owl.carousel.css">
@@ -30,11 +33,15 @@
   <link rel="stylesheet" href="frontend/assets/css/demos/demo-8.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
-    .btn-outline-primary-2:hover{
-      background-color: #333!important;
+    .btn-outline-primary-2:hover {
+      background-color: #333 !important;
     }
-    .btn-outline-primary-2:hover span{
-      color: white!important;
+
+    .btn-outline-primary-2:hover span {
+      color: white !important;
+    }
+    #copyText{
+      cursor: pointer;
     }
   </style>
 </head>
@@ -51,15 +58,21 @@
               <div class="col-md-12" style="margin: 10px;">
                 <center>
                   <h2 class="title title-lg mt-1">Make Payment</h2>
-                  <p>After making the payment, please upload the screenshot of the payment and wait for the order confirmation by our team!</p>
-                    <br><br>
-                    <img src="/uploads/qr.jpg" alt="QR" style="max-height: 350px;" >
-                    <br><br>
-                    <h4>Total Amount To Be Paid: Rs. <span style="color:red"><%= (data.amount).toFixed(2) %></span></h4>
+                  <p>After making the payment, please upload the screenshot of the payment and wait for the order
+                    confirmation by our team!</p>
+                  <br><br>
+                  <img src="/uploads/qr.jpg" alt="QR" style="max-height: 350px;">
+                  <br>
+                  <b id="copyText"><i class='bx bx-copy'></i>&nbsp; UPI - mayurjadhav0211-4@okicici</b><p id="message"></p>
+                  <br>
+                  <h4>Total Amount To Be Paid: Rs. <span style="color:red">
+                      <%= (data.amount).toFixed(2) %>
+                    </span></h4>
                 </center>
 
-                <div class="row" style="border:1px solid #e7e7e7;text-align: left;align-self: self-start;padding: 1rem;align-self: stretch;margin-bottom: 1rem;">
-                  <form  action="/api/order/create-order" method="POST" enctype="multipart/form-data">
+                <div class="row"
+                  style="border:1px solid #e7e7e7;text-align: left;align-self: self-start;padding: 1rem;align-self: stretch;margin-bottom: 1rem;">
+                  <form action="/api/order/create-order" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="user" value="<%= data.user %>">
                     <input type="hidden" name="allProduct" value="<%= data.allProduct %>">
                     <input type="hidden" name="address" value="<%= data.address %>">
@@ -69,7 +82,8 @@
                     <center><span id="adresponse" class="text-danger"></span></center>
                     <div class="form-group col-md-12">
                       <label for="image">Payment Screenshot *</label>
-                      <input accept="image/*" type="file" onchange="checkSize(this)" class="form-control" id="image" name="image" required>
+                      <input accept="image/*" type="file" onchange="checkSize(this)" class="form-control" id="image"
+                        name="image" required>
                     </div>
 
                     <div class="form-footer col-md-12 d-flex" style="flex-direction: row; gap: 10px;">
@@ -82,7 +96,7 @@
                         <i style="color: #333;" class="icon-long-arrow-right"></i>
                       </button>
                     </div>
-                    
+
                     <!-- End .form-footer -->
                   </form>
                 </div>
@@ -93,16 +107,31 @@
       </div><!-- End .page-content -->
     </main><!-- End .main -->
 
-<script type="text/javascript"> 
-    window.history.forward(); 
+    <script type="text/javascript">
+      window.history.forward();
       function checkSize(input) {
-        let size = input.files[0]?.size || 0 ;
-        if( size > 4194304){
+        let size = input.files[0]?.size || 0;
+        if (size > 4194304) {
           alert('File size exceeds the maximum limit of 4 MB');
           input.value = "";
         }
       }
-  </script> 
+      document.addEventListener('DOMContentLoaded', () => {
+        const copyTextElement = document.getElementById('copyText');
+        copyTextElement.addEventListener('click', () => {
+          const textToCopy = "mayurjadhav0211-4@okicici";
+          if (!navigator.clipboard) {
+            console.error('Clipboard API not supported');
+          } else {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              document.getElementById('message').innerText = "Text copied!";
+            }).catch(err => {
+              console.log('Failed to copy: ', err);
+            });
+          }
+        });
+      });
+    </script>
     <%- include('./footer.ejs') %>
 
 </body>

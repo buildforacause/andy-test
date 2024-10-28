@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    pwdReset: {
+      type: String,
+      default: "false",
+    },
 
   },
   { timestamps: true }

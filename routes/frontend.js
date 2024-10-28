@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
   const targetDate = new Date('February 28, 2024 11:00:00 GMT+0530');
   const currentDate = new Date();
   if (currentDate.getTime() < targetDate.getTime()) {
-      return res.redirect('/timer');
+    return res.redirect('/timer');
   }
   let Products = await productModel
     .find({ featured: true, status: "Active" })
@@ -37,47 +37,47 @@ router.get("/", async (req, res) => {
   );
   Products = Products.filter((_, index) => index < 5);
   let FProducts = await productModel
-  .find({ status: "Active" })
-  .populate("category", "_id cName")
-  .sort({ createdAt: -1 });
+    .find({ status: "Active" })
+    .populate("category", "_id cName")
+    .sort({ createdAt: -1 });
   FProducts = FProducts.filter(
-  (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
-);
-//   FProducts = FProducts.filter((_, index) => index < 8);
-const groupedProducts = {};
-FProducts.forEach(product => {
+    (value, index, self) => index === self.findIndex((t) => t.SKU === value.SKU)
+  );
+  //   FProducts = FProducts.filter((_, index) => index < 8);
+  const groupedProducts = {};
+  FProducts.forEach(product => {
     if (!groupedProducts[product.category._id]) {
-        groupedProducts[product.category._id] = [];
+      groupedProducts[product.category._id] = [];
     }
     groupedProducts[product.category._id].push(product);
-});
-const numCategories = Object.keys(groupedProducts).length;
-const minProductsPerCategory = Math.floor(8 / numCategories);
-const remainingProducts = 8 % numCategories;
-const productsFromEachCategory = [];
-for (const categoryId in groupedProducts) {
+  });
+  const numCategories = Object.keys(groupedProducts).length;
+  const minProductsPerCategory = Math.floor(8 / numCategories);
+  const remainingProducts = 8 % numCategories;
+  const productsFromEachCategory = [];
+  for (const categoryId in groupedProducts) {
     if (groupedProducts.hasOwnProperty(categoryId)) {
-        const productsInCategory = groupedProducts[categoryId].slice(0, minProductsPerCategory);
-        productsFromEachCategory.push(...productsInCategory);
+      const productsInCategory = groupedProducts[categoryId].slice(0, minProductsPerCategory);
+      productsFromEachCategory.push(...productsInCategory);
     }
-}
-if (remainingProducts > 0) {
+  }
+  if (remainingProducts > 0) {
     const remainingCategories = Object.keys(groupedProducts).slice(0, remainingProducts);
     remainingCategories.forEach(categoryId => {
-        const productToAdd = groupedProducts[categoryId][minProductsPerCategory];
-        if (productToAdd) {
-            productsFromEachCategory.push(productToAdd);
-        }
+      const productToAdd = groupedProducts[categoryId][minProductsPerCategory];
+      if (productToAdd) {
+        productsFromEachCategory.push(productToAdd);
+      }
     });
-}
+  }
 
-// You can sort the products if needed
-productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
+  // You can sort the products if needed
+  productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
 
-FProducts = productsFromEachCategory;
+  FProducts = productsFromEachCategory;
 
-// You can sort the products if needed
-productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
+  // You can sort the products if needed
+  productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.category.cName));
   let Categories = await categoryModel
     .find({ cStatus: "Active" })
     .sort({ _id: -1 });
@@ -88,7 +88,7 @@ productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.categor
   let banner = await secondarybannerModel.find({});
 
   let allProducts = await productModel
-    .find({status: "Active"})
+    .find({ status: "Active" })
     .populate("category")
     .sort({ createdAt: -1 });
   const top5RecentProductsByCategory = new Map();
@@ -115,7 +115,7 @@ productsFromEachCategory.sort((a, b) => a.category.cName.localeCompare(b.categor
       if (!isDuplicate) {
         uniqueProducts.push(currentProduct);
       }
-  
+
       return uniqueProducts;
     }, []),
   }));
@@ -179,7 +179,7 @@ router.get("/dashboard", async (req, res) => {
     .populate("allProduct.id", "name image price")
     .populate("address", "aaddress aphone aname acity apincode")
     .sort({ _id: -1 });
-  let inforders = await couponModel.find({user:userid, status:1})
+  let inforders = await couponModel.find({ user: userid, status: 1 })
   res.render("frontend/dashboard.ejs", {
     inforders: inforders,
     orders: orders,
@@ -258,15 +258,15 @@ router.post("/upload", async (req, res) => {
 
   let amount = totalValue - (totalValue / 100) * couponValue;
   amount = amount + delivery;
-  if(totalweight > 1600 && totalweight <=2600){
+  if (totalweight > 1600 && totalweight <= 2600) {
     amount += 20;
-  }else if(totalweight > 2600 && totalweight <=3600){
+  } else if (totalweight > 2600 && totalweight <= 3600) {
     amount += 40
-  }else if(totalweight > 3600 && totalweight <=4600){
+  } else if (totalweight > 3600 && totalweight <= 4600) {
     amount += 60
-  }else if(totalweight > 4600 && totalweight <=5600){
+  } else if (totalweight > 4600 && totalweight <= 5600) {
     amount += 80
-  }else if(totalweight > 5600){
+  } else if (totalweight > 5600) {
     amount += 100
   }
   let navCats = await categoryModel
@@ -303,7 +303,7 @@ router.post("/upload", async (req, res) => {
   // }else{
   //     res.redirect("/dashboard");
   // }
-  if(req.body.allProduct){
+  if (req.body.allProduct) {
     return res.render("frontend/upload.ejs", {
       data: data,
       user: user,
@@ -311,9 +311,9 @@ router.post("/upload", async (req, res) => {
       navCats: navCats,
       info: Info[0],
     });
-}else{
-  res.redirect("/dashboard");
-}
+  } else {
+    res.redirect("/dashboard");
+  }
 });
 
 router.get("/return", async (req, res) => {
@@ -341,7 +341,7 @@ router.get("/return", async (req, res) => {
     //if order id doesnt exist or if given order id's user isnt the same47
 
 
-    
+
   }
   res.render("frontend/return.ejs", {
     order: orders[0],
@@ -426,15 +426,15 @@ router.post("/checkout", async (req, res) => {
   }
 
   let finaldelivery = delivery;
-  if(totalweight > 1600 && totalweight <=2600){
+  if (totalweight > 1600 && totalweight <= 2600) {
     finaldelivery += 20;
-  }else if(totalweight > 2600 && totalweight <=3600){
+  } else if (totalweight > 2600 && totalweight <= 3600) {
     finaldelivery += 40
-  }else if(totalweight > 3600 && totalweight <=4600){
+  } else if (totalweight > 3600 && totalweight <= 4600) {
     finaldelivery += 60
-  }else if(totalweight > 4600 && totalweight <=5600){
+  } else if (totalweight > 4600 && totalweight <= 5600) {
     finaldelivery += 80
-  }else if(totalweight > 5600){
+  } else if (totalweight > 5600) {
     finaldelivery += 100
   }
 
@@ -447,42 +447,42 @@ router.post("/checkout", async (req, res) => {
     addresses: userAddress,
     navCats: navCats,
     info: Info[0],
-    delivery:finaldelivery,
-    totalweight:totalweight
+    delivery: finaldelivery,
+    totalweight: totalweight
   });
 });
- 
+
 router.get("/view/:id", async (req, res) => {
   let id = req.params.id;
   let Product = await productModel
-    .find({ _id: id})
+    .find({ _id: id })
     .populate("category", "_id cName")
     .populate("ratings.user");
-  if(Product.length < 1){
+  if (Product.length < 1) {
     res.redirect("/");
   }
   let SKU = Product[0].SKU;
   let ProductSize = await productModel
-    .find({ SKU: SKU,status: "Active" })
+    .find({ SKU: SKU, status: "Active" })
     .populate("category", "_id cName")
     .populate("ratings.user");
-    const order = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
-    ProductSize = ProductSize.sort((productA, productB) => {
-      const sizeA = productA.name.split('-').pop().toUpperCase();
-      const sizeB = productB.name.split('-').pop().toUpperCase();
-    
-      return order.indexOf(sizeA) - order.indexOf(sizeB);
-    });
+  const order = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+  ProductSize = ProductSize.sort((productA, productB) => {
+    const sizeA = productA.name.split('-').pop().toUpperCase();
+    const sizeB = productB.name.split('-').pop().toUpperCase();
+
+    return order.indexOf(sizeA) - order.indexOf(sizeB);
+  });
   let allProds = await productModel
-    .find({ SKU: { $ne: SKU },status: "Active" })
+    .find({ SKU: { $ne: SKU }, status: "Active" })
     .populate("category", "_id cName");
   let uniqueProds = {};
   let uniqueProducts = [];
   allProds.forEach(prod => {
-      if (!uniqueProds[prod.SKU]) {
-          uniqueProds[prod.SKU] = true;
-          uniqueProducts.push(prod);
-      }
+    if (!uniqueProds[prod.SKU]) {
+      uniqueProds[prod.SKU] = true;
+      uniqueProducts.push(prod);
+    }
   });
   var allReviews = [];
   ProductSize.forEach(product => {
@@ -494,7 +494,7 @@ router.get("/view/:id", async (req, res) => {
   allReviews.forEach(r => {
     total = total + Number(r.rating);
   });
-  
+
   total = total / allReviews.length;
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
@@ -524,7 +524,7 @@ router.get("/view/:id", async (req, res) => {
     userid: userid,
     navCats: navCats,
     reviewcheck: reviewcheck,
-    allReviews:allReviews
+    allReviews: allReviews
   });
 });
 
@@ -546,7 +546,7 @@ router.get("/shop", async (req, res) => {
       return res.redirect("/");
     }
   } else if (req.query.s) {
-    const searchTerms=cleanText(req.query.s).split(/\s+/).map(term => new RegExp(term, 'i'));
+    const searchTerms = cleanText(req.query.s).split(/\s+/).map(term => new RegExp(term, 'i'));
     console.log(searchTerms);
     allProds = await productModel
       .find({
@@ -556,7 +556,7 @@ router.get("/shop", async (req, res) => {
               { name: { $in: searchTerms } },
               { description: { $in: searchTerms } },
               { material: { $in: searchTerms } },
-              { searchTerms: {$in: searchTerms}},
+              { searchTerms: { $in: searchTerms } },
             ]
           },
           { status: "Active" },
@@ -566,7 +566,7 @@ router.get("/shop", async (req, res) => {
     title = "Search Results For " + req.query.s;
   } else {
     allProds = await productModel
-      .find({ status: "Active"})
+      .find({ status: "Active" })
       .populate("category", "_id cName");
     title = "All Products";
   }
@@ -592,28 +592,28 @@ router.get("/shop", async (req, res) => {
   }
 
   //filter based on max price
-  if (req.query.maxrate){
-    allProds=allProds.filter(product=>product.price<=req.query.maxrate);
+  if (req.query.maxrate) {
+    allProds = allProds.filter(product => product.price <= req.query.maxrate);
   }
 
-  if(req.query.sortby){
-    if (req.query.sortby==2){
-        allProds.sort((a, b) => a.price - b.price);
+  if (req.query.sortby) {
+    if (req.query.sortby == 2) {
+      allProds.sort((a, b) => a.price - b.price);
     }
-    if (req.query.sortby==3){
-        allProds.sort((a, b) => b.price - a.price);
+    if (req.query.sortby == 3) {
+      allProds.sort((a, b) => b.price - a.price);
     }
-    if (req.query.sortby==4){
-        allProds.sort((a, b) => b.offer - a.offer);
+    if (req.query.sortby == 4) {
+      allProds.sort((a, b) => b.offer - a.offer);
 
     }
   }
   let currMaxPrice = maxPrice;
-  if(req.query.maxrate){
+  if (req.query.maxrate) {
     currMaxPrice = req.query.maxrate
   }
   let sortby = 1;
-  if(req.query.sortby){
+  if (req.query.sortby) {
     sortby = req.query.sortby
   }
   res.render("frontend/results.ejs", {
@@ -627,7 +627,7 @@ router.get("/shop", async (req, res) => {
     maxPrice: maxPrice,
     curMaxPrice: currMaxPrice,
     sortby: sortby,
-    filteredby: req.query.filterby||""
+    filteredby: req.query.filterby || ""
   });
 });
 
@@ -647,7 +647,7 @@ router.get("/timer", (req, res) => {
   const targetDate = new Date('February 28, 2024 11:00:00 GMT+0530');
   const currentDate = new Date();
   if (currentDate.getTime() >= targetDate.getTime()) {
-      return res.redirect('/');
+    return res.redirect('/');
   }
   res.render("frontend/timer.ejs");
 });
@@ -655,7 +655,7 @@ router.get("/timer", (req, res) => {
 router.get('/verify', async (req, res) => {
   const { token } = req.query;
 
-  const user = await userModel.findOneAndUpdate({secretKey:token}, {verified: "YES"});
+  const user = await userModel.findOneAndUpdate({ secretKey: token }, { verified: "YES" });
 
   if (!user) {
     return res.status(404).send('Invalid verification token');
@@ -682,5 +682,47 @@ router.get('/verify', async (req, res) => {
 });
 
 
+router.get('/emailverification', async (req, res) => {
+  let Info = await infoModel.find({});
+  let user = req.cookies.autOken;
+  res.render('frontend/emailverification.ejs', {
+    info: Info[0],
+    user: user,
+  });
+});
+
+
+router.get('/resetpassword', async (req, res) => {
+  let Info = await infoModel.find({});
+  let user = req.cookies.autOken;
+  const { token } = req.query;
+  let data = await userModel.find({ secretKey: token });
+  if (data != "" && data[0].pwdReset == "No") {
+    const verified = await userModel.findOneAndUpdate({ secretKey: token }, { pwdReset: "YES" });
+    if (!verified) {
+      return res.send('Invalid verification token. If you think it is a mistake then please contact the administrator.');
+    }
+    console.log("Condition true");
+    res.render('frontend/resetpassword.ejs', {
+      info: Info[0],
+      user: user,
+      userData: data[0]
+    });
+  } else {
+    console.log("Inside ELse");
+    const htmlResponse = `
+    <html>
+      <head>
+        <meta http-equiv="refresh" content="5;url=/">
+      </head>
+      <body>
+        <h1>Invalid verification token. If you think it is a mistake then please contact the administrator.</h1>
+      </body>
+    </html>
+  `;
+
+   return res.send(htmlResponse);
+  }
+});
 
 module.exports = router;

@@ -20658,3 +20658,12 @@ header{
   align-items: center;
   z-index: 9999;
 }
+
+
+.page-card{
+  display: flex;
+  height: inherit;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

@@ -70,6 +70,7 @@
 
                                     <tr>
                                         <th>Order Id</th>
+                                        <th>Rejected Date</th>
                                         <th>User Name</th>
                                         <th>User Phone</th>
                                         <th>Amount</th>
@@ -83,6 +84,7 @@
 
                                         <tr>
                                             <td><%= order._id %></td>
+                                            <td class="daterejected"><%= new Date(order.createdAt) %></td>
                                             <td><%= order.user.name %></td>
                                             <td><%= (order.address !== null ? order.address.aphone : 0) %></td>
                                             <td><%= order.amount %></td>
@@ -144,6 +146,21 @@
 
                             <script>
                                 $(document).ready(function() {
+                                    $('.daterejected').each(function () {
+                                        const originalDate = new Date($(this).text());
+                                        const options = {
+                                            weekday: 'long',
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                            // hour: 'numeric',
+                                            // minute: 'numeric',
+                                            // timeZoneName: 'short'
+                                        };
+
+                                    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(originalDate);
+                                        $(this).text(formattedDate);
+                                    });
                                     $('#tblUser').DataTable(
                                       
                                     );

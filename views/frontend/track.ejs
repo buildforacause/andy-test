@@ -267,8 +267,8 @@
                                   <% if (order.refund) { %>
                                     <p style="margin: 0px;">View return details</p>    
                                     <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return details</a>
-                                  <% } else if (new Date() - order.updatedAt < 86400000) { %>
-                                  <p style="margin: 0px;">Not satisfied with your order? Return within 30 days!</p>
+                                  <% } else if (new Date() - order.updatedAt < 7*86400000) { %>
+                                  <p style="margin: 0px;">Not satisfied with your order? Return within 7 days! <b>(No returns if MRP tag is removed)</b></p>
                                   <a href="/return?of=<%= order._id %>" class="btn btn-outline-primary-2">Return</a>
                                   <% }else{ %> 
                                     <p style="margin: 0px;">Return Period for this order is over!</p>
