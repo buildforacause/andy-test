@@ -207,11 +207,15 @@
                                 <div class="p-5" style="border:1px solid #e4e4e4;text-align:center;border-radius:10px;">  
                                   <% if(order.status == "Shipped"){ %>                            
                                     <% if (order.tracking && order.tracking.trackingid) { %>
-                                      <p class="mb-0"><span style="font-weight: 500; margin-bottom: 0rem;">Tracking Id: </span><%= order.tracking.trackingid %></p>
+                                      <p class="mb-0"><span style="font-weight: 500; margin-bottom: 0rem;">Tracking Id: </span><i class='bx bx-copy'></i>&nbsp;<span id="trackingId" style="cursor: pointer;"><%= order.tracking.trackingid %></span></p><span id="message"></span>
                                     <% } %>
                                     
                                     <% if (order.tracking && order.tracking.trackingcompany) { %>
-                                      <p class="mb-2"><span style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem;">Delivery Partner: </span><%= order.tracking.trackingcompany %></p>
+                                      <p class="mb-0"><span style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem;">Delivery Partner: </span><%= order.tracking.trackingcompany %></p>
+                                    <% } %>
+
+                                    <% if (order.tracking && order.tracking.trackinglink) { %>
+                                      <p class="mb-2"><a href="<%= order.tracking.trackinglink %>" target="_blank" style="font-weight: 500; margin-top: 0!important; margin-bottom: 0rem; text-decoration: underline;">Click here to track delivery</a></p>
                                     <% } %>
                                   <% } %>
                                   
@@ -317,6 +321,24 @@
     <%- include('./footer.ejs') %>
 
         <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyTextElement = document.getElementById('trackingId');
+        copyTextElement.addEventListener('click', () => {
+          const textToCopy = copyTextElement.innerHTML;
+          if (!navigator.clipboard) {
+            console.error('Clipboard API not supported');
+          } else {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              document.getElementById('message').innerText = "Id copied!";
+            }).catch(err => {
+              console.log('Failed to copy: ', err);
+            });
+          }
+        });
+      });
+
+
+
 $("#cancel-this2").hide()
 $("#confirmationInput").on("input", (e) => {
   if (e.target.value.toLowerCase() === "confirm") {

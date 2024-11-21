@@ -94,6 +94,7 @@
                       <form id="update-order<%= order._id %>">
                         <input type="hidden" name="oId" id="oId" value="<%= order._id %>">
                         <input type="hidden" name="trackingid" class="trackingid" value="">
+                        <input type="hidden" name="trackinglink" class="trackinglink" value="">
                         <input type="hidden" name="trackingcompany" class="trackingcompany" value="">
                         
                         <select class="form-select" name="status" id="select">
@@ -154,6 +155,7 @@
           <p style="color: red;text-align: center;" class="warning" id="modalError"></p>
           <input id="updatetrackingmodalcompany" class="form-control" placeholder="Delivery Company Name">
           <input id="updatetrackingmodalid" class="form-control mt-2" placeholder="Tracking ID">
+          <input id="updatetrackingmodallink" class="form-control mt-2" placeholder="Tracking Link">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Close</button>
@@ -215,6 +217,7 @@
     $(".form-select").on('input', function() {
       $(this).siblings('.trackingcompany').val("");
       $(this).siblings('.trackingid').val("");
+      $(this).siblings('.trackinglink').val("");
     })
     $(".form-select").on('change', submitHandler3)
 
@@ -223,18 +226,20 @@
       return new Promise((resolve, reject) => {
         let trackingModalOperator = "";
         let trackingModalId = "";
+        let trackingModalLink = "";
         $('#updatetrackingmodal').modal('show');
         $('#modalheaderoid').html(oId);
         // Attach a click event handler to the "Save changes" button
         $('#saveChangesButton').click(function() {
           trackingModalOperator = $('#updatetrackingmodalcompany').val();
           trackingModalId = $('#updatetrackingmodalid').val();
+          trackingModalLink = $('#updatetrackingmodallink').val();
           // Close the modal when the button is clicked
-          if (trackingModalId && trackingModalOperator) {
+          if (trackingModalId && trackingModalOperator && trackingModalLink) {
             $('#updatetrackingmodal').modal('hide');
-            resolve([trackingModalOperator, trackingModalId]);
+            resolve([trackingModalOperator, trackingModalId, trackingModalLink]);
           } else {
-            $('#modalError').text("Please fill both the fields");
+            $('#modalError').text("Please fill all the fields");
           }
         });
         $('#closeModalButton').on('click', function() {
@@ -264,9 +269,10 @@
 
           }
         });
-        const [trackingModalOperator, trackingModalId] = await modalCall();
+        const [trackingModalOperator, trackingModalId, trackingModalLink] = await modalCall();
         $(this).siblings('.trackingcompany').val(trackingModalOperator);
         $(this).siblings('.trackingid').val(trackingModalId);
+        $(this).siblings('.trackinglink').val(trackingModalLink);
       }
 
       let orderId = $(this).siblings("#oId").val()

@@ -230,7 +230,7 @@ class Order {
   }
 
   async postUpdateOrder(req, res) {
-    let { oId, trackingid, trackingcompany, status } = req.body;
+    let { oId, trackingid, trackinglink, trackingcompany, status } = req.body;
     if (!oId || !status) {
       return res.json({ message: "All fields are required" });
     } else {
@@ -251,10 +251,10 @@ class Order {
         let abc = await sendEmailNoReply(email, subject, text);
       }
 
-      if (trackingid !== undefined && trackingcompany !== undefined) {
+      if (trackingid !== undefined && trackingcompany !== undefined && trackinglink !== undefined) {
         let currentOrder = orderModel.findByIdAndUpdate(oId, {
           status: status,
-          tracking: { trackingid, trackingcompany },
+          tracking: { trackingid, trackinglink, trackingcompany },
           updatedAt: Date.now(),
         });
         currentOrder.exec((err, result) => {
