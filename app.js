@@ -2,9 +2,9 @@
 
 ================== Most Important ==================
 * Issue 1 :
-In uploads folder you need create 3 folder like bellow.
+In uploads folder you need create 4 folder like bellow.
 Folder structure will be like: 
-public -> uploads -> 1. products 2. customize 3. categories
+public -> uploads -> 1. products 2. customize 3. categories 4. customizedaportswear
 *** Now This folder will automatically create when we run the server file
 
 * Issue 2:
@@ -52,6 +52,7 @@ const infoRouter = require("./routes/info");
 const couponRouter = require("./routes/coupon");
 const addressRouter = require("./routes/address");
 const bannerRouter = require("./routes/secondarybanner");
+const customizedsportswearRouter=require("./routes/customizedsportswear");
 // Import Auth middleware for check user login or not~
 const { loginCheck } = require("./middleware/auth");
 const CreateAllFolder = require("./config/uploadFolderCreateScript");
@@ -84,7 +85,8 @@ app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}
 // Routes
 app.use("/admin", adminRouter);
 app.use("/api", authRouter);
-app.use("/api/banner", bannerRouter)
+app.use("/api/banner", bannerRouter);
+app.use("/api/customizedsportswear", customizedsportswearRouter);
 app.use("/api/user", usersRouter);
 app.use("/api/address", addressRouter);
 app.use("/api/category", categoryRouter);

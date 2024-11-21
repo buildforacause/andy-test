@@ -5,12 +5,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="author" content="JVSH Technologies">
-  <meta name="description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta name="description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
   <meta property="og:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
-  <meta property="og:description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta property="og:description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
   <meta property="og:image" content="frontend/assets/images/demos/demo-8/logo.png">
   <meta name="twitter:title" content="Professional Sports Jerseys Manufacturer in Mumbai | Mayur Sports">
-  <meta name="twitter:description" content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
+  <meta name="twitter:description"
+    content="Mayur Sports is a leading professional sports jerseys manufacturer in Mumbai, providing high-quality sports apparel. Find the perfect sports jerseys for your team at Mayur Sports.">
 
 
 
@@ -39,9 +42,10 @@
   <div class="page-wrapper">
     <%- include("./navbar.ejs") %>
 
-    <main class="main">
-      <div class="intro-slider-container">
-        <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light mb-0" data-toggle="owl" data-owl-options='{
+      <main class="main">
+        <div class="intro-slider-container">
+          <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light mb-0" data-toggle="owl"
+            data-owl-options='{
                         "dots": true,
                         "nav": false, 
                         "autoplay": true,
@@ -53,31 +57,31 @@
                             }
                         }
                     }'>
-          <% sliders.forEach(slider => { %>
+            <% sliders.forEach(slider=> { %>
 
-          <div class="intro-slide" style="background-image: url('<%= slider.slideImage %>');">
-            <div class="container intro-content text-left">
-              <!-- <h3 class="intro-subtitle">Limited time only *</h3> -->
-              <!-- <h1 class="intro-title">Summer<br><strong>sale</strong></h1> -->
-              <!-- <h3 class="intro-subtitle">Up to 50% off</h3> -->
+              <div class="intro-slide" style="background-image: url('<%= slider.slideImage %>');">
+                <div class="container intro-content text-left">
+                  <!-- <h3 class="intro-subtitle">Limited time only *</h3> -->
+                  <!-- <h1 class="intro-title">Summer<br><strong>sale</strong></h1> -->
+                  <!-- <h3 class="intro-subtitle">Up to 50% off</h3> -->
 
-              <!-- <a href="/shop" class="btn">
+                  <!-- <a href="/shop" class="btn">
                                 <span>SHOP NOW</span>
                                 <i class="icon-long-arrow-right"></i>
                             </a> -->
-            </div><!-- End .intro-content -->
-            <!-- <img class="position-right" src="frontend/assets/images/demos/demo-8/slider/img-1.png"> -->
-          </div><!-- End .intro-slide -->
-          <% }) %>
-        </div><!-- End .intro-slider owl-carousel owl-simple -->
+                </div><!-- End .intro-content -->
+                <!-- <img class="position-right" src="frontend/assets/images/demos/demo-8/slider/img-1.png"> -->
+              </div><!-- End .intro-slide -->
+              <% }) %>
+          </div><!-- End .intro-slider owl-carousel owl-simple -->
 
-        <span class="slider-loader"></span><!-- End .slider-loader -->
-      </div><!-- End .intro-slider-container -->
+          <span class="slider-loader"></span><!-- End .slider-loader -->
+        </div><!-- End .intro-slider-container -->
 
-      <div class="pt-4 pb-2">
-        <div class="container brands">
+        <div class="pt-4 pb-2">
+          <div class="container brands">
 
-          <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
+            <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
                             "nav": false, 
                             "dots": true,
                             "margin": 20,
@@ -102,31 +106,34 @@
                                 }
                             }
                         }'>
-            <% categories.forEach(element => { %>
+              <% categories.forEach(element=> { %>
 
-            <div class="banner banner-cat" style="border: 1px solid #ebebeb!important;border-radius: 15px!important;overflow: hidden;">
+                <div class="banner banner-cat"
+                  style="border: 1px solid #ebebeb!important;border-radius: 15px!important;overflow: hidden;">
 
-              <a href="/shop?filterby=<%= element._id %>" class="banner-link">
-                <div class="banner-content banner-content-static text-center">
-                  <img style="border-radius: 50%; width: 100px; height: 100px;align-items: baseline;
+                  <a href="/shop?filterby=<%= element._id %>" class="banner-link">
+                    <div class="banner-content banner-content-static text-center">
+                      <img style="border-radius: 50%; width: 100px; height: 100px;align-items: baseline;
                                 text-align: center;
                                 justify-content: center;
                                 display: inline-flex;" src="<%= element.cImage %>">
-                  <h3 class="banner-title" style="margin-top: 5px;"><%= element.cName %></h3><!-- End .banner-title -->
-                  <!-- <h4 class="banner-subtitle">18 Products</h4> -->
-                  <span style="color:#FE2910!important;">Shop Now</span>
-                </div>
-              </a><!-- End .banner-content -->
-            </div><!-- End .banner -->
-            <% }) %>
+                      <h3 class="banner-title" style="margin-top: 5px;">
+                        <%= element.cName %>
+                      </h3><!-- End .banner-title -->
+                      <!-- <h4 class="banner-subtitle">18 Products</h4> -->
+                      <span style="color:#FE2910!important;">Shop Now</span>
+                    </div>
+                  </a><!-- End .banner-content -->
+                </div><!-- End .banner -->
+                <% }) %>
 
-          </div>
-          <!-- End .banners-carousel owl-carousel owl-simple -->
+            </div>
+            <!-- End .banners-carousel owl-carousel owl-simple -->
 
-          <!-- End .owl-carousel -->
-        </div><!-- End .container -->
-      </div><!-- End .bg-lighter -->
-      <!-- <div class="container">
+            <!-- End .owl-carousel -->
+          </div><!-- End .container -->
+        </div><!-- End .bg-lighter -->
+        <!-- <div class="container">
       <div class="mycategories" style="grid-template-columns: repeat(5,1fr);"> 
         <div class="mycategories_wrapper">
           <div class="mycategories_img">
@@ -146,387 +153,471 @@
         </div>
       </div>
     </div> -->
-      <div class="container mb-5">
-        <ul class="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
-          <!-- <li class="nav-item">
+        <div class="container mb-5">
+          <ul class="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
+            <!-- <li class="nav-item">
                         <a class="nav-link active" id="products-featured-link" data-toggle="tab" href="#products-featured-tab" role="tab" aria-controls="products-featured-tab" aria-selected="true">Featured</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="products-sale-link" data-toggle="tab" href="#products-sale-tab" role="tab" aria-controls="products-sale-tab" aria-selected="false">On Sale</a>
                     </li> -->
-          <li class="nav-item">
-            <h2 class="title title-lg myheading">TOP RATED</h2><!-- End .title -->
-          </li>
-        </ul>
-
-        <div class="tab-content tab-content-carousel">
-          <div class="tab-pane p-0 fade show active" id="products-top-tab" role="tabpanel" aria-labelledby="products-top-link">
-            <div class="products">
-              <div class="row justify-content-center">
-                <% products.forEach(prod => { %>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2">
-                    <% if (prod.offer != 0) { %>
-                    <span class="product-label label-sale">-<%= prod.offer %>% Off</span>
-                    <% } %>
-                    <figure class="product-media">
-                      <a href="/view/<%= prod._id %>">
-                        <img src="<%= prod.image[0] %>" alt="Product image" class="product-image">
-                        <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
-
-                      <div class="product-action ">
-                        <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
-                        <% if (prod.quantity < 1) { %>
-                        <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= prod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>" productprice="<%= prod.price %>" productname="<%= prod.name %>" productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                      <div class="product-detailbody">
-                        <h3 class="product-title"><a href="/view/<%= prod._id %>"><%= prod.name.length > 23 ? prod.name.substring(0, 20) + '...' : prod.name %></a></h3><!-- End .product-title -->
-                        <div class="product-cat">
-                          <a href="#"><%= prod.category.cName %></a>
-                        </div><!-- End .product-cat -->
-                      </div>
-                      <div class="product-price">
-                        <% if (prod.offer != 0) { %>
-                        <span class="outer">
-                          <span class="inner old-price">₹<%= prod.price.toFixed(0) %></span>
-                        </span>
-                        <span class="new-price"> <span style="color:#FE2910!important">₹</span><%= prod.price - ((prod.price/100)*prod.offer).toFixed(0) %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= prod.price.toFixed(0) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
-                </div>
-                <% }) %>
-              </div>
-
-
-            </div><!-- End .owl-carousel -->
-          </div><!-- .End .tab-pane -->
-        </div><!-- End .tab-content -->
-      </div><!-- End .container -->
-
-      <div class="mb-3 mb-xl-2"></div><!-- End .mb-3 -->
-
-      <div class="trending">
-        <a href="/shop?filterby=<%= banner.link %>">
-          <img src="<%= banner.image %>" style="height: 400px !important; width: 100% !important;" alt="Banner">
-        </a>
-        <div class="container">
-          <a href="/shop?filterby=<%= banner.link %>">
-            <div class="banner banner-big d-md-block">
-              <div class="banner-content text-center">
-                <h4 class="banner-subtitle text-white"></h4><!-- End .banner-subtitle -->
-                <h3 class="banner-title text-white"><%= banner.title %></h3><!-- End .banner-title -->
-                <p class="d-lg-block text-white"><%= banner.description %></p>
-                <!-- <a href="/shop?filterby=" class="btn btn-primary-white"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a> -->
-              </div><!-- End .banner-content -->
-            </div><!-- End .banner -->
-          </a>
-
-        </div>
-      </div>
-
-
-
-      <div class="mb-5"></div><!-- End .mb-5 -->
-
-      <div class="container recent-arrivals">
-        <div class="heading heading-flex align-items-center mb-3">
-          <h2 class="title title-lg">Recent Arrivals</h2><!-- End .title -->
-          <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="recent-all-link" data-toggle="tab" href="#recent-all-tab" role="tab" aria-controls="recent-all-tab" aria-selected="true">All</a>
+              <h2 class="title title-lg myheading">TOP RATED</h2><!-- End .title -->
             </li>
-            <% categories.forEach(element => { %>
-            <li class="nav-item">
-              <a class="nav-link" id="recent-<%= element.cName %>-link" data-toggle="tab" href="#<%= slugify(element.cName) %>" role="tab" aria-controls="recent-<%= element.cName %>-tab" aria-selected="false"><%= element.cName %></a>
-            </li>
-            <% }) %>
           </ul>
-        </div><!-- End .heading -->
 
-        <div class="tab-content">
-          <div class="tab-pane p-0 fade show active" id="recent-all-tab" role="tabpanel" aria-labelledby="recent-all-link">
-            <div class="products">
-              <div class="row justify-content-center">
+          <div class="tab-content tab-content-carousel">
+            <div class="tab-pane p-0 fade show active" id="products-top-tab" role="tabpanel"
+              aria-labelledby="products-top-link">
+              <div class="products">
+                <div class="row justify-content-center">
+                  <% products.forEach(prod=> { %>
 
-                
-                <% fproducts.forEach(recentprod => { %>
+                    <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                      <div class="product product-2">
+                        <% if (prod.offer !=0) { %>
+                          <span class="product-label label-sale">-<%= prod.offer %>% Off</span>
+                          <% } %>
+                            <figure class="product-media">
+                              <a href="/view/<%= prod._id %>">
+                                <img src="<%= prod.image[0] %>" alt="Product image" class="product-image">
+                                <img src="<%= prod.image[1] %>" alt="Product image" class="product-image-hover">
+                              </a>
 
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2">
-                    <% if (recentprod.offer != 0) { %>
-                    <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
-                    <% } %>
-                    <figure class="product-media">
-                      <a href="/view/<%= recentprod._id %>">
-                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
-                        <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
+                              <div class="product-action ">
+                                <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
+                                <% if (prod.quantity < 1) { %>
+                                  <a href="/view/<%= prod._id %>" class="newbta"><span
+                                      class="newbtaspan">View</span></a>
+                                  <% }else{ %>
+                                    <a href="/view/<%= prod._id %>" class="newbta"><span
+                                        class="newbtaspan">View</span></a>
+                                    <a type="button" productid="<%= prod._id %>" productoffer="<%=prod.offer%>"
+                                      productprice="<%= prod.price %>" productname="<%= prod.name %>"
+                                      productimage="<%= prod.image[0] %>" redirect="/cart" class="newbta baba"><span
+                                        class="newbtaspan">Buy Now</span></a>
+                                    <% } %>
+                              </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
 
-                      <div class="product-action ">
-                        <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
-                        <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                      <div class="product-detailbody">
-                        <h3 class="product-title"><a href="/view/<%= recentprod._id %>"><%= recentprod.name.length > 23 ? recentprod.name.substring(0, 20) + '...' : recentprod.name %></a></h3><!-- End .product-title -->
-                        <div class="product-cat">
-                          <a href="#"><%= recentprod.category.cName %></a>
-                        </div><!-- End .product-cat -->
-                      </div>
-                      <div class="product-price">
-                        <% if (recentprod.offer != 0) { %>
-                        <span class="outer">
-                          <span class="inner old-price">₹<%= recentprod.price.toFixed(0) %></span>
-                        </span>
-                        <span class="new-price"> <span style="color:#FE2910!important">₹</span><%= recentprod.price - ((recentprod.price/100)*recentprod.offer).toFixed(0) %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= recentprod.price.toFixed(0) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
-                </div>
-                <% }) %>
-              </div><!-- End .row -->
-            </div><!-- End .products -->
-          </div><!-- .End .tab-pane -->
-
-          <% categories.forEach(element => { %>
-          <div class="tab-pane p-0 fade" id="<%= slugify(element.cName) %>" role="tabpanel" aria-labelledby="recent-<%= element.cName %>-link">
-            <div class="products">
-              <div class="row justify-content-center">
-                <% recentproducts.forEach(recent => { %>
-                <% if (recent.category==element.cName) { %>
-                <% recent.products.forEach(recentprod => { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2">
-                    <% if (recentprod.offer != 0) { %>
-                    <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
-                    <% } %>
-                    <figure class="product-media">
-                      <a href="/view/<%= recentprod._id %>">
-                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
-                        <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
-
-                      <div class="product-action ">
-                        <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
-                        <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span class="newbtaspan">View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
-
-                    <div class="product-body">
-                      <div class="product-detailbody">
-                        <h3 class="product-title"><a href="/view/<%= recentprod._id %>"><%= recentprod.name.length > 23 ? recentprod.name.substring(0, 20) + '...' : recentprod.name %></a></h3><!-- End .product-title -->
-                        <div class="product-cat">
-                          <a href="#"><%= recentprod.category.cName %></a>
-                        </div><!-- End .product-cat -->
-                      </div>
-                      <div class="product-price">
-                        <% if (recentprod.offer != 0) { %>
-                        <span class="outer">
-                          <span class="inner old-price">₹<%= recentprod.price.toFixed(0) %></span>
-                        </span>
-                        <span class="new-price"> <span style="color:#FE2910!important">₹</span><%= recentprod.price - ((recentprod.price/100)*recentprod.offer).toFixed(0) %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= recentprod.price.toFixed(0) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
+                            <div class="product-body">
+                              <div class="product-detailbody">
+                                <h3 class="product-title"><a href="/view/<%= prod._id %>">
+                                    <%= prod.name.length> 23 ? prod.name.substring(0, 20) + '...' : prod.name %>
+                                  </a></h3><!-- End .product-title -->
+                                <div class="product-cat">
+                                  <a href="#">
+                                    <%= prod.category.cName %>
+                                  </a>
+                                </div><!-- End .product-cat -->
+                              </div>
+                              <div class="product-price">
+                                <% if (prod.offer !=0) { %>
+                                  <span class="outer">
+                                    <span class="inner old-price">₹<%= prod.price.toFixed(0) %></span>
+                                  </span>
+                                  <span class="new-price"> <span style="color:#FE2910!important">₹</span>
+                                    <%= prod.price - ((prod.price/100)*prod.offer).toFixed(0) %>
+                                  </span>
+                                  <% } else { %>
+                                    <span class="new-price">₹<%= prod.price.toFixed(0) %></span>
+                                    <% } %>
+                              </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                      </div><!-- End .product -->
+                    </div>
+                    <% }) %>
                 </div>
 
+
+              </div><!-- End .owl-carousel -->
+            </div><!-- .End .tab-pane -->
+          </div><!-- End .tab-content -->
+        </div><!-- End .container -->
+
+        <div class="mb-3 mb-xl-2"></div><!-- End .mb-3 -->
+
+        <div class="trending">
+          <a href="/shop?filterby=<%= banner.link %>">
+            <img src="<%= banner.image %>" style="height: 400px !important; width: 100% !important;" alt="Banner">
+          </a>
+          <div class="container">
+            <a href="/shop?filterby=<%= banner.link %>">
+              <div class="banner banner-big d-md-block">
+                <div class="banner-content text-center">
+                  <h4 class="banner-subtitle text-white"></h4><!-- End .banner-subtitle -->
+                  <h3 class="banner-title text-white">
+                    <%= banner.title %>
+                  </h3><!-- End .banner-title -->
+                  <p class="d-lg-block text-white">
+                    <%= banner.description %>
+                  </p>
+                  <!-- <a href="/shop?filterby=" class="btn btn-primary-white"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a> -->
+                </div><!-- End .banner-content -->
+              </div><!-- End .banner -->
+            </a>
+
+          </div>
+        </div>
+
+
+
+        <div class="mb-5"></div><!-- End .mb-5 -->
+
+        <div class="container recent-arrivals">
+          <div class="heading heading-flex align-items-center mb-3">
+            <h2 class="title title-lg">Recent Arrivals</h2><!-- End .title -->
+            <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="recent-all-link" data-toggle="tab" href="#recent-all-tab" role="tab"
+                  aria-controls="recent-all-tab" aria-selected="true">All</a>
+              </li>
+              <% categories.forEach(element=> { %>
+                <li class="nav-item">
+                  <a class="nav-link" id="recent-<%= element.cName %>-link" data-toggle="tab"
+                    href="#<%= slugify(element.cName) %>" role="tab" aria-controls="recent-<%= element.cName %>-tab"
+                    aria-selected="false">
+                    <%= element.cName %>
+                  </a>
+                </li>
                 <% }) %>
-                <% } %>
-                <% }) %>
-              </div><!-- End .row -->
-            </div><!-- End .products -->
-          </div><!-- .End .tab-pane -->
+            </ul>
+          </div><!-- End .heading -->
 
-          <% }) %>
+          <div class="tab-content">
+            <div class="tab-pane p-0 fade show active" id="recent-all-tab" role="tabpanel"
+              aria-labelledby="recent-all-link">
+              <div class="products">
+                <div class="row justify-content-center">
 
 
-          <div class="tab-pane p-0 fade" id="recent-men-tab" role="tabpanel" aria-labelledby="recent-men-link">
-            <div class="products">
-              <div class="row justify-content-center">
-                <% recentproducts.forEach(recent => { %>
-                <% if (recent.category=='T-shirt') { %>
-                <% recent.products.forEach(recentprod => { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2 text-center">
-                    <figure class="product-media">
-                      <% if (recentprod.offer != 0) { %>
-                      <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
-                      <% } %>
-                      <a href="/view/<%= recentprod._id %>">
-                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
-                        <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
-                      <div class="product-action ">
-                        <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+                  <% fproducts.forEach(recentprod=> { %>
 
-                    <div class="product-body">
-                      <div class="product-cat">
-                        <a href="#"><%= recentprod.category.cName %></a>
-                      </div><!-- End .product-cat -->
-                      <h3 class="product-title"><a href="/view/<%= recentprod._id %>"><%= recentprod.name %></a></h3><!-- End .product-title -->
-                      <div class="product-price">
-                        <% if (recentprod.offer != 0) { %>
-                        <span class="new-price">₹<%= (recentprod.price - (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
-                        <span class="old-price">₹<%= recentprod.price %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                    <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                      <div class="product product-2">
+                        <% if (recentprod.offer !=0) { %>
+                          <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
+                          <% } %>
+                            <figure class="product-media">
+                              <a href="/view/<%= recentprod._id %>">
+                                <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
+                                <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
+                              </a>
 
-                <% }) %>
-                <% } %>
-                <% }) %>
-              </div><!-- End .row -->
-            </div><!-- End .products -->
-          </div><!-- .End .tab-pane -->
-          <div class="tab-pane p-0 fade" id="recent-shoes-tab" role="tabpanel" aria-labelledby="recent-shoes-link">
-            <div class="products">
-              <div class="row justify-content-center">
+                              <div class="product-action ">
+                                <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
+                                <% if (recentprod.quantity < 1) { %>
+                                  <a href="/view/<%= recentprod._id %>" class="newbta"><span
+                                      class="newbtaspan">View</span></a>
+                                  <% }else{ %>
+                                    <a href="/view/<%= recentprod._id %>" class="newbta"><span
+                                        class="newbtaspan">View</span></a>
+                                    <a type="button" productid="<%= recentprod._id %>"
+                                      productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>"
+                                      productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>"
+                                      redirect="/cart" class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
+                                    <% } %>
+                              </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
 
-                <% recentproducts.forEach(recent => { %>
-                <% if (recent.category=='Tracks & Shorts') { %>
-                <% recent.products.forEach(recentprod => { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2 text-center">
-                    <figure class="product-media">
-                      <% if (recentprod.offer != 0) { %>
-                      <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
-                      <% } %>
-                      <a class="productimagurl" href="/view/<%= recentprod._id %>"></a>
-                      <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
-                      <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
-                      <div class="product-action ">
-                        <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+                            <div class="product-body">
+                              <div class="product-detailbody">
+                                <h3 class="product-title"><a href="/view/<%= recentprod._id %>">
+                                    <%= recentprod.name.length> 23 ? recentprod.name.substring(0, 20) + '...' :
+                                      recentprod.name %>
+                                  </a></h3><!-- End .product-title -->
+                                <div class="product-cat">
+                                  <a href="#">
+                                    <%= recentprod.category.cName %>
+                                  </a>
+                                </div><!-- End .product-cat -->
+                              </div>
+                              <div class="product-price">
+                                <% if (recentprod.offer !=0) { %>
+                                  <span class="outer">
+                                    <span class="inner old-price">₹<%= recentprod.price.toFixed(0) %></span>
+                                  </span>
+                                  <span class="new-price"> <span style="color:#FE2910!important">₹</span>
+                                    <%= recentprod.price - ((recentprod.price/100)*recentprod.offer).toFixed(0) %>
+                                  </span>
+                                  <% } else { %>
+                                    <span class="new-price">₹<%= recentprod.price.toFixed(0) %></span>
+                                    <% } %>
+                              </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                      </div><!-- End .product -->
+                    </div>
+                    <% }) %>
+                </div><!-- End .row -->
+              </div><!-- End .products -->
+            </div><!-- .End .tab-pane -->
 
-                    <div class="product-body">
-                      <div class="product-cat">
-                        <a href="#"><%= recentprod.category.cName %></a>
-                      </div><!-- End .product-cat -->
-                      <h3 class="product-title"><a href="/view/<%= recentprod._id %>"><%= recentprod.name %></a></h3><!-- End .product-title -->
-                      <div class="product-price">
-                        <% if (recentprod.offer != 0) { %>
-                        <span class="new-price">₹<%= (recentprod.price - (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
-                        <span class="old-price">₹<%= recentprod.price %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+            <% categories.forEach(element=> { %>
+              <div class="tab-pane p-0 fade" id="<%= slugify(element.cName) %>" role="tabpanel"
+                aria-labelledby="recent-<%= element.cName %>-link">
+                <div class="products">
+                  <div class="row justify-content-center">
+                    <% recentproducts.forEach(recent=> { %>
+                      <% if (recent.category==element.cName) { %>
+                        <% recent.products.forEach(recentprod=> { %>
+                          <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                            <div class="product product-2">
+                              <% if (recentprod.offer !=0) { %>
+                                <span class="product-label label-sale">-<%= recentprod.offer %>% Off</span>
+                                <% } %>
+                                  <figure class="product-media">
+                                    <a href="/view/<%= recentprod._id %>">
+                                      <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
+                                      <img src="<%= recentprod.image[1] %>" alt="Product image"
+                                        class="product-image-hover">
+                                    </a>
 
-                <% }) %>
-                <% } %>
-                <% }) %>
+                                    <div class="product-action ">
+                                      <!-- <a href="/view/<%= // prod._id %>" class="btn-product "><span>Buy Now</span></a> -->
+                                      <% if (recentprod.quantity < 1) { %>
+                                        <a href="/view/<%= recentprod._id %>" class="newbta"><span
+                                            class="newbtaspan">View</span></a>
+                                        <% }else{ %>
+                                          <a href="/view/<%= recentprod._id %>" class="newbta"><span
+                                              class="newbtaspan">View</span></a>
+                                          <a type="button" productid="<%= recentprod._id %>"
+                                            productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>"
+                                            productname="<%= recentprod.name %>"
+                                            productimage="<%= recentprod.image[0] %>" redirect="/cart"
+                                            class="newbta baba"><span class="newbtaspan">Buy Now</span></a>
+                                          <% } %>
+                                    </div><!-- End .product-action -->
+                                  </figure><!-- End .product-media -->
 
-              </div><!-- End .row -->
-            </div><!-- End .products -->
-          </div><!-- .End .tab-pane -->
-          <div class="tab-pane p-0 fade" id="recent-sando-tab" role="tabpanel" aria-labelledby="recent-men-link">
-            <div class="products">
-              <div class="row justify-content-center">
-                <% recentproducts.forEach(recent => { %>
-                <% if (recent.category=='Sando') { %>
-                <% recent.products.forEach(recentprod => { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
-                  <div class="product product-2 text-center">
-                    <figure class="product-media">
-                      <% if (recentprod.offer != 0) { %>
-                      <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
-                      <% } %>
-                      <a href="/view/<%= recentprod._id %>">
-                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
-                        <img src="<%= recentprod.image[1] %>" alt="Product image" class="product-image-hover">
-                      </a>
-                      <div class="product-action ">
-                        <% if (recentprod.quantity < 1) { %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <% }else{ %>
-                        <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
-                        <a type="button" productid="<%= recentprod._id %>" productoffer="<%=recentprod.offer%>" productprice="<%= recentprod.price %>" productname="<%= recentprod.name %>" productimage="<%= recentprod.image[0] %>" redirect="/cart" class="newbta baba"><span>buy now</span></a>
-                        <% } %>
-                      </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+                                  <div class="product-body">
+                                    <div class="product-detailbody">
+                                      <h3 class="product-title"><a href="/view/<%= recentprod._id %>">
+                                          <%= recentprod.name.length> 23 ? recentprod.name.substring(0, 20) + '...' :
+                                            recentprod.name %>
+                                        </a></h3><!-- End .product-title -->
+                                      <div class="product-cat">
+                                        <a href="#">
+                                          <%= recentprod.category.cName %>
+                                        </a>
+                                      </div><!-- End .product-cat -->
+                                    </div>
+                                    <div class="product-price">
+                                      <% if (recentprod.offer !=0) { %>
+                                        <span class="outer">
+                                          <span class="inner old-price">₹<%= recentprod.price.toFixed(0) %></span>
+                                        </span>
+                                        <span class="new-price"> <span style="color:#FE2910!important">₹</span>
+                                          <%= recentprod.price - ((recentprod.price/100)*recentprod.offer).toFixed(0) %>
+                                        </span>
+                                        <% } else { %>
+                                          <span class="new-price">₹<%= recentprod.price.toFixed(0) %></span>
+                                          <% } %>
+                                    </div><!-- End .product-price -->
+                                  </div><!-- End .product-body -->
+                            </div><!-- End .product -->
+                          </div>
 
-                    <div class="product-body">
-                      <div class="product-cat">
-                        <a href="#"><%= recentprod.category.cName %></a>
-                      </div><!-- End .product-cat -->
-                      <h3 class="product-title"><a href="/view/<%= recentprod._id %>"><%= recentprod.name %></a></h3><!-- End .product-title -->
-                      <div class="product-price">
-                        <% if (recentprod.offer != 0) { %>
-                        <span class="new-price">₹<%= (recentprod.price - (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
-                        <span class="old-price">₹<%= recentprod.price %></span>
-                        <% } else { %>
-                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
-                        <% } %>
-                      </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                  </div><!-- End .product -->
-                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                          <% }) %>
+                            <% } %>
+                              <% }) %>
+                  </div><!-- End .row -->
+                </div><!-- End .products -->
+              </div><!-- .End .tab-pane -->
 
-                <% }) %>
-                <% } %>
-                <% }) %>
-              </div><!-- End .row -->
-            </div><!-- End .products -->
-          </div><!-- .End .tab-pane -->
-        </div><!-- End .tab-content -->
+              <% }) %>
 
-        <div class="more-container text-center mt-3 mb-3">
-          <a href="/shop" class="btn btn-outline-dark-3 btn-more"><span>View More</span><i class="icon-long-arrow-right"></i></a>
-        </div><!-- End .more-container -->
-      </div><!-- End .container -->
-      <!-- 
+
+                <div class="tab-pane p-0 fade" id="recent-men-tab" role="tabpanel" aria-labelledby="recent-men-link">
+                  <div class="products">
+                    <div class="row justify-content-center">
+                      <% recentproducts.forEach(recent=> { %>
+                        <% if (recent.category=='T-shirt' ) { %>
+                          <% recent.products.forEach(recentprod=> { %>
+                            <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                              <div class="product product-2 text-center">
+                                <figure class="product-media">
+                                  <% if (recentprod.offer !=0) { %>
+                                    <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
+                                    <% } %>
+                                      <a href="/view/<%= recentprod._id %>">
+                                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
+                                        <img src="<%= recentprod.image[1] %>" alt="Product image"
+                                          class="product-image-hover">
+                                      </a>
+                                      <div class="product-action ">
+                                        <% if (recentprod.quantity < 1) { %>
+                                          <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                          <% }else{ %>
+                                            <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                            <a type="button" productid="<%= recentprod._id %>"
+                                              productoffer="<%=recentprod.offer%>"
+                                              productprice="<%= recentprod.price %>"
+                                              productname="<%= recentprod.name %>"
+                                              productimage="<%= recentprod.image[0] %>" redirect="/cart"
+                                              class="newbta baba"><span>buy now</span></a>
+                                            <% } %>
+                                      </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                  <div class="product-cat">
+                                    <a href="#">
+                                      <%= recentprod.category.cName %>
+                                    </a>
+                                  </div><!-- End .product-cat -->
+                                  <h3 class="product-title"><a href="/view/<%= recentprod._id %>">
+                                      <%= recentprod.name %>
+                                    </a></h3><!-- End .product-title -->
+                                  <div class="product-price">
+                                    <% if (recentprod.offer !=0) { %>
+                                      <span class="new-price">₹<%= (recentprod.price -
+                                          (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
+                                      <span class="old-price">₹<%= recentprod.price %></span>
+                                      <% } else { %>
+                                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
+                                        <% } %>
+                                  </div><!-- End .product-price -->
+                                </div><!-- End .product-body -->
+                              </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+                            <% }) %>
+                              <% } %>
+                                <% }) %>
+                    </div><!-- End .row -->
+                  </div><!-- End .products -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane p-0 fade" id="recent-shoes-tab" role="tabpanel"
+                  aria-labelledby="recent-shoes-link">
+                  <div class="products">
+                    <div class="row justify-content-center">
+
+                      <% recentproducts.forEach(recent=> { %>
+                        <% if (recent.category=='Tracks & Shorts' ) { %>
+                          <% recent.products.forEach(recentprod=> { %>
+                            <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                              <div class="product product-2 text-center">
+                                <figure class="product-media">
+                                  <% if (recentprod.offer !=0) { %>
+                                    <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
+                                    <% } %>
+                                      <a class="productimagurl" href="/view/<%= recentprod._id %>"></a>
+                                      <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
+                                      <img src="<%= recentprod.image[1] %>" alt="Product image"
+                                        class="product-image-hover">
+                                      </a>
+                                      <div class="product-action ">
+                                        <% if (recentprod.quantity < 1) { %>
+                                          <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                          <% }else{ %>
+                                            <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                            <a type="button" productid="<%= recentprod._id %>"
+                                              productoffer="<%=recentprod.offer%>"
+                                              productprice="<%= recentprod.price %>"
+                                              productname="<%= recentprod.name %>"
+                                              productimage="<%= recentprod.image[0] %>" redirect="/cart"
+                                              class="newbta baba"><span>buy now</span></a>
+                                            <% } %>
+                                      </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                  <div class="product-cat">
+                                    <a href="#">
+                                      <%= recentprod.category.cName %>
+                                    </a>
+                                  </div><!-- End .product-cat -->
+                                  <h3 class="product-title"><a href="/view/<%= recentprod._id %>">
+                                      <%= recentprod.name %>
+                                    </a></h3><!-- End .product-title -->
+                                  <div class="product-price">
+                                    <% if (recentprod.offer !=0) { %>
+                                      <span class="new-price">₹<%= (recentprod.price -
+                                          (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
+                                      <span class="old-price">₹<%= recentprod.price %></span>
+                                      <% } else { %>
+                                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
+                                        <% } %>
+                                  </div><!-- End .product-price -->
+                                </div><!-- End .product-body -->
+                              </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+                            <% }) %>
+                              <% } %>
+                                <% }) %>
+
+                    </div><!-- End .row -->
+                  </div><!-- End .products -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane p-0 fade" id="recent-sando-tab" role="tabpanel" aria-labelledby="recent-men-link">
+                  <div class="products">
+                    <div class="row justify-content-center">
+                      <% recentproducts.forEach(recent=> { %>
+                        <% if (recent.category=='Sando' ) { %>
+                          <% recent.products.forEach(recentprod=> { %>
+                            <div class="col-md-4 col-lg-3 col-sm-6 col-6 mobilefk">
+                              <div class="product product-2 text-center">
+                                <figure class="product-media">
+                                  <% if (recentprod.offer !=0) { %>
+                                    <span class="product-label label-sale">-<%= recentprod.offer %>%</span>
+                                    <% } %>
+                                      <a href="/view/<%= recentprod._id %>">
+                                        <img src="<%= recentprod.image[0] %>" alt="Product image" class="product-image">
+                                        <img src="<%= recentprod.image[1] %>" alt="Product image"
+                                          class="product-image-hover">
+                                      </a>
+                                      <div class="product-action ">
+                                        <% if (recentprod.quantity < 1) { %>
+                                          <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                          <% }else{ %>
+                                            <a href="/view/<%= recentprod._id %>" class="newbta"><span>View</span></a>
+                                            <a type="button" productid="<%= recentprod._id %>"
+                                              productoffer="<%=recentprod.offer%>"
+                                              productprice="<%= recentprod.price %>"
+                                              productname="<%= recentprod.name %>"
+                                              productimage="<%= recentprod.image[0] %>" redirect="/cart"
+                                              class="newbta baba"><span>buy now</span></a>
+                                            <% } %>
+                                      </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                  <div class="product-cat">
+                                    <a href="#">
+                                      <%= recentprod.category.cName %>
+                                    </a>
+                                  </div><!-- End .product-cat -->
+                                  <h3 class="product-title"><a href="/view/<%= recentprod._id %>">
+                                      <%= recentprod.name %>
+                                    </a></h3><!-- End .product-title -->
+                                  <div class="product-price">
+                                    <% if (recentprod.offer !=0) { %>
+                                      <span class="new-price">₹<%= (recentprod.price -
+                                          (recentprod.price/100)*recentprod.offer).toFixed(2) %></span>
+                                      <span class="old-price">₹<%= recentprod.price %></span>
+                                      <% } else { %>
+                                        <span class="new-price">₹<%= recentprod.price.toFixed(2) %></span>
+                                        <% } %>
+                                  </div><!-- End .product-price -->
+                                </div><!-- End .product-body -->
+                              </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+                            <% }) %>
+                              <% } %>
+                                <% }) %>
+                    </div><!-- End .row -->
+                  </div><!-- End .products -->
+                </div><!-- .End .tab-pane -->
+          </div><!-- End .tab-content -->
+
+          <div class="more-container text-center mt-3 mb-3">
+            <a href="/shop" class="btn btn-outline-dark-3 btn-more"><span>View More</span><i
+                class="icon-long-arrow-right"></i></a>
+          </div><!-- End .more-container -->
+        </div><!-- End .container -->
+        <!-- 
             <div class="pt-2 pb-2">
                 <div class="container brands">
 					    
@@ -566,30 +657,79 @@
                     </div>
                 </div>
             </div> -->
-      <hr>
+        <div class="pt-4 pb-2">
+          <div class="container brands">
+            <% if(customizedsportswear.length> 0){ %>
+              <ul class="nav nav-pills nav-big nav-border-anim justify-content-center mb-2 mb-md-3" role="tablist">
+                <li class="nav-item">
+                  <h2 class="title title-lg myheading">CUSTOMIZED SPORTSWEAR</h2><!-- End .title -->
+                </li>
+              </ul>
+              <div class="owl-carousel owl-simple" data-toggle="owl" data-owl-options='{
+                                  "stagePadding": 50,
+                                  "autoplay":true,
+                                  "autoplayTimeout":2000,
+                                  "autoplayHoverPause":true,
+                                  "nav": false, 
+                                  "dots": true,
+                                  "margin": 10,
+                                  "loop": true,
+                                  "responsive": {
+                                      "0": {
+                                          "items":1
+                                      },
+                                      "480": {
+                                          "items":1
+                                      },
+                                      "768": {
+                                          "items":2
+                                      },
+                                      "992": {
+                                          "items":3
+                                      },
+                                      "1200": {
+                                          "items":5,
+                                          "nav": true,
+                                          "dots": false
+                                      }
+                                  }
+                              }'>
+                <% customizedsportswear.forEach(element=> { %>
 
-      <div class="container" id="about">
+                  <img class="banner banner-cat"
+                    style="border: 1px solid #ebebeb!important;border-radius: 15px!important;overflow: hidden; cursor: pointer;"
+                    onclick="window.open('<%=element.link %>', '_blank');" src='<%=element.image %>'>
+                  <!-- End .banner -->
+                  <% }) %>
 
-        <h2 class="title title-lg myheading text-center">ABOUT US</h2><!-- End .title -->
-        <div class="row">
-          <div class="col-lg-6 col-xs-12 about-text text-center mt-3">
-            <div class="aboutimage" style="flex:1;">
-              <img src="<%= info.image %>" style="height:100%;margin:0;border-radius: 15px;" alt="image">
-            </div>
-          </div><!-- End .col-md-6 about-text -->
+              </div>
+              <% } %>
+                <hr>
 
-          <div class="col-lg-6 col-xs-12 about-text text-center mt-3">
-            <div class="abouttext" style="flex:1;text-align: start;">
-              <p> <%= info.about %> </p>
-            </div>
-          </div><!-- End .col-md-6 about-text -->
-        </div><!-- End .row -->
-      </div><!-- End .container -->
+                <div class="container" id="about">
 
-      <div class="mb-7"></div><!-- End .mb-5 -->
+                  <h2 class="title title-lg myheading text-center">ABOUT US</h2><!-- End .title -->
+                  <div class="row">
+                    <div class="col-lg-6 col-xs-12 about-text text-center mt-3">
+                      <div class="aboutimage" style="flex:1;">
+                        <img src="<%= info.image %>" style="height:100%;margin:0;border-radius: 15px;" alt="image">
+                      </div>
+                    </div><!-- End .col-md-6 about-text -->
 
-      <div class="container">
-        <!-- <div class="row justify-content-center">
+                    <div class="col-lg-6 col-xs-12 about-text text-center mt-3">
+                      <div class="abouttext" style="flex:1;text-align: start;">
+                        <p>
+                          <%= info.about %>
+                        </p>
+                      </div>
+                    </div><!-- End .col-md-6 about-text -->
+                  </div><!-- End .row -->
+                </div><!-- End .container -->
+
+                <div class="mb-7"></div><!-- End .mb-5 -->
+
+                <div class="container">
+                  <!-- <div class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6">
                         <div class="icon-box icon-box-card text-center">
                             <span class="icon-box-icon">
@@ -603,15 +743,16 @@
                     </div>
                 </div> -->
 
-        <div class="bulk-order" id="bulk-order" style="display: flex;align-items: center;">
-          <i style="font-weight: 300;font-size: 2rem;color:white;" class='bx bx-package'></i>
-          <a style="font-weight: 400;font-size: 1.4rem;color:white;" href="tel:<%= info.phone %>">BULK ORDER ?</a>
-        </div>
-      </div>
+                  <div class="bulk-order" id="bulk-order" style="display: flex;align-items: center;">
+                    <i style="font-weight: 300;font-size: 2rem;color:white;" class='bx bx-package'></i>
+                    <a style="font-weight: 400;font-size: 1.4rem;color:white;" href="tel:<%= info.phone %>">BULK ORDER
+                      ?</a>
+                  </div>
+                </div>
 
-    </main><!-- End .main -->
+      </main><!-- End .main -->
 
-    <%- include("./footer.ejs") %>
+      <%- include("./footer.ejs") %>
 </body>
 
 

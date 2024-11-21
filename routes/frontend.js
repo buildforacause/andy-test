@@ -10,6 +10,7 @@ const userModel = require("../models/users");
 const orderModel = require("../models/orders");
 const couponModel = require("../models/coupon");
 const secondarybannerModel = require("../models/secondarybanner");
+const customizedSportswearModel = require("../models/customizedsportswear");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 
@@ -122,6 +123,7 @@ router.get("/", async (req, res) => {
 
   let Sponsors = await sponsorModel.find({}).sort({ _id: -1 });
   let sliders = await customizeModel.find({});
+  let customizedsportswear = await customizedSportswearModel.find({disabled: false});
   let user = req.cookies.autOken;
   let userid = req.cookies.userid;
   let Info = await infoModel.find({});
@@ -136,6 +138,7 @@ router.get("/", async (req, res) => {
     sponsors: Sponsors,
     user: user,
     sliders: sliders,
+    customizedsportswear: customizedsportswear,
     fproducts: FProducts
   });
 });

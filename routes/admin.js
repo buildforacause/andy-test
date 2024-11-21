@@ -12,6 +12,7 @@ const userModel = require("../models/users");
 const couponModel = require("../models/coupon");
 const orderModel = require("../models/orders");
 const secondarybannerModel = require("../models/secondarybanner");
+const customizedSportswearModel=require("../models/customizedsportswear");
 // const ordersController = require("../controller/orders");
 
 router.get('/',async (req,res) => {
@@ -710,8 +711,65 @@ router.get("/return-edit", async(req,res)=>{
     res.render("returns/return-edit.ejs", {order: Orders[0] });
 })
 
+//Abhijeet
+
+router.get("/customized-sportswear-view", async(req,res)=>{
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+    let sliders = await customizedSportswearModel.find({});
+    
+    const message = req.query.message;
+    res.render("slider/customized-sportswear-view.ejs", {sliders: sliders,message: message || '' });
+})
+
+router.get('/customized-sportswear-add',async(req,res)=>{
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+    res.render("slider/customized-sportswear-add.ejs");
+})
 
 
+router.get('/customized-sportswear-edit/:id',async(req,res)=>{
+    let userid = req.cookies.userid;
+    if(userid){
+        let verify = await userModel.find({_id: userid})
+        if(verify.length > 0){
+            if(verify[0].userRole !== 0){
+                res.redirect("/")
+            }
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+   
+    let id = req.params.id
+    let custom = await customizedSportswearModel.findById(id);
+    res.render("slider/customized-sportswear-edit.ejs", {custom: custom});
+})
 
 
 module.exports = router;

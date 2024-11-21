@@ -3,6 +3,7 @@ const fs = require("fs");
 const categoriesFolder = "./public/uploads/categories";
 const customizeFolder = "./public/uploads/customize";
 const productsFolder = "./public/uploads/products";
+const customizedsportswearFolder = "./public/uploads/customizedsportswear"
 
 const CreateAllFolder = () => {
   if (!fs.existsSync(categoriesFolder)) {
@@ -19,6 +20,12 @@ const CreateAllFolder = () => {
 
   if (!fs.existsSync(productsFolder)) {
     fs.mkdirSync(productsFolder, {
+      recursive: true,
+    });
+  }
+
+  if (!fs.existsSync(customizedsportswearFolder)) {
+    fs.mkdirSync(customizedsportswearFolder, {
       recursive: true,
     });
   }
